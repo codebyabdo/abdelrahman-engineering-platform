@@ -2,10 +2,10 @@ import { BlogList } from '@/components/sections/blog/blog-list'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Blog | Alex Chen',
-  description: 'Technical articles about frontend engineering, React architecture, and team leadership.',
+  title: 'Blog | Frontend Systems & Architecture',
+  description:
+    'Deep technical articles on building scalable SaaS applications, frontend architecture patterns, React/Next.js performance optimization, and real-world engineering practices.',
 }
-
 export default function BlogPage() {
   return (
     <>

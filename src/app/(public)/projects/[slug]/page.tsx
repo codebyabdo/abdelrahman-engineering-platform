@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   }
 
   return {
-    title: `${project.title} | Alex Chen`,
+    title: `${project.title} | Abd El-Rhman Adel `,
     description: project.description,
   }
 }

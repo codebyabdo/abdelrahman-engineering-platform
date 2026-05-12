@@ -23,23 +23,57 @@ export const viewport: Viewport = {
   colorScheme: 'dark',
 }
 
+
 export const metadata: Metadata = {
-  title: 'Alex Chen | Frontend Engineer & Team Lead',
-  description: 'Mid-Level Frontend Engineer specializing in scalable SaaS systems, role-based architectures, and modern React ecosystems. Building products that scale.',
-  keywords: ['Frontend Engineer', 'React', 'Next.js', 'TypeScript', 'Team Lead', 'SaaS', 'Web Development'],
-  authors: [{ name: 'Alex Chen' }],
+  title: 'Abd El-Rhman Adel | Frontend Engineer (React & Next.js)',
+  
+  description:
+    'Frontend Engineer with 2.5+ years of experience building scalable SaaS applications, role-based systems, and production-grade React/Next.js architectures. Specialized in performance optimization, dashboards, and enterprise-level frontend systems.',
+
+  keywords: [
+    'Frontend Engineer',
+    'React Developer',
+    'Next.js Developer',
+    'TypeScript',
+    'SaaS Applications',
+    'Frontend Architecture',
+    'Dashboard Systems',
+    'Web Performance Optimization',
+  ],
+
+  authors: [{ name: 'Abd El-Rhman Adel' }],
+
   openGraph: {
-    title: 'Alex Chen | Frontend Engineer & Team Lead',
-    description: 'Building scalable frontend systems and leading technical products.',
+    title: 'Abd El-Rhman Adel | Frontend Engineer',
+    description:
+      'Building scalable SaaS platforms, dashboards, and production-grade frontend systems using React & Next.js.',
     type: 'website',
+    url: 'https://codebyabdo.vercel.app',
+    siteName: 'Abd El-Rhman Adel Portfolio',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Abd El-Rhman Adel Portfolio',
+      },
+    ],
   },
+
   twitter: {
     card: 'summary_large_image',
-    title: 'Alex Chen | Frontend Engineer & Team Lead',
-    description: 'Building scalable frontend systems and leading technical products.',
+    title: 'Abd El-Rhman Adel | Frontend Engineer',
+    description:
+      'Frontend Engineer specializing in scalable SaaS systems and modern React architectures.',
+    images: ['/og-image.png'],
   },
+
   icons: {
     icon: [
+      {
+        url: '/icon.svg.png',
+        type: 'image/svg+xml',
+      },
       {
         url: '/icon-light-32x32.png',
         media: '(prefers-color-scheme: light)',
@@ -47,10 +81,6 @@ export const metadata: Metadata = {
       {
         url: '/icon-dark-32x32.png',
         media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
       },
     ],
     apple: '/apple-icon.png',

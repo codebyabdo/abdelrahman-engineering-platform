@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 
   return {
-    title: `${post.title} | Alex Chen`,
+    title: `${post.title} | Abd El-Rhman Adel `,
     description: post.excerpt,
   }
 }

@@ -6,8 +6,9 @@ import { Metadata } from 'next'
 
 
 export const metadata: Metadata = {
-  title: 'About | Alex Chen',
-  description: 'Frontend Engineer & Team Lead with 5+ years of experience building scalable SaaS systems.',
+  title: 'About | Frontend Engineer (React & Next.js)',
+  description:
+    'Frontend Engineer with 2.5+ years of experience specializing in SaaS platforms, scalable frontend architectures, dashboards, and performance optimization using React and Next.js.',
 }
 
 export default function AboutPage() {

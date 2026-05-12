@@ -8,8 +8,9 @@ import { SystemDesignSection } from '@/components/sections/approach/system-desig
 import { TeamWorkflowSection } from '@/components/sections/approach/team-workflow-section'
 
 export const metadata: Metadata = {
-  title: 'Engineering Approach | Alex Chen',
-  description: 'My philosophy on frontend architecture, system design, performance optimization, and team collaboration.',
+  title: 'Engineering Approach | Frontend Systems Design',
+  description:
+    'How I design scalable SaaS frontend architectures, optimize performance, structure large React/Next.js codebases, and collaborate on production-grade systems.',
 }
 
 export default function ApproachPage() {
