@@ -53,7 +53,7 @@ export function AboutHero() {
                     />
                   </div>
                 ) : (
-                  <div className="w-[280px] h-[280px] rounded-full flex items-center justify-center bg-primary/10 ring-4 ring-primary/10">
+                  <div className="w-70 h-70 rounded-full flex items-center justify-center bg-primary/10 ring-4 ring-primary/10">
                     <span className="text-8xl font-heading font-bold text-primary/20">
                       AA
                     </span>

@@ -11,6 +11,7 @@ export interface Project {
   status: 'Completed' | 'In Progress'
   roleType: 'Team Lead' | 'Frontend Engineer'
   teamRole: string
+  liveDemo?: string
   teamSize: number
   duration: string
   featured: boolean
@@ -78,6 +79,8 @@ export const projects: Project[] = [
     roleType: 'Team Lead',
 
     teamRole: 'Frontend Team Lead',
+
+    liveDemo: 'https://vorder-sigma.vercel.app',
 
     teamSize: 6,
 
@@ -376,6 +379,8 @@ export const projects: Project[] = [
 
     teamRole: 'Frontend Developer',
 
+    liveDemo: 'https://accounting-system-one.vercel.app',
+
     teamSize: 3,
 
     duration: '3 Months',
@@ -508,6 +513,9 @@ export const projects: Project[] = [
   roleType: 'Team Lead',
 
   teamRole: 'Frontend Engineer & Product Designer',
+
+      liveDemo: 'https://x-code-prtfolio.vercel.app',
+
 
   teamSize: 1,
 

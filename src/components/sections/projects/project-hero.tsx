@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Calendar, Users, Briefcase } from "lucide-react";
+import { ArrowLeft, Calendar, Users, Briefcase, ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -98,6 +98,22 @@ export function ProjectHero({ project }: ProjectHeroProps) {
                 ))}
               </div>
             </StaggerItem>
+            <StaggerItem>
+  {project.liveDemo && (
+    <div className="pt-2">
+      <Button asChild size="lg" className="group">
+        <a
+          href={project.liveDemo}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View Live Project
+          <ArrowRight  className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </a>
+      </Button>
+    </div>
+  )}
+</StaggerItem>
           </StaggerChildren>
 
           {/* Project Image */}
