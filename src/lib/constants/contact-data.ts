@@ -1,4 +1,6 @@
 import { Clock, Mail, MapPin, User } from "lucide-react"
+import { FaGithub, FaLinkedin } from "react-icons/fa6"
+import { TbWorld } from "react-icons/tb"
 
 export const contactInfo = [
   {
@@ -23,17 +25,17 @@ export const contactInfo = [
 
 export const socialLinks = [
   {
-    icon: User,
+    icon: FaGithub,
     href: 'https://github.com/codebyabdo',
     label: 'GitHub',
   },
   {
-    icon: User,
+    icon: FaLinkedin,
     href: 'https://linkedin.com/in/codebyabdo',
     label: 'LinkedIn',
   },
   {
-    icon: User,
+    icon: TbWorld,
     href: 'https://codebyabdo.vercel.app',
     label: 'Portfolio',
   },

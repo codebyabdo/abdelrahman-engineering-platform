@@ -1,4 +1,13 @@
-import { Computer, Mail, MessageSquare, User } from "lucide-react";
+import { GitCommitVertical, Mail, MessageSquare, User, Globe,  GitGraph, Link } from 'lucide-react';
+
+import {
+  FaGithub,
+  FaLinkedin,
+  FaXTwitter,
+} from "react-icons/fa6";
+
+import { MdEmail } from "react-icons/md";
+import { TbWorld } from "react-icons/tb";
 
 export const footerLinks = {
   navigation: [
@@ -14,22 +23,22 @@ export const footerLinks = {
     {
       label: 'GitHub',
       href: 'https://github.com/codebyabdo',
-      icon: Computer,
+      icon: FaGithub,
     },
     {
       label: 'LinkedIn',
       href: 'https://linkedin.com/in/codebyabdo',
-      icon: MessageSquare,
+      icon: FaLinkedin,
     },
     {
       label: 'Portfolio',
       href: 'https://codebyabdo.vercel.app',
-      icon: User,
+      icon: TbWorld,
     },
     {
       label: 'Email',
       href: 'mailto:abdelrahman.adel.js@gmail.com',
-      icon: Mail,
+      icon: MdEmail,
     },
   ],
 }

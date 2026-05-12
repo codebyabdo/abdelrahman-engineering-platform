@@ -1,6 +1,7 @@
 export interface Project {
   slug: string
   title: string
+  image?: string
   subtitle: string
   description: string
   longDescription: string
@@ -45,6 +46,8 @@ export const projects: Project[] = [
     slug: 'vorder-platform',
 
     title: 'Vorder Platform',
+
+    image: "/vorder.png",
 
     subtitle:
       'Multi-tenant SaaS platform for creating and managing online stores.',
@@ -194,6 +197,8 @@ export const projects: Project[] = [
 
     title: 'Blood Bank Management System',
 
+        image: "/blood.png",
+
     subtitle:
       'Role-based healthcare platform for managing blood requests and inventory.',
 
@@ -341,6 +346,8 @@ export const projects: Project[] = [
 
     title: 'Accounting & Inventory Management System',
 
+        image: "/accounting.png",
+
     subtitle:
       'Modern dashboard system for clothing store operations and inventory management.',
 
@@ -468,6 +475,9 @@ export const projects: Project[] = [
   slug: 'xcode-portfolio',
 
   title: 'XCode Portfolio',
+
+
+        image: "/xcode.png",
 
   subtitle:
     'Modern developer portfolio platform focused on scalable frontend architecture and product-driven presentation.',

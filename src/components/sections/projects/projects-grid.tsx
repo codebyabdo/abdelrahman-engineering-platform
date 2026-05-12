@@ -1,33 +1,44 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { FadeUp, StaggerChildren, StaggerItem, HoverCard, motion } from '@/components/animations/motion'
-import { cn } from '@/lib/utils'
-import { categories, projects } from '@/lib/constants/projects-data'
+import { useState } from "react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  FadeUp,
+  StaggerChildren,
+  StaggerItem,
+  HoverCard,
+} from "@/components/animations/motion";
+import { cn } from "@/lib/utils";
+import { categories, projects } from "@/lib/constants/projects-data";
+import Image from "next/image";
 
 export function ProjectsGrid() {
-  const [activeCategory, setActiveCategory] = useState('All')
+  const [activeCategory, setActiveCategory] = useState("All");
 
-  const filteredProjects = activeCategory === 'All'
-    ? projects
-    : projects.filter((p) => p.category === activeCategory)
+  const [imgError, setImgError] = useState(false);
+
+  const filteredProjects =
+    activeCategory === "All"
+      ? projects
+      : projects.filter((p) => p.category === activeCategory);
 
   return (
     <section className="py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <FadeUp className="max-w-2xl mb-16 space-y-6">
-          <p className="text-sm text-primary font-medium uppercase tracking-wider">Portfolio</p>
+          <p className="text-sm text-primary font-medium uppercase tracking-wider">
+            Portfolio
+          </p>
           <h1 className="font-heading font-semibold text-4xl sm:text-5xl lg:text-6xl text-balance">
             Selected Projects
           </h1>
           <p className="text-lg text-muted-foreground text-pretty">
-            A collection of projects showcasing my expertise in frontend engineering, 
-            architecture design, and team leadership.
+            A collection of projects showcasing my expertise in frontend
+            engineering, architecture design, and team leadership.
           </p>
         </FadeUp>
 
@@ -36,14 +47,14 @@ export function ProjectsGrid() {
           {categories.map((category) => (
             <Button
               key={category}
-              variant={activeCategory === category ? 'default' : 'outline'}
+              variant={activeCategory === category ? "default" : "outline"}
               size="sm"
               onClick={() => setActiveCategory(category)}
               className={cn(
-                'transition-all',
-                activeCategory === category 
-                  ? '' 
-                  : 'border-border/50 hover:border-primary/50'
+                "transition-all",
+                activeCategory === category
+                  ? ""
+                  : "border-border/50 hover:border-primary/50",
               )}
             >
               {category}
@@ -56,19 +67,36 @@ export function ProjectsGrid() {
           {filteredProjects.map((project) => (
             <StaggerItem key={project.slug}>
               <HoverCard className="h-full">
-                <Link href={`/projects/${project.slug}`} className="group block h-full">
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="group block h-full"
+                >
                   <article className="h-full flex flex-col p-6 rounded-2xl border border-border/50 bg-card/50 hover:border-primary/30 hover:bg-card transition-all duration-300">
                     {/* Project Image Placeholder */}
                     <div className="relative aspect-video rounded-xl overflow-hidden bg-secondary mb-6">
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5" />
+
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-5xl font-heading font-bold text-primary/20">
-                          {project.title.charAt(0)}
-                        </div>
+                        {!imgError && project.image ? (
+                          <Image
+                            src={project.image}
+                            alt={project.title}
+                            fill
+                            className="object-cover"
+                            onError={() => setImgError(true)}
+                          />
+                        ) : (
+                          <div className="text-5xl font-heading font-bold text-primary/20">
+                            {project.title?.charAt(0)}
+                          </div>
+                        )}
                       </div>
+
                       {project.featured && (
                         <div className="absolute top-4 right-4">
-                          <Badge className="bg-primary/90 text-primary-foreground">Featured</Badge>
+                          <Badge className="bg-primary/90 text-primary-foreground">
+                            Featured
+                          </Badge>
                         </div>
                       )}
                     </div>
@@ -76,10 +104,15 @@ export function ProjectsGrid() {
                     {/* Content */}
                     <div className="flex-1 flex flex-col">
                       <div className="flex items-center gap-3 mb-3">
-                        <Badge variant="outline" className="border-border/50 text-muted-foreground">
+                        <Badge
+                          variant="outline"
+                          className="border-border/50 text-muted-foreground"
+                        >
                           {project.category}
                         </Badge>
-                        <span className="text-sm text-muted-foreground">{project.duration}</span>
+                        <span className="text-sm text-muted-foreground">
+                          {project.duration}
+                        </span>
                       </div>
 
                       <h2 className="font-heading font-semibold text-xl lg:text-2xl mb-3 group-hover:text-primary transition-colors">
@@ -93,12 +126,19 @@ export function ProjectsGrid() {
                       {/* Tags */}
                       <div className="flex flex-wrap gap-2 mb-4">
                         {project.tags.slice(0, 4).map((tag) => (
-                          <Badge key={tag} variant="secondary" className="bg-secondary/50 text-xs">
+                          <Badge
+                            key={tag}
+                            variant="secondary"
+                            className="bg-secondary/50 text-xs"
+                          >
                             {tag}
                           </Badge>
                         ))}
                         {project.tags.length > 4 && (
-                          <Badge variant="secondary" className="bg-secondary/50 text-xs">
+                          <Badge
+                            variant="secondary"
+                            className="bg-secondary/50 text-xs"
+                          >
                             +{project.tags.length - 4}
                           </Badge>
                         )}
@@ -123,5 +163,5 @@ export function ProjectsGrid() {
         </StaggerChildren>
       </div>
     </section>
-  )
+  );
 }

@@ -1,20 +1,31 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, User } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   FadeUp,
   StaggerChildren,
   StaggerItem,
 } from "@/components/animations/motion";
+import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import Image from "next/image";
+import { useState } from "react";
+
 const socialLinks = [
-  { icon: User, href: 'https://github.com/codebyabdo', label: 'GitHub' },
-  { icon: User, href: 'https://linkedin.com/in/codebyabdo', label: 'LinkedIn' },
-  { icon: User, href: 'https://x.com/codebyabdo', label: 'Twitter' },
+  { icon: FaGithub, href: "https://github.com/codebyabdo", label: "GitHub" },
+  {
+    icon: FaLinkedin,
+    href: "https://linkedin.com/in/codebyabdo",
+    label: "LinkedIn",
+  },
+  { icon: FaXTwitter, href: "https://x.com/codebyabdo", label: "Twitter" },
 ];
 
 export function AboutHero() {
+  const [imgError, setImgError] = useState(false);
+
+  const imageSrc = "/profile.png";
   return (
     <section className="py-24 lg:py-32 border-b border-border/50">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -22,11 +33,32 @@ export function AboutHero() {
           {/* Image */}
           <FadeUp className="order-2 lg:order-1">
             <div className="relative aspect-square max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden bg-secondary">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5" />
+              {/* background gradient */}
+              <div className="absolute inset-0 bg-linear-to-br from-primary/20 to-primary/5" />
+
+              {/* center content */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-9xl font-heading font-bold text-primary/20">
-                  AA
-                </div>
+                {!imgError && imageSrc ? (
+                  <div className="relative">
+                    <Image
+                      src={imageSrc}
+                      alt="Profile Picture"
+                      width={500}
+                      height={500}
+                      className="object-cover  ring-primary/20 shadow-xl"
+                      onLoadingComplete={(result) => {
+                        if (result.naturalWidth === 0) setImgError(true);
+                      }}
+                      onError={() => setImgError(true)}
+                    />
+                  </div>
+                ) : (
+                  <div className="w-[280px] h-[280px] rounded-full flex items-center justify-center bg-primary/10 ring-4 ring-primary/10">
+                    <span className="text-8xl font-heading font-bold text-primary/20">
+                      AA
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </FadeUp>
@@ -80,7 +112,7 @@ export function AboutHero() {
               <div className="flex flex-wrap items-center gap-4">
                 <Button asChild className="group">
                   <Link href="/contact">
-                    Get in Touch
+                    Start a Project
                     <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>

@@ -8,21 +8,23 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
-          <div className="flex items-center gap-2">
-            <div className="w-12 h-12 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-heading font-semibold text-sm">
-              CODE
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <div className="w-12 h-12 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-heading font-semibold text-sm">
+                CODE
+              </div>
+
+              <span className="font-heading font-semibold text-foreground">
+                byabdo
+              </span>
             </div>
 
-            <span className="font-heading font-semibold text-foreground">
-             byabdo
-            </span>
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
+              Front-End Web Developer specializing in React.js, Next.js,
+              TypeScript, and scalable SaaS applications with modern frontend
+              architecture.
+            </p>
           </div>
-
-          <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-            Front-End Web Developer specializing in React.js, Next.js,
-            TypeScript, and scalable SaaS applications with modern frontend
-            architecture.
-          </p>
 
           {/* Navigation */}
           <div>
