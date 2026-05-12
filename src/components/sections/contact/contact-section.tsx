@@ -1,54 +1,33 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Mail, MapPin, Clock, Send, User } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Label } from '@/components/ui/label'
-import { FadeUp, StaggerChildren, StaggerItem, HoverCard } from '@/components/animations/motion'
+import { useState } from "react";
+import { Send } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import {
+  FadeUp,
+  StaggerChildren,
+  StaggerItem,
+} from "@/components/animations/motion";
 
-const contactInfo = [
-  {
-    icon: Mail,
-    title: 'Email',
-    value: 'hello@alexchen.dev',
-    href: 'mailto:hello@alexchen.dev',
-  },
-  {
-    icon: MapPin,
-    title: 'Location',
-    value: 'San Francisco, CA',
-    href: null,
-  },
-  {
-    icon: Clock,
-    title: 'Availability',
-    value: 'Open to opportunities',
-    href: null,
-  },
-]
-
-const socialLinks = [
-  { icon: User, href: 'https://github.com', label: 'GitHub' },
-  { icon: User, href: 'https://linkedin.com', label: 'LinkedIn' },
-  { icon: User, href: 'https://twitter.com', label: 'Twitter' },
-]
+import { contactInfo, socialLinks } from "@/lib/constants/contact-data";
 
 export function ContactSection() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    
+    e.preventDefault();
+    setIsSubmitting(true);
+
     // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-  }
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+  };
 
   return (
     <section className="py-24 lg:py-32">
@@ -57,19 +36,22 @@ export function ContactSection() {
           {/* Left Column - Info */}
           <StaggerChildren className="space-y-8">
             <StaggerItem>
-              <p className="text-sm text-primary font-medium uppercase tracking-wider">Contact</p>
+              <p className="text-sm text-primary font-medium uppercase tracking-wider">
+                Contact
+              </p>
             </StaggerItem>
 
             <StaggerItem>
               <h1 className="font-heading font-semibold text-4xl sm:text-5xl text-balance">
-                Let&apos;s work together
+                Let&apos;s build something great together
               </h1>
             </StaggerItem>
 
             <StaggerItem>
               <p className="text-lg text-muted-foreground text-pretty">
-                Have a project in mind? Looking for a frontend engineer or team lead? 
-                I&apos;m always open to discussing new opportunities and interesting challenges.
+                I&apos;m always interested in collaborating on modern web
+                applications, SaaS products, admin dashboards, and scalable
+                frontend systems built with React, Next.js, and TypeScript.
               </p>
             </StaggerItem>
 
@@ -82,9 +64,11 @@ export function ContactSection() {
                       <item.icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">{item.title}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {item.title}
+                      </p>
                       {item.href ? (
-                        <a 
+                        <a
                           href={item.href}
                           className="font-medium hover:text-primary transition-colors"
                         >
@@ -102,7 +86,9 @@ export function ContactSection() {
             {/* Social Links */}
             <StaggerItem>
               <div className="pt-4">
-                <p className="text-sm text-muted-foreground mb-3">Connect with me</p>
+                <p className="text-sm text-muted-foreground mb-3">
+                  Connect with me
+                </p>
                 <div className="flex gap-3">
                   {socialLinks.map((link) => (
                     <a
@@ -129,11 +115,18 @@ export function ContactSection() {
                   <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto">
                     <Send className="w-8 h-8" />
                   </div>
-                  <h3 className="font-heading font-semibold text-xl">Message Sent!</h3>
+                  <h3 className="font-heading font-semibold text-xl">
+                    Message Sent Successfully
+                  </h3>
+
                   <p className="text-muted-foreground">
-                    Thank you for reaching out. I&apos;ll get back to you as soon as possible.
+                    Thanks for reaching out. I&apos;ll get back to you as soon
+                    as possible.
                   </p>
-                  <Button onClick={() => setIsSubmitted(false)} variant="outline">
+                  <Button
+                    onClick={() => setIsSubmitted(false)}
+                    variant="outline"
+                  >
                     Send Another Message
                   </Button>
                 </div>
@@ -142,22 +135,22 @@ export function ContactSection() {
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="name">Name</Label>
-                      <Input 
-                        id="name" 
+                      <Input
+                        id="name"
                         name="name"
-                        placeholder="John Doe" 
-                        required 
+                        placeholder="Your full name"
+                        required
                         className="bg-background border-border/50 focus:border-primary"
                       />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">Email</Label>
-                      <Input 
-                        id="email" 
+                      <Input
+                        id="email"
                         name="email"
-                        type="email" 
-                        placeholder="john@example.com" 
-                        required 
+                        type="email"
+                        placeholder="your@email.com"
+                        required
                         className="bg-background border-border/50 focus:border-primary"
                       />
                     </div>
@@ -165,43 +158,47 @@ export function ContactSection() {
 
                   <div className="space-y-2">
                     <Label htmlFor="company">Company (Optional)</Label>
-                    <Input 
-                      id="company" 
+                    <Input
+                      id="company"
                       name="company"
-                      placeholder="Your company name" 
+                      placeholder="Company or startup name"
                       className="bg-background border-border/50 focus:border-primary"
                     />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="subject">Subject</Label>
-                    <Input 
-                      id="subject" 
+                    <Input
+                      id="subject"
                       name="subject"
-                      placeholder="Project inquiry" 
-                      required 
+                      placeholder="Tell me about your project"
+                      required
                       className="bg-background border-border/50 focus:border-primary"
                     />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="message">Message</Label>
-                    <Textarea 
-                      id="message" 
+                    <Textarea
+                      id="message"
                       name="message"
-                      placeholder="Tell me about your project or opportunity..."
+                      placeholder="Tell me about your project, idea, or opportunity..."
                       rows={5}
-                      required 
+                      required
                       className="bg-background border-border/50 focus:border-primary resize-none"
                     />
                   </div>
 
-                  <Button type="submit" className="w-full group" disabled={isSubmitting}>
+                  <Button
+                    type="submit"
+                    className="w-full group"
+                    disabled={isSubmitting}
+                  >
                     {isSubmitting ? (
-                      'Sending...'
+                      "Sending..."
                     ) : (
                       <>
-                        Send Message
+                        Send Inquiry
                         <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </>
                     )}
@@ -213,5 +210,5 @@ export function ContactSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

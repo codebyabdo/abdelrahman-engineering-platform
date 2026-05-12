@@ -1,30 +1,8 @@
 'use client'
 
-import { Code2, Layers, Zap, Users } from 'lucide-react'
 import { FadeUp, StaggerChildren, StaggerItem, HoverCard } from '@/components/animations/motion'
+import { philosophies } from '@/lib/constants/philosophies'
 
-const philosophies = [
-  {
-    icon: Layers,
-    title: 'Architecture First',
-    description: 'Every project starts with solid foundations. I design systems that scale, from folder structures to state management patterns.',
-  },
-  {
-    icon: Code2,
-    title: 'Clean Code',
-    description: 'Readable, maintainable, and well-documented code is not optional. I write code that other developers love to work with.',
-  },
-  {
-    icon: Zap,
-    title: 'Performance Obsessed',
-    description: 'Speed is a feature. I optimize for Core Web Vitals, implement code splitting, and ensure fast load times across all devices.',
-  },
-  {
-    icon: Users,
-    title: 'Team Leadership',
-    description: 'Great products come from great teams. I mentor developers, establish best practices, and foster collaborative environments.',
-  },
-]
 
 export function PhilosophySection() {
   return (

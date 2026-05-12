@@ -1,43 +1,30 @@
-'use client'
+"use client";
 
-import { MessageSquare, GitPullRequest, FileCode, Users } from 'lucide-react'
-import { FadeUp, StaggerChildren, StaggerItem, HoverCard } from '@/components/animations/motion'
+import {
+  FadeUp,
+  StaggerChildren,
+  StaggerItem,
+  HoverCard,
+} from "@/components/animations/motion";
 
-const workflowPrinciples = [
-  {
-    icon: MessageSquare,
-    title: 'Clear Communication',
-    description: 'Regular standups, async updates, and documentation ensure everyone stays aligned on goals and progress.',
-  },
-  {
-    icon: GitPullRequest,
-    title: 'Code Review Culture',
-    description: 'Thorough but constructive code reviews that focus on knowledge sharing, not just finding bugs.',
-  },
-  {
-    icon: FileCode,
-    title: 'Documentation First',
-    description: 'Architecture decisions, API changes, and complex logic are documented before implementation begins.',
-  },
-  {
-    icon: Users,
-    title: 'Mentorship Focus',
-    description: 'Pairing sessions, knowledge transfers, and growth-oriented feedback help everyone level up.',
-  },
-]
+import { workflowPrinciples } from "@/lib/constants/workflow-data";
 
 export function TeamWorkflowSection() {
   return (
     <section className="py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <FadeUp className="max-w-2xl mb-16 space-y-4">
-          <p className="text-sm text-primary font-medium uppercase tracking-wider">Leadership</p>
+          <p className="text-sm text-primary font-medium uppercase tracking-wider">
+            Leadership
+          </p>
           <h2 className="font-heading font-semibold text-3xl sm:text-4xl">
             Team Collaboration
           </h2>
           <p className="text-muted-foreground">
-            Great software is built by great teams. My leadership approach focuses on 
-            creating environments where developers can do their best work.
+            Great frontend products are built through strong collaboration,
+            clean communication, and maintainable engineering practices. I focus
+            on creating scalable solutions while working effectively with teams
+            and clients.
           </p>
         </FadeUp>
 
@@ -62,5 +49,5 @@ export function TeamWorkflowSection() {
         </StaggerChildren>
       </div>
     </section>
-  )
+  );
 }

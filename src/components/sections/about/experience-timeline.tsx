@@ -1,42 +1,9 @@
 'use client'
 
 import { FadeUp, StaggerChildren, StaggerItem, motion } from '@/components/animations/motion'
+import { experiences } from '@/lib/constants/experiences-data'
 
-const experiences = [
-  {
-    period: '2023 - Present',
-    title: 'Senior Frontend Engineer & Team Lead',
-    company: 'TechCorp Inc.',
-    description: 'Leading a team of 8 engineers building enterprise SaaS products. Architecting frontend systems, establishing best practices, and mentoring junior developers.',
-    highlights: [
-      'Increased team velocity by 40% through process improvements',
-      'Led migration from legacy codebase to Next.js 14',
-      'Implemented design system used across 5 products',
-    ],
-  },
-  {
-    period: '2021 - 2023',
-    title: 'Frontend Engineer',
-    company: 'StartupXYZ',
-    description: 'Built and maintained core product features for a B2B SaaS platform. Focused on performance optimization and accessibility improvements.',
-    highlights: [
-      'Reduced bundle size by 60% through code splitting',
-      'Achieved 98+ Lighthouse scores across all pages',
-      'Implemented real-time collaboration features',
-    ],
-  },
-  {
-    period: '2019 - 2021',
-    title: 'Junior Frontend Developer',
-    company: 'WebAgency',
-    description: 'Developed responsive websites and web applications for various clients. Gained experience with React, TypeScript, and modern CSS.',
-    highlights: [
-      'Delivered 20+ client projects on time and budget',
-      'Introduced component-based architecture',
-      'Created reusable UI component library',
-    ],
-  },
-]
+
 
 export function ExperienceTimeline() {
   return (

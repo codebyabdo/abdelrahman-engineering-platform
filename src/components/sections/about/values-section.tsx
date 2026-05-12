@@ -1,30 +1,7 @@
 'use client'
 
-import { Heart, Target, Lightbulb, Rocket } from 'lucide-react'
 import { FadeUp, StaggerChildren, StaggerItem, HoverCard } from '@/components/animations/motion'
-
-const values = [
-  {
-    icon: Target,
-    title: 'Product-Focused',
-    description: 'I believe engineers should deeply understand the product and user needs. Technical decisions are always in service of delivering value.',
-  },
-  {
-    icon: Lightbulb,
-    title: 'Continuous Learning',
-    description: 'Technology evolves rapidly. I dedicate time each week to learning new concepts, tools, and patterns to stay at the cutting edge.',
-  },
-  {
-    icon: Heart,
-    title: 'Quality Over Speed',
-    description: 'While I value efficiency, I never compromise on code quality. Good architecture today prevents technical debt tomorrow.',
-  },
-  {
-    icon: Rocket,
-    title: 'Impact-Driven',
-    description: 'I measure success not by lines of code, but by the impact on users and business. Every feature should move the needle.',
-  },
-]
+import { values } from '@/lib/constants/values-data'
 
 export function ValuesSection() {
   return (

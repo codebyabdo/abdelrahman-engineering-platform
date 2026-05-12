@@ -1,6 +1,10 @@
-'use client'
+"use client";
 
-import { FadeUp, StaggerChildren, StaggerItem } from '@/components/animations/motion'
+import {
+  FadeUp,
+  StaggerChildren,
+  StaggerItem,
+} from "@/components/animations/motion";
 
 export function ApproachHero() {
   return (
@@ -8,32 +12,38 @@ export function ApproachHero() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <StaggerChildren className="max-w-3xl space-y-8">
           <StaggerItem>
-            <p className="text-sm text-primary font-medium uppercase tracking-wider">Philosophy</p>
+            <p className="text-sm text-primary font-medium uppercase tracking-wider">
+              Approach
+            </p>
           </StaggerItem>
 
           <StaggerItem>
             <h1 className="font-heading font-semibold text-4xl sm:text-5xl lg:text-6xl text-balance">
-              Engineering Approach
+              Frontend Engineering
             </h1>
           </StaggerItem>
 
           <StaggerItem>
             <p className="text-lg text-muted-foreground leading-relaxed text-pretty">
-              Building scalable frontend systems requires more than just writing code. 
-              It demands a structured approach to architecture, a deep understanding of 
-              performance optimization, and the ability to lead teams towards shared goals.
+              I focus on building scalable, maintainable, and high-performance
+              frontend applications using modern React and Next.js ecosystems.
+              My approach combines clean architecture, reusable systems, and
+              performance-driven development to deliver production-ready user
+              experiences.
             </p>
           </StaggerItem>
 
           <StaggerItem>
             <p className="text-muted-foreground leading-relaxed text-pretty">
-              Over the years, I&apos;ve developed a set of principles and patterns that guide 
-              my work. These aren&apos;t rigid rules but flexible guidelines that adapt to each 
-              project&apos;s unique requirements while maintaining consistency and quality.
+              Through freelance projects and SaaS platforms like VORDER and
+              Accounting System, I’ve developed practical workflows for handling
+              complex UI states, API integrations, authentication systems, and
+              scalable component architecture while keeping developer experience
+              and maintainability a priority.
             </p>
           </StaggerItem>
         </StaggerChildren>
       </div>
     </section>
-  )
+  );
 }

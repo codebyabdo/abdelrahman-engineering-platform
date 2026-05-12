@@ -1,15 +1,18 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { ArrowRight, User  } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { FadeUp, StaggerChildren, StaggerItem } from '@/components/animations/motion'
-
+import Link from "next/link";
+import { ArrowRight, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  FadeUp,
+  StaggerChildren,
+  StaggerItem,
+} from "@/components/animations/motion";
 const socialLinks = [
-  { icon: User, href: 'https://github.com', label: 'GitHub' },
-  { icon: User, href: 'https://linkedin.com', label: 'LinkedIn' },
-  { icon: User, href: 'https://twitter.com', label: 'Twitter' },
-]
+  { icon: User, href: 'https://github.com/codebyabdo', label: 'GitHub' },
+  { icon: User, href: 'https://linkedin.com/in/codebyabdo', label: 'LinkedIn' },
+  { icon: User, href: 'https://x.com/codebyabdo', label: 'Twitter' },
+];
 
 export function AboutHero() {
   return (
@@ -22,7 +25,7 @@ export function AboutHero() {
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-9xl font-heading font-bold text-primary/20">
-                  AC
+                  AA
                 </div>
               </div>
             </div>
@@ -31,36 +34,44 @@ export function AboutHero() {
           {/* Content */}
           <StaggerChildren className="order-1 lg:order-2 space-y-8">
             <StaggerItem>
-              <p className="text-sm text-primary font-medium uppercase tracking-wider">About Me</p>
+              <p className="text-sm text-primary font-medium uppercase tracking-wider">
+                About Me
+              </p>
             </StaggerItem>
 
             <StaggerItem>
               <h1 className="font-heading font-semibold text-4xl sm:text-5xl lg:text-6xl text-balance">
-                Alex Chen
+                Abd El-Rhman Adel
               </h1>
             </StaggerItem>
 
             <StaggerItem>
               <p className="text-xl text-muted-foreground">
-                Frontend Engineer & Team Lead
+                Front-End Developer • React.js & Next.js Developer
               </p>
             </StaggerItem>
 
             <StaggerItem>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  I&apos;m a frontend engineer with 5+ years of experience building 
-                  scalable web applications. Currently, I specialize in React ecosystems, 
-                  SaaS architecture, and leading engineering teams.
+                  I&apos;m a Front-End Developer specializing in building
+                  modern, responsive, and scalable web applications using
+                  React.js, Next.js, and Next.js. I focus on creating clean user
+                  interfaces with smooth user experiences and maintainable
+                  architectures.
                 </p>
+
                 <p>
-                  My passion lies at the intersection of clean code and user experience. 
-                  I believe that the best software is built when engineers deeply understand 
-                  both the technical constraints and the user needs.
+                  I&apos;m currently studying Electrical Engineering at Future
+                  Higher Institute of Engineering while actively working on
+                  freelance projects and improving my skills in frontend
+                  architecture, APIs integration, and modern web technologies.
                 </p>
+
                 <p>
-                  When I&apos;m not coding, I contribute to open-source projects, 
-                  write about frontend development, and mentor aspiring developers.
+                  I enjoy turning ideas into real products, building creative UI
+                  experiences, and continuously learning new technologies to
+                  grow as a developer.
                 </p>
               </div>
             </StaggerItem>
@@ -73,6 +84,7 @@ export function AboutHero() {
                     <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
+
                 <div className="flex gap-2">
                   {socialLinks.map((link) => (
                     <a
@@ -93,5 +105,5 @@ export function AboutHero() {
         </div>
       </div>
     </section>
-  )
+  );
 }

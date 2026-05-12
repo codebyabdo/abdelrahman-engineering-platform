@@ -1,57 +1,28 @@
-'use client'
+"use client";
 
-import { FadeUp, StaggerChildren, StaggerItem, motion } from '@/components/animations/motion'
+import {
+  FadeUp,
+  StaggerChildren,
+  StaggerItem,
+  motion,
+} from "@/components/animations/motion";
 
-const systemDesignTopics = [
-  {
-    title: 'Component Design',
-    items: [
-      'Compound components for flexibility',
-      'Controlled and uncontrolled patterns',
-      'Polymorphic components with TypeScript',
-      'Accessibility as a first-class concern',
-    ],
-  },
-  {
-    title: 'State Management',
-    items: [
-      'Server state vs client state separation',
-      'Context for truly global state only',
-      'Local state with hooks composition',
-      'Optimistic updates for responsiveness',
-    ],
-  },
-  {
-    title: 'Type Safety',
-    items: [
-      'Strict TypeScript configuration',
-      'Generic components and utilities',
-      'Zod for runtime validation',
-      'API contracts with type generation',
-    ],
-  },
-  {
-    title: 'Error Handling',
-    items: [
-      'Error boundaries for graceful failures',
-      'Centralized error reporting',
-      'User-friendly error messages',
-      'Retry mechanisms for transient failures',
-    ],
-  },
-]
+import { systemDesignTopics } from "@/lib/constants/system-design-topics";
 
 export function SystemDesignSection() {
   return (
     <section className="py-24 lg:py-32 border-y border-border/50 bg-card/30">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <FadeUp className="max-w-2xl mb-16 space-y-4">
-          <p className="text-sm text-primary font-medium uppercase tracking-wider">Patterns</p>
+          <p className="text-sm text-primary font-medium uppercase tracking-wider">
+            Patterns
+          </p>
           <h2 className="font-heading font-semibold text-3xl sm:text-4xl">
             Frontend System Design
           </h2>
           <p className="text-muted-foreground">
-            Design patterns and practices for building robust, scalable frontend applications.
+            Design patterns and practices for building robust, scalable frontend
+            applications.
           </p>
         </FadeUp>
 
@@ -83,5 +54,5 @@ export function SystemDesignSection() {
         </StaggerChildren>
       </div>
     </section>
-  )
+  );
 }

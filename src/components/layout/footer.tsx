@@ -1,22 +1,6 @@
-import Link from 'next/link'
-import {  Computer, Mail, MessageSquare, User } from 'lucide-react'
-
-const footerLinks = {
-  navigation: [
-    { label: 'Home', href: '/' },
-    { label: 'Projects', href: '/projects' },
-    { label: 'Approach', href: '/approach' },
-    { label: 'About', href: '/about' },
-    { label: 'Blog', href: '/blog' },
-    { label: 'Contact', href: '/contact' },
-  ],
-  social: [
-    { label: 'GitHub', href: 'https://github.com', icon: Computer },
-    { label: 'LinkedIn', href: 'https://linkedin.com', icon: MessageSquare },
-    { label: 'Twitter', href: 'https://twitter.com', icon: User },
-    { label: 'Email', href: 'mailto:hello@alexchen.dev', icon: Mail },
-  ],
-}
+import Link from "next/link";
+import { Computer, Mail, MessageSquare, User } from "lucide-react";
+import { footerLinks } from "@/lib/constants/footer-links";
 
 export function Footer() {
   return (
@@ -24,27 +8,31 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-heading font-semibold text-sm">
-                AC
-              </div>
-              <span className="font-heading font-semibold text-foreground">
-                Alex Chen
-              </span>
+          <div className="flex items-center gap-2">
+            <div className="w-12 h-12 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-heading font-semibold text-sm">
+              CODE
             </div>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-              Frontend Engineer & Team Lead building scalable SaaS systems with modern React ecosystems.
-            </p>
+
+            <span className="font-heading font-semibold text-foreground">
+             byabdo
+            </span>
           </div>
+
+          <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
+            Front-End Web Developer specializing in React.js, Next.js,
+            TypeScript, and scalable SaaS applications with modern frontend
+            architecture.
+          </p>
 
           {/* Navigation */}
           <div>
-            <h4 className="font-heading font-medium text-foreground mb-4">Navigation</h4>
+            <h4 className="font-heading font-medium text-foreground mb-4">
+              Navigation
+            </h4>
             <ul className="space-y-2">
               {footerLinks.navigation.map((link) => (
                 <li key={link.href}>
-                  <Link 
+                  <Link
                     href={link.href}
                     className="text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
@@ -57,7 +45,9 @@ export function Footer() {
 
           {/* Social */}
           <div>
-            <h4 className="font-heading font-medium text-foreground mb-4">Connect</h4>
+            <h4 className="font-heading font-medium text-foreground mb-4">
+              Connect
+            </h4>
             <div className="flex gap-3">
               {footerLinks.social.map((link) => (
                 <a
@@ -77,13 +67,15 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Alex Chen. All rights reserved.
+            © {new Date().getFullYear()} Abd El-Rahman Adel. All rights
+            reserved.
           </p>
+
           <p className="text-sm text-muted-foreground">
-            Built with Next.js & Tailwind CSS
+            Built with Next.js, TypeScript & Tailwind CSS
           </p>
         </div>
       </div>
     </footer>
-  )
+  );
 }

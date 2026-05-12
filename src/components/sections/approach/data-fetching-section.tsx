@@ -1,30 +1,14 @@
-'use client'
+"use client";
 
-import { Database, RefreshCw, Shield, Zap } from 'lucide-react'
-import { FadeUp, StaggerChildren, StaggerItem, HoverCard } from '@/components/animations/motion'
+import {
+  FadeUp,
+  StaggerChildren,
+  StaggerItem,
+  HoverCard,
+} from "@/components/animations/motion";
+import { dataStrategies } from "@/lib/constants/strategies-data";
 
-const dataStrategies = [
-  {
-    icon: Database,
-    title: 'Server Components',
-    description: 'Leverage React Server Components for data fetching to reduce client-side JavaScript and improve initial load performance.',
-  },
-  {
-    icon: RefreshCw,
-    title: 'Smart Caching',
-    description: 'Implement intelligent caching strategies with stale-while-revalidate patterns for optimal freshness and speed.',
-  },
-  {
-    icon: Zap,
-    title: 'Optimistic Updates',
-    description: 'Provide instant feedback by updating UI optimistically, rolling back gracefully on failures.',
-  },
-  {
-    icon: Shield,
-    title: 'Type-Safe APIs',
-    description: 'Use TypeScript end-to-end with generated types from API schemas for compile-time safety.',
-  },
-]
+
 
 export function DataFetchingSection() {
   return (
@@ -32,19 +16,22 @@ export function DataFetchingSection() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <FadeUp className="space-y-6">
-            <p className="text-sm text-primary font-medium uppercase tracking-wider">Data Layer</p>
+            <p className="text-sm text-primary font-medium uppercase tracking-wider">
+              Data Layer
+            </p>
             <h2 className="font-heading font-semibold text-3xl sm:text-4xl">
               Data Fetching Strategy
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              Modern applications require sophisticated data management. My approach 
-              combines React Query for client-side state, Server Components for 
-              SSR/SSG scenarios, and careful consideration of caching boundaries.
+              Modern frontend applications require efficient state management
+              and reliable API communication. My workflow focuses on building
+              scalable data layers using React Query, TanStack Query, and
+              structured API services.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              The goal is always to provide the best user experience while maintaining 
-              code simplicity. This often means preferring declarative approaches over 
-              imperative ones and letting the framework handle complexity where possible.
+              I prioritize performance, maintainability, and user experience by
+              reducing unnecessary requests, optimizing rendering behavior, and
+              keeping frontend architecture clean and reusable across projects.
             </p>
           </FadeUp>
 
@@ -70,5 +57,5 @@ export function DataFetchingSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

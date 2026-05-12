@@ -1,6 +1,6 @@
 'use client'
 
-import { FadeUp, StaggerChildren, StaggerItem, motion } from '@/components/animations/motion'
+import { StaggerChildren, StaggerItem, motion } from '@/components/animations/motion'
 import { useEffect, useState, useRef } from 'react'
 
 const metrics = [

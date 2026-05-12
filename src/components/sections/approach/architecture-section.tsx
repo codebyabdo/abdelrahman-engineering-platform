@@ -1,50 +1,8 @@
 'use client'
 
-import { FolderTree, Layers, GitBranch, Package } from 'lucide-react'
 import { FadeUp, StaggerChildren, StaggerItem, HoverCard } from '@/components/animations/motion'
+import { architecturePrinciples } from '@/lib/constants/architecture-principles'
 
-const architecturePrinciples = [
-  {
-    icon: FolderTree,
-    title: 'Feature-Based Structure',
-    description: 'Organizing code by features rather than types creates natural boundaries, improves discoverability, and makes it easier to scale teams.',
-    details: [
-      'Each feature contains its own components, hooks, and utilities',
-      'Shared code lives in common directories',
-      'Clear ownership and reduced coupling',
-    ],
-  },
-  {
-    icon: Layers,
-    title: 'Separation of Concerns',
-    description: 'Clean separation between UI, business logic, and data layers ensures maintainability and testability.',
-    details: [
-      'UI components focused on presentation',
-      'Custom hooks for reusable logic',
-      'Services layer for external interactions',
-    ],
-  },
-  {
-    icon: GitBranch,
-    title: 'Branching Strategy',
-    description: 'A well-defined Git workflow ensures code quality and enables parallel development across team members.',
-    details: [
-      'Feature branches with clear naming',
-      'Protected main branch with CI checks',
-      'Automated deployments on merge',
-    ],
-  },
-  {
-    icon: Package,
-    title: 'Modular Dependencies',
-    description: 'Careful dependency management reduces bundle size and improves security posture.',
-    details: [
-      'Regular audit and updates',
-      'Tree-shaking friendly imports',
-      'Minimal peer dependencies',
-    ],
-  },
-]
 
 export function ArchitectureSection() {
   return (

@@ -1,230 +1,324 @@
 export interface BlogPost {
-  slug: string
-  title: string
-  excerpt: string
-  content: string
-  category: string
-  tags: string[]
-  publishedAt: string
-  readingTime: string
-  featured: boolean
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  category: string;
+  tags: string[];
+  publishedAt: string;
+  readingTime: string;
+  featured: boolean;
 }
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: 'building-scalable-react-architecture',
-    title: 'Building Scalable React Architecture',
-    excerpt: 'A deep dive into feature-based folder structures, separation of concerns, and patterns that help React applications scale with your team.',
+    slug: "building-scalable-saas-frontends",
+    title: "Building Scalable SaaS Frontends with React",
+    excerpt:
+      "Lessons learned from building production-grade SaaS applications using React, feature-based architecture, and scalable frontend patterns.",
     content: `
-# Building Scalable React Architecture
+# Building Scalable SaaS Frontends with React
 
-When building large-scale React applications, architecture decisions made early on can have lasting impacts on developer productivity and code maintainability.
+Building SaaS applications is very different from building landing pages or small websites. As applications grow, maintainability, scalability, and performance become critical.
 
-## Feature-Based Structure
+## Feature-Based Architecture
 
-Instead of organizing code by type (components, hooks, utils), consider organizing by feature:
+One of the most important decisions I made while working on projects like VORDER was organizing the application by features instead of file types.
 
 \`\`\`
 src/
   features/
+    products/
+    orders/
     auth/
-      components/
-      hooks/
-      utils/
-      index.ts
     dashboard/
-      components/
-      hooks/
-      utils/
-      index.ts
 \`\`\`
 
-This approach creates natural boundaries, improves discoverability, and makes it easier to understand what each part of your application does.
+This structure improves scalability and makes collaboration easier when projects grow.
 
-## Separation of Concerns
+## Reusable UI Systems
 
-Keep your components focused on rendering. Business logic should live in custom hooks, and data fetching should be handled by a dedicated layer.
+Creating reusable components accelerated development speed significantly across projects.
+
+Some examples:
+- Shared form components
+- Reusable modals and tables
+- Generic dashboard layouts
+- Shared API utilities
+
+## API Layer Structure
+
+Using React Query and Axios together helped reduce redundant requests and simplified server state management.
+
+Key benefits:
+- Smart caching
+- Better loading states
+- Optimistic UI updates
+- Cleaner business logic
 
 ## Conclusion
 
-Good architecture isn't about following rules blindly—it's about making decisions that help your team move faster and maintain code quality over time.
+Scalable frontend architecture is not about complexity. It's about creating systems that remain maintainable as features, users, and teams grow.
     `,
-    category: 'Architecture',
-    tags: ['React', 'Architecture', 'Best Practices'],
-    publishedAt: '2024-01-15',
-    readingTime: '8 min',
+    category: "Architecture",
+    tags: ["React", "SaaS", "Architecture", "Frontend"],
+    publishedAt: "2025-02-14",
+    readingTime: "8 min",
     featured: true,
   },
+
   {
-    slug: 'mastering-typescript-generics',
-    title: 'Mastering TypeScript Generics',
-    excerpt: 'Learn how to write type-safe, reusable code with TypeScript generics. From basic patterns to advanced use cases.',
+    slug: "frontend-performance-optimization",
+    title: "Frontend Performance Optimization Techniques",
+    excerpt:
+      "Practical frontend optimization techniques using lazy loading, code splitting, caching, and rendering improvements.",
     content: `
-# Mastering TypeScript Generics
+# Frontend Performance Optimization Techniques
 
-Generics are one of TypeScript's most powerful features, enabling you to write flexible, reusable code without sacrificing type safety.
+Performance directly affects user experience and business success. During multiple projects, performance optimization became a core part of my frontend workflow.
 
-## Why Generics?
+## Code Splitting
 
-Without generics, you'd have to choose between:
-- Using \`any\` and losing type safety
-- Writing duplicate code for each type
+Large bundles slow down applications. Dynamic imports help reduce initial load times significantly.
 
-Generics give you the best of both worlds.
+\`\`\`tsx
+const Dashboard = dynamic(() => import('./Dashboard'))
+\`\`\`
 
-## Basic Syntax
+## Lazy Loading
 
-\`\`\`typescript
-function identity<T>(arg: T): T {
-  return arg;
+Lazy loading below-the-fold sections improves perceived performance and reduces unnecessary rendering.
+
+## React Query Caching
+
+Using TanStack Query reduced repeated API calls and improved data-heavy dashboards.
+
+Benefits:
+- Faster navigation
+- Reduced server load
+- Better user experience
+
+## Image Optimization
+
+Optimized assets and CDN delivery improved loading speed dramatically in media-heavy projects.
+
+## Conclusion
+
+Frontend performance should be considered from the beginning of development, not after deployment.
+    `,
+    category: "Performance",
+    tags: ["Performance", "React", "Optimization", "Next.js"],
+    publishedAt: "2025-01-28",
+    readingTime: "7 min",
+    featured: true,
+  },
+
+  {
+    slug: "role-based-authentication-react",
+    title: "Implementing Role-Based Authentication in React Apps",
+    excerpt:
+      "How I build protected frontend applications with authentication flows, role permissions, and secure route handling.",
+    content: `
+# Implementing Role-Based Authentication in React Apps
+
+Authentication is one of the most important parts of modern web applications.
+
+While building dashboard systems and SaaS applications, implementing secure authentication and permissions became essential.
+
+## Protected Routes
+
+Applications should prevent unauthorized access both visually and logically.
+
+\`\`\`tsx
+if (!user) {
+  return <Navigate to="/login" />
 }
 \`\`\`
 
-## Practical Examples
+## Role-Based Permissions
 
-Generics shine in real-world scenarios like API responses, form handling, and component props.
+Different users require different access levels.
+
+Examples:
+- Admin
+- Owner
+- Staff
+
+This approach improves security and simplifies dashboard management.
+
+## Persistent Sessions
+
+Using token-based authentication with proper local storage handling improves user experience while keeping applications secure.
+
+## API Security
+
+Frontend protection alone is never enough. APIs should always validate user permissions server-side.
 
 ## Conclusion
 
-Start with simple generics and gradually introduce more complex patterns as your codebase grows.
+Authentication systems should be scalable, maintainable, and designed with security in mind from day one.
     `,
-    category: 'TypeScript',
-    tags: ['TypeScript', 'Generics', 'Type Safety'],
-    publishedAt: '2024-01-08',
-    readingTime: '6 min',
+    category: "Authentication",
+    tags: ["Authentication", "React", "Security", "Frontend"],
+    publishedAt: "2025-01-10",
+    readingTime: "6 min",
+    featured: false,
+  },
+
+  {
+    slug: "tanstack-query-real-world-usage",
+    title: "Using TanStack Query in Real Projects",
+    excerpt:
+      "How TanStack Query improved API handling, caching, and frontend scalability in production applications.",
+    content: `
+# Using TanStack Query in Real Projects
+
+Managing server state manually quickly becomes difficult in large applications.
+
+TanStack Query solved many challenges I faced while building dashboards and SaaS systems.
+
+## Why TanStack Query?
+
+Before using React Query:
+- Too much useEffect logic
+- Duplicate requests
+- Complex loading states
+- Difficult caching
+
+After introducing TanStack Query:
+- Cleaner code
+- Better caching
+- Easier mutations
+- Improved performance
+
+## Query Organization
+
+I usually organize queries by feature:
+
+\`\`\`
+features/
+  products/
+    api/
+    hooks/
+\`\`\`
+
+## Better User Experience
+
+Features like:
+- Background refetching
+- Optimistic updates
+- Pagination
+- Infinite queries
+
+make applications feel faster and smoother.
+
+## Conclusion
+
+TanStack Query became a core part of my frontend architecture workflow for scalable applications.
+    `,
+    category: "Data Fetching",
+    tags: ["TanStack Query", "React Query", "React", "API"],
+    publishedAt: "2024-12-18",
+    readingTime: "6 min",
     featured: true,
   },
+
   {
-    slug: 'performance-optimization-nextjs',
-    title: 'Performance Optimization in Next.js',
-    excerpt: 'Practical techniques for optimizing Next.js applications, from code splitting to image optimization and caching strategies.',
+    slug: "building-modern-company-websites",
+    title: "Building Modern Company Websites with React",
+    excerpt:
+      "Creating responsive and scalable company websites using React, Tailwind CSS, and reusable UI systems.",
     content: `
-# Performance Optimization in Next.js
+# Building Modern Company Websites with React
 
-Next.js provides excellent defaults, but there's always room for optimization.
+Modern company websites should be fast, responsive, accessible, and easy to maintain.
 
-## Key Strategies
+While working on X CODE, the focus was creating a scalable frontend architecture with reusable UI components.
 
-1. **Code Splitting**: Use dynamic imports for heavy components
-2. **Image Optimization**: Leverage next/image for automatic optimization
-3. **Caching**: Implement intelligent caching strategies
-4. **Bundle Analysis**: Regularly audit your bundle size
+## Reusable Components
 
-## Measuring Performance
+Reusable systems helped accelerate development:
+- Navbar systems
+- Shared sections
+- CTA components
+- Responsive layouts
 
-Use Lighthouse, Web Vitals, and Real User Monitoring to track improvements.
+## SEO Optimization
+
+Semantic HTML and proper metadata improved visibility and search rankings.
+
+## Accessibility
+
+Accessibility improvements included:
+- Keyboard navigation
+- ARIA labels
+- Proper semantic structure
+
+## Responsive Design
+
+Using Tailwind CSS allowed building fully responsive layouts efficiently across devices.
 
 ## Conclusion
 
-Performance optimization is an ongoing process. Start with the biggest wins and iterate.
+Company websites are not just visual showcases. They represent product quality and brand credibility.
     `,
-    category: 'Performance',
-    tags: ['Next.js', 'Performance', 'Optimization'],
-    publishedAt: '2023-12-20',
-    readingTime: '7 min',
+    category: "Frontend Development",
+    tags: ["React", "Tailwind CSS", "Responsive Design", "SEO"],
+    publishedAt: "2024-11-22",
+    readingTime: "5 min",
     featured: false,
   },
+
   {
-    slug: 'state-management-modern-react',
-    title: 'State Management in Modern React',
-    excerpt: 'Comparing different state management approaches in React: Context, Zustand, React Query, and when to use each.',
+    slug: "typescript-in-large-react-projects",
+    title: "Using TypeScript in Large React Applications",
+    excerpt:
+      "How TypeScript improves scalability, maintainability, and developer experience in complex frontend projects.",
     content: `
-# State Management in Modern React
+# Using TypeScript in Large React Applications
 
-The state management landscape has evolved significantly. Here's how to choose the right approach.
+As React applications grow, TypeScript becomes essential for maintaining scalable and maintainable codebases.
 
-## Types of State
+## Strong Type Safety
 
-- **Server State**: Data from APIs (use React Query)
-- **Client State**: UI state (use Zustand or Context)
-- **Form State**: Form values (use React Hook Form)
-- **URL State**: Route parameters (use router)
+TypeScript helps catch bugs before runtime and improves confidence during refactoring.
 
-## When to Use What
+## Better Developer Experience
 
-Choose based on your specific needs. Don't over-engineer simple cases, but don't under-engineer complex ones.
+Benefits include:
+- Autocomplete
+- Safer refactoring
+- Better documentation
+- Improved team collaboration
+
+## Reusable Typed Components
+
+Generic and reusable components become easier to maintain using TypeScript.
+
+## API Integration
+
+Defining typed API responses improves consistency and reduces frontend bugs significantly.
 
 ## Conclusion
 
-The best state management is the simplest one that meets your needs.
+TypeScript is one of the best investments for long-term frontend scalability.
     `,
-    category: 'State Management',
-    tags: ['React', 'State Management', 'Zustand'],
-    publishedAt: '2023-12-10',
-    readingTime: '5 min',
+    category: "TypeScript",
+    tags: ["TypeScript", "React", "Scalability", "Frontend"],
+    publishedAt: "2024-10-30",
+    readingTime: "5 min",
     featured: false,
   },
-  {
-    slug: 'leading-frontend-teams',
-    title: 'Leading Frontend Teams: Lessons Learned',
-    excerpt: 'Reflections on leading engineering teams, establishing best practices, and fostering a culture of continuous improvement.',
-    content: `
-# Leading Frontend Teams: Lessons Learned
-
-After leading teams for several years, here are the lessons that have stuck with me.
-
-## Communication is Everything
-
-Most problems stem from miscommunication. Over-communicate, document decisions, and create space for questions.
-
-## Code Reviews as Teaching
-
-Use code reviews as opportunities for knowledge sharing, not just bug finding.
-
-## Empower, Don't Micromanage
-
-Give your team ownership. Guide the outcome, not the process.
-
-## Conclusion
-
-Great teams are built on trust, communication, and a shared commitment to quality.
-    `,
-    category: 'Leadership',
-    tags: ['Leadership', 'Team Management', 'Engineering'],
-    publishedAt: '2023-11-28',
-    readingTime: '6 min',
-    featured: true,
-  },
-  {
-    slug: 'authentication-patterns-nextjs',
-    title: 'Authentication Patterns in Next.js',
-    excerpt: 'Implementing secure authentication in Next.js applications with Better Auth, middleware, and route protection.',
-    content: `
-# Authentication Patterns in Next.js
-
-Authentication is critical. Here's how to implement it properly in Next.js.
-
-## Key Concepts
-
-- **Session Management**: JWT vs cookies
-- **Route Protection**: Middleware and server components
-- **OAuth Integration**: Social login providers
-
-## Best Practices
-
-1. Always use HTTPS
-2. Implement CSRF protection
-3. Use httpOnly cookies for tokens
-4. Validate on the server
-
-## Conclusion
-
-Security is not optional. Take the time to implement authentication correctly from the start.
-    `,
-    category: 'Authentication',
-    tags: ['Next.js', 'Authentication', 'Security'],
-    publishedAt: '2023-11-15',
-    readingTime: '8 min',
-    featured: false,
-  },
-]
-
-export const blogCategories = ['All', ...new Set(blogPosts.map((p) => p.category))]
+];
+export const blogCategories = [
+  "All",
+  ...new Set(blogPosts.map((p) => p.category)),
+];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
-  return blogPosts.find((p) => p.slug === slug)
+  return blogPosts.find((p) => p.slug === slug);
 }
 
 export function getFeaturedPosts(): BlogPost[] {
-  return blogPosts.filter((p) => p.featured)
+  return blogPosts.filter((p) => p.featured);
 }

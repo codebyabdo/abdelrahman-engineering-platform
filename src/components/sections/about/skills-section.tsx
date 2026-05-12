@@ -2,29 +2,8 @@
 
 import { Badge } from '@/components/ui/badge'
 import { FadeUp, StaggerChildren, StaggerItem } from '@/components/animations/motion'
+import { skillCategories } from '@/lib/constants/skill-categories-data'
 
-const skillCategories = [
-  {
-    title: 'Languages',
-    skills: ['TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'SQL'],
-  },
-  {
-    title: 'Frameworks',
-    skills: ['React', 'Next.js', 'Node.js', 'Express', 'Tailwind CSS'],
-  },
-  {
-    title: 'Tools & Platforms',
-    skills: ['Git', 'Vercel', 'Docker', 'AWS', 'Figma', 'Linear'],
-  },
-  {
-    title: 'Practices',
-    skills: ['Agile/Scrum', 'TDD', 'CI/CD', 'Code Review', 'Documentation'],
-  },
-  {
-    title: 'Soft Skills',
-    skills: ['Team Leadership', 'Mentoring', 'Communication', 'Problem Solving', 'Project Management'],
-  },
-]
 
 export function SkillsSection() {
   return (
