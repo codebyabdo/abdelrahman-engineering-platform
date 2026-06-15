@@ -1,7 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Calendar, Users, Briefcase, ArrowRight } from "lucide-react";
+import {
+  ArrowLeft,
+  Calendar,
+  Users,
+  Briefcase,
+  ArrowRight,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -99,21 +105,21 @@ export function ProjectHero({ project }: ProjectHeroProps) {
               </div>
             </StaggerItem>
             <StaggerItem>
-  {project.liveDemo && (
-    <div className="pt-2">
-      <Button asChild size="lg" className="group">
-        <a
-          href={project.liveDemo}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          View Live Project
-          <ArrowRight  className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </a>
-      </Button>
-    </div>
-  )}
-</StaggerItem>
+              {project.liveDemo && (
+                <div className="pt-2">
+                  <Button asChild size="lg" className="group">
+                    <a
+                      href={project.liveDemo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View Live Project
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </a>
+                  </Button>
+                </div>
+              )}
+            </StaggerItem>
           </StaggerChildren>
 
           {/* Project Image */}
@@ -125,14 +131,14 @@ export function ProjectHero({ project }: ProjectHeroProps) {
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-8xl font-heading font-bold text-primary/20">
                 {!imgError && project.image ? (
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      width={1200}
-                      height={700}
-                      className="w-full h-full object-contain rounded-lg"
-                      onError={() => setImgError(true)}
-                    />
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    width={1200}
+                    height={700}
+                    className="w-full h-full object-contain rounded-lg"
+                    onError={() => setImgError(true)}
+                  />
                 ) : (
                   <div className="text-5xl font-heading font-bold text-primary/20">
                     {project.title?.charAt(0)}

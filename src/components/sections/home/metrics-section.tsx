@@ -4,10 +4,10 @@ import { StaggerChildren, StaggerItem, motion } from '@/components/animations/mo
 import { useEffect, useState, useRef } from 'react'
 
 const metrics = [
-  { value: 5, suffix: '+', label: 'Years Experience' },
+  { value: 2.5, suffix: '+', label: 'Years Experience' },
   { value: 20, suffix: '+', label: 'Projects Delivered' },
-  { value: 8, suffix: '', label: 'Team Members Led' },
-  { value: 99, suffix: '%', label: 'Client Satisfaction' },
+  { value: 3, suffix: '+', label: 'SaaS & Business Systems' },
+  { value: 50, suffix: '+', label: 'Merchants Empowered' },
 ]
 
 function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
