@@ -1,28 +1,33 @@
-import { Code2, Layers, Users, Zap } from "lucide-react";
+export const ENGINEERING_VALUES: EngineeringValue[] = [
+  {
+    title: "Engineering as Product Craft",
+    iconName: "Sparkles",
+    description: "Code quality is invalid if the end product feels sluggish or ambiguous. I bridge the gap between Figma mockups and production architecture.",
+    example: "Achieved 100/100 Lighthouse ratings while preserving smooth 60fps micro-animations."
+  },
+  {
+    title: "Zero-Latency Performance Mindset",
+    iconName: "Zap",
+    description: "Every millisecond of latency is a friction point. I optimize for low INP, small bundle footprints, and off-main-thread processing.",
+    example: "Offloaded high-throughput WebSocket processing to Web Workers in Nexus FinTech."
+  },
+  {
+    title: "Universal Accessibility (WCAG AA)",
+    iconName: "Eye",
+    description: "Software must be inclusive by default. Focus states, screen reader semantics, and keyboard navigation are non-negotiable standards.",
+    example: "Tested with NVDA, VoiceOver, and automated axe-core pipelines on every commit."
+  },
+  {
+    title: "Resilient & Maintainable Architecture",
+    iconName: "Layers",
+    description: "Clear folder boundaries, strict TypeScript contracts, and modular composition prevent spaghetti code as teams scale.",
+    example: "Designed self-documenting token hierarchies in the Aura Component Studio."
+  }
+];
 
-export const philosophies = [
-  {
-    icon: Layers,
-    title: 'Scalable Architecture',
-    description:
-      'I build frontend applications with scalable structures using feature-based architecture, reusable components, and maintainable state management patterns that support long-term growth.',
-  },
-  {
-    icon: Code2,
-    title: 'Clean & Maintainable Code',
-    description:
-      'I focus on writing readable, reusable, and type-safe code using TypeScript, modern React patterns, and clear project organization to improve developer experience and maintainability.',
-  },
-  {
-    icon: Zap,
-    title: 'Performance Optimization',
-    description:
-      'Performance is a core part of every project. I optimize applications using code splitting, lazy loading, React Query caching, and bundle optimization to deliver faster user experiences.',
-  },
-  {
-    icon: Users,
-    title: 'Product Collaboration',
-    description:
-      'I enjoy collaborating with designers and backend developers to transform business requirements into polished, responsive, and user-focused web applications.',
-  },
-]
+export interface EngineeringValue {
+  title: string;
+  iconName: string;
+  description: string;
+  example: string;
+}
