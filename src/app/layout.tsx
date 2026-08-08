@@ -1,102 +1,73 @@
-import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
-import { Inter } from 'next/font/google'
-import './globals.css'
-
-const geist = Geist({ 
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
+import "./globals.css";
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://codebyabdo.vercel.app";
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
+const geistMono = Geist_Mono({
   subsets: ["latin"],
-  variable: '--font-geist',
-})
-
-const geistMono = Geist_Mono({ 
-  subsets: ["latin"],
-  variable: '--font-geist-mono',
-})
-
-const inter = Inter({ 
-  subsets: ["latin"],
-  variable: '--font-inter',
-})
-
+  variable: "--font-geist-mono",
+});
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 export const viewport: Viewport = {
-  themeColor: '#0B0F14',
-  colorScheme: 'dark',
-}
-
-
+  themeColor: "#0B0F14",
+  colorScheme: "dark",
+};
 export const metadata: Metadata = {
-  title: 'Abd El-Rhman Adel | Frontend Engineer (React & Next.js)',
-  
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Abd El-Rahman Adel | Frontend Engineer",
+    template: "%s | Abd El-Rahman Adel",
+  },
   description:
-    'Frontend Engineer with 2.5+ years of experience building scalable SaaS applications, role-based systems, and production-grade React/Next.js architectures. Specialized in performance optimization, dashboards, and enterprise-level frontend systems.',
-
+    "Frontend Engineer specializing in React, Next.js, TypeScript, scalable SaaS applications, frontend architecture, and web performance.",
   keywords: [
-    'Frontend Engineer',
-    'React Developer',
-    'Next.js Developer',
-    'TypeScript',
-    'SaaS Applications',
-    'Frontend Architecture',
-    'Dashboard Systems',
-    'Web Performance Optimization',
+    "Frontend Engineer",
+    "React Developer",
+    "Next.js Developer",
+    "TypeScript",
+    "SaaS Applications",
+    "Frontend Architecture",
+    "Dashboard Systems",
+    "Web Performance Optimization",
   ],
-
-  authors: [{ name: 'Abd El-Rhman Adel' }],
-
+  authors: [{ name: "Abd El-Rahman Adel", url: SITE_URL }],
+  creator: "Abd El-Rahman Adel",
+  publisher: "Abd El-Rahman Adel",
   openGraph: {
-    title: 'Abd El-Rhman Adel | Frontend Engineer',
-    description:
-      'Building scalable SaaS platforms, dashboards, and production-grade frontend systems using React & Next.js.',
-    type: 'website',
-    url: 'https://codebyabdo.vercel.app',
-    siteName: 'Abd El-Rhman Adel Portfolio',
+    type: "website",
+    siteName: "Abd El-Rahman Adel Portfolio",
     images: [
       {
-        url: '/og-image.png',
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: 'Abd El-Rhman Adel Portfolio',
+        alt: "Abd El-Rahman Adel Portfolio",
       },
     ],
   },
-
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Abd El-Rhman Adel | Frontend Engineer',
-    description:
-      'Frontend Engineer specializing in scalable SaaS systems and modern React architectures.',
-    images: ['/og-image.png'],
-  },
-
+  twitter: { card: "summary_large_image", images: ["/og-image.png"] },
   icons: {
     icon: [
-      {
-        url: '/icon.svg.png',
-        type: 'image/svg+xml',
-      },
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icon-light-32x32.png", media: "(prefers-color-scheme: light)" },
+      { url: "/icon-dark-32x32.png", media: "(prefers-color-scheme: dark)" },
     ],
-    apple: '/apple-icon.png',
+    apple: "/apple-icon.png",
   },
-}
-
+};
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`dark bg-background ${geist.variable} ${geistMono.variable} ${inter.variable}`}>
-      <body className="font-sans antialiased min-h-screen">
+    <html
+      lang="en"
+      className={`${inter.variable} ${geist.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="min-h-screen overflow-x-hidden bg-background text-foreground antialiased">
         {children}
       </body>
     </html>
-  )
+  );
 }
