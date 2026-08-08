@@ -1,5 +1,6 @@
 "use client";
 
+import { ProjectCaseStudy } from "@/types/featured-projects-data";
 import {
   Accessibility,
   ArrowUpRight,
@@ -19,7 +20,6 @@ import {
   Wrench,
 } from "lucide-react";
 
-import type { ProjectCaseStudy } from "@/lib/constants/featured-projects-data";
 
 interface ProjectDetailDialogProps {
   project: ProjectCaseStudy;
