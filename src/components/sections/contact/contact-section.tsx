@@ -1,214 +1,143 @@
 "use client";
 
-import { useState } from "react";
-import { Send } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import {
-  FadeUp,
-  StaggerChildren,
-  StaggerItem,
-} from "@/components/animations/motion";
+import { useEffect, useState } from "react";
 
-import { contactInfo, socialLinks } from "@/lib/constants/contact-data";
+import { FadeUp, StaggerChildren } from "@/components/animations/motion";
+
+import { ContactInfoCard } from "./contact-info-card";
+import { ContactForm } from "./contact-form";
+import { ContactSuccess } from "./contact-success";
+import { MainHeader } from "@/components/shared/main-header";
+import { Mail } from "lucide-react";
+
+interface ContactFormData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+const INITIAL_FORM: ContactFormData = {
+  name: "",
+  email: "",
+  subject: "Senior Frontend Engineering Role",
+  message: "",
+};
+
+
+const header = {
+  title: "Let's Build Something Exceptional",
+  description:
+    "Open to Senior Frontend Engineer & Design Architect positions, high-throughput web platform advisory, and design system consulting.",
+  subtitle: "CONTACT & INQUIRIES",
+  highligh: "Direct Communication Protocol",
+  icon: Mail,
+};
+
 
 export function ContactSection() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [form, setForm] = useState<ContactFormData>(INITIAL_FORM);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [time, setTime] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date();
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+      const options: Intl.DateTimeFormatOptions = {
+        timeZone: "Africa/Cairo",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      };
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      setTime(new Intl.DateTimeFormat("en-US", options).format(now));
+    };
+
+    updateClock();
+
+    const timer = window.setInterval(updateClock, 1000);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const updateField = <K extends keyof ContactFormData>(
+    field: K,
+    value: ContactFormData[K],
+  ) => {
+    setForm((current) => ({
+      ...current,
+      [field]: value,
+    }));
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (
+      !form.name.trim() ||
+      !form.email.trim() ||
+      !form.message.trim()
+    ) {
+      return;
+    }
+
+    setSubmitting(true);
+
+    window.setTimeout(() => {
+      setSubmitting(false);
+      setSubmitted(true);
+    }, 1200);
+  };
+
+  const handleReset = () => {
+    setForm(INITIAL_FORM);
+    setSubmitted(false);
   };
 
   return (
-    <section className="py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Left Column - Info */}
-          <StaggerChildren className="space-y-8">
-            <StaggerItem>
-              <p className="text-sm text-primary font-medium uppercase tracking-wider">
-                Contact
-              </p>
-            </StaggerItem>
+    <div className="mx-auto max-w-7xl space-y-12 px-4 pb-16 pt-24 sm:px-6 sm:pt-32">
+      {/* Header */}
+      <MainHeader header={header} />
 
-            <StaggerItem>
-              <h1 className="font-heading font-semibold text-4xl sm:text-5xl text-balance">
-                Let&apos;s build something great together
-              </h1>
-            </StaggerItem>
+      {/* Content */}
+      <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12">
+        {/* Contact Information */}
+        <StaggerChildren
+          className="space-y-8 lg:col-span-5"
+          delay={0.05}
+        >
+          <ContactInfoCard time={time} />
+        </StaggerChildren>
 
-            <StaggerItem>
-              <p className="text-lg text-muted-foreground text-pretty">
-                I&apos;m always interested in collaborating on modern web
-                applications, SaaS products, admin dashboards, and scalable
-                frontend systems built with React, Next.js, and TypeScript.
-              </p>
-            </StaggerItem>
+        {/* Contact Form */}
+        <FadeUp
+          delay={0.15}
+          duration={0.6}
+          className="lg:col-span-7"
+        >
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#080808] shadow-2xl bg-radial-glow">
+            <div className="pointer-events-none absolute -right-32 -top-32 h-64 w-64 rounded-full bg-blue-600/10 blur-3xl" />
 
-            {/* Contact Info */}
-            <div className="space-y-4">
-              {contactInfo.map((item, index) => (
-                <StaggerItem key={index}>
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                      <item.icon className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">
-                        {item.title}
-                      </p>
-                      {item.href ? (
-                        <a
-                          href={item.href}
-                          className="font-medium hover:text-primary transition-colors"
-                        >
-                          {item.value}
-                        </a>
-                      ) : (
-                        <p className="font-medium">{item.value}</p>
-                      )}
-                    </div>
-                  </div>
-                </StaggerItem>
-              ))}
-            </div>
+            <div className="pointer-events-none absolute -bottom-32 -left-32 h-64 w-64 rounded-full bg-blue-600/5 blur-3xl" />
 
-            {/* Social Links */}
-            <StaggerItem>
-              <div className="pt-4">
-                <p className="text-sm text-muted-foreground mb-3">
-                  Connect with me
-                </p>
-                <div className="flex gap-3">
-                  {socialLinks.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all"
-                      aria-label={link.label}
-                    >
-                      <link.icon className="w-4 h-4" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </StaggerItem>
-          </StaggerChildren>
-
-          {/* Right Column - Form */}
-          <FadeUp delay={0.2}>
-            <div className="p-6 lg:p-8 rounded-2xl border border-border/50 bg-card/50">
-              {isSubmitted ? (
-                <div className="text-center py-12 space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto">
-                    <Send className="w-8 h-8" />
-                  </div>
-                  <h3 className="font-heading font-semibold text-xl">
-                    Message Sent Successfully
-                  </h3>
-
-                  <p className="text-muted-foreground">
-                    Thanks for reaching out. I&apos;ll get back to you as soon
-                    as possible.
-                  </p>
-                  <Button
-                    onClick={() => setIsSubmitted(false)}
-                    variant="outline"
-                  >
-                    Send Another Message
-                  </Button>
-                </div>
+            <div className="relative p-8 sm:p-10">
+              {submitted ? (
+                <ContactSuccess onReset={handleReset} />
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">Name</Label>
-                      <Input
-                        id="name"
-                        name="name"
-                        placeholder="Your full name"
-                        required
-                        className="bg-background border-border/50 focus:border-primary"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="your@email.com"
-                        required
-                        className="bg-background border-border/50 focus:border-primary"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="company">Company (Optional)</Label>
-                    <Input
-                      id="company"
-                      name="company"
-                      placeholder="Company or startup name"
-                      className="bg-background border-border/50 focus:border-primary"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="subject">Subject</Label>
-                    <Input
-                      id="subject"
-                      name="subject"
-                      placeholder="Tell me about your project"
-                      required
-                      className="bg-background border-border/50 focus:border-primary"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Message</Label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      placeholder="Tell me about your project, idea, or opportunity..."
-                      rows={5}
-                      required
-                      className="bg-background border-border/50 focus:border-primary resize-none"
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    className="w-full group"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      "Sending..."
-                    ) : (
-                      <>
-                        Send Inquiry
-                        <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </>
-                    )}
-                  </Button>
-                </form>
+                <ContactForm
+                  form={form}
+                  submitting={submitting}
+                  onSubmit={handleSubmit}
+                  onUpdate={updateField}
+                />
               )}
             </div>
-          </FadeUp>
-        </div>
+          </div>
+        </FadeUp>
       </div>
-    </section>
+    </div>
   );
 }

@@ -189,6 +189,8 @@ export const PROJECTS: ProjectCaseStudy[] = [
     ],
 
     gallery: ["/vorder.png"],
+    githubUrl: "https://github.com/codebyabdo/vorder-saas-frontend-showcase",
+    liveUrl: "https://vorder-sigma.vercel.app"
   },
 
   {
@@ -364,6 +366,8 @@ export const PROJECTS: ProjectCaseStudy[] = [
     ],
 
     gallery: ["/accounting.png"],
+    githubUrl: "https://github.com/codebyabdo/accounting-management-system-showcase",
+    liveUrl: "https://accounting-system-one.vercel.app"
   },
 
   {
@@ -560,6 +564,8 @@ export const PROJECTS: ProjectCaseStudy[] = [
     ],
 
     gallery: ["/asmaa.png"],
+    githubUrl: "https://github.com/codebyabdo/asmaa-portfolios",
+    liveUrl: "https://asmaaadel.vercel.app"
   },
 
   {
@@ -845,7 +851,8 @@ export const PROJECTS: ProjectCaseStudy[] = [
       "Clear technical documentation reduces integration friction across multidisciplinary teams.",
     ],
 
-    gallery: [],
+    gallery: ["/adas.png"],
+    githubUrl: "https://github.com/codebyabdo/adas-smart-speed-bump-detection-system",
   },
 
   {
@@ -986,7 +993,19 @@ export const PROJECTS: ProjectCaseStudy[] = [
     ],
 
     gallery: ["/xcode.png"],
+    githubUrl: "https://github.com/codebyabdo/xcode-company-website",
+    liveUrl: "https://x-code-prtfolio.vercel.app"
   },
 ];
 
 
+
+export const categories = ['All', ...new Set(PROJECTS.map((p) => p.category))]
+
+export function getProjectBySlug(id: string): ProjectCaseStudy | undefined {
+  return PROJECTS.find((p) => p.id === id)
+}
+
+export function getFeaturedProjects(): ProjectCaseStudy[] {
+  return PROJECTS.filter((p) => p.featured)
+}

@@ -4,7 +4,7 @@ import { ChevronRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 
 import { PROJECTS } from "@/lib/constants/featured-projects-data";
-import { ProjectCard } from "./project-card";
+import { ProjectCard } from "../projects/project-card";
 
 export function FeaturedProjects() {
   return (
