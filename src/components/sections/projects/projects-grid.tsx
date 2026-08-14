@@ -1,166 +1,105 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { useMemo, useState } from "react";
+import { FolderGit2, Search } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
 import {
   FadeUp,
   StaggerChildren,
   StaggerItem,
-  HoverCard,
 } from "@/components/animations/motion";
+
 import { cn } from "@/lib/utils";
-import { categories, projects } from "@/lib/constants/projects-data";
-import Image from "next/image";
+import { PROJECTS, categories } from "@/lib/constants/featured-projects-data";
+
+import { ProjectCard } from "./project-card";
+import { MainHeader } from "@/components/shared/main-header";
+import { Filters } from "@/components/shared/filters";
+
+const header = {
+  title: "Selected Systems & Case Studies",
+  description:
+    "In-depth technical breakdowns of production applications built with React, Next.js, TypeScript, and high-performance frontend architectures.",
+  subtitle: "Case Studies & Architecture",
+  highligh: "Production Engineering Portfolio",
+  icon: FolderGit2,
+};
 
 export function ProjectsGrid() {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const [imgError, setImgError] = useState(false);
+  const filteredProjects = useMemo(() => {
+    const normalizedQuery = searchQuery.trim().toLowerCase();
 
-  const filteredProjects =
-    activeCategory === "All"
-      ? projects
-      : projects.filter((p) => p.category === activeCategory);
+    return PROJECTS.filter((project) => {
+      const matchesCategory =
+        activeCategory === "All" || project.category === activeCategory;
+
+      const matchesSearch =
+        !normalizedQuery ||
+        project.title.toLowerCase().includes(normalizedQuery) ||
+        project.subtitle.toLowerCase().includes(normalizedQuery) ||
+        project.category.toLowerCase().includes(normalizedQuery) ||
+        project.role.toLowerCase().includes(normalizedQuery) ||
+        project.clientOrCompany.toLowerCase().includes(normalizedQuery) ||
+        project.techStack.some((tech) =>
+          tech.toLowerCase().includes(normalizedQuery),
+        );
+
+      return matchesCategory && matchesSearch;
+    });
+  }, [activeCategory, searchQuery]);
+
+  const resetFilters = () => {
+    setActiveCategory("All");
+    setSearchQuery("");
+  };
 
   return (
-    <section className="py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="px-4 pb-16 pt-24 sm:px-6 sm:pt-32">
+      <div className="mx-auto max-w-7xl space-y-12">
         {/* Header */}
-        <FadeUp className="max-w-2xl mb-16 space-y-6">
-          <p className="text-sm text-primary font-medium uppercase tracking-wider">
-            Portfolio
-          </p>
-          <h1 className="font-heading font-semibold text-4xl sm:text-5xl lg:text-6xl text-balance">
-            Selected Projects
-          </h1>
-          <p className="text-lg text-muted-foreground text-pretty">
-            A collection of projects showcasing my expertise in frontend
-            engineering, architecture design, and team leadership.
-          </p>
-        </FadeUp>
+        <MainHeader header={header} />
 
-        {/* Category Filter */}
-        <FadeUp delay={0.1} className="flex flex-wrap gap-2 mb-12">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={activeCategory === category ? "default" : "outline"}
-              size="sm"
-              onClick={() => setActiveCategory(category)}
-              className={cn(
-                "transition-all",
-                activeCategory === category
-                  ? ""
-                  : "border-border/50 hover:border-primary/50",
-              )}
-            >
-              {category}
-            </Button>
-          ))}
-        </FadeUp>
+        {/* Filters */}
+        <Filters 
+        categories={categories}
+        activeCategory={activeCategory}
+        searchQuery={searchQuery}
+        onCategoryChange={setActiveCategory}
+        onSearchChange={setSearchQuery}
+        />
 
         {/* Projects Grid */}
-        <StaggerChildren className="grid md:grid-cols-2 gap-6 lg:gap-8">
-          {filteredProjects.map((project) => (
-            <StaggerItem key={project.slug}>
-              <HoverCard className="h-full">
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className="group block h-full"
-                >
-                  <article className="h-full flex flex-col p-6 rounded-2xl border border-border/50 bg-card/50 hover:border-primary/30 hover:bg-card transition-all duration-300">
-                    {/* Project Image Placeholder */}
-                    <div className="relative aspect-video rounded-xl overflow-hidden bg-secondary mb-6">
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5" />
+        {filteredProjects.length === 0 ? (
+          <FadeUp>
+            <div className="space-y-3 rounded-3xl border border-white/10 bg-[#080808] p-12 text-center">
+              <p className="font-mono text-xs uppercase tracking-wider text-white/40">
+                No projects found matching your search filter.
+              </p>
 
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        {!imgError && project.image ? (
-                          <Image
-                            src={project.image}
-                            alt={project.title}
-                            fill
-                            className="object-cover"
-                            onError={() => setImgError(true)}
-                          />
-                        ) : (
-                          <div className="text-5xl font-heading font-bold text-primary/20">
-                            {project.title?.charAt(0)}
-                          </div>
-                        )}
-                      </div>
-
-                      {project.featured && (
-                        <div className="absolute top-4 right-4">
-                          <Badge className="bg-primary/90 text-primary-foreground">
-                            Featured
-                          </Badge>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1 flex flex-col">
-                      <div className="flex items-center gap-3 mb-3">
-                        <Badge
-                          variant="outline"
-                          className="border-border/50 text-muted-foreground"
-                        >
-                          {project.category}
-                        </Badge>
-                        <span className="text-sm text-muted-foreground">
-                          {project.duration}
-                        </span>
-                      </div>
-
-                      <h2 className="font-heading font-semibold text-xl lg:text-2xl mb-3 group-hover:text-primary transition-colors">
-                        {project.title}
-                      </h2>
-
-                      <p className="text-muted-foreground leading-relaxed mb-4 flex-1">
-                        {project.description}
-                      </p>
-
-                      {/* Tags */}
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.tags.slice(0, 4).map((tag) => (
-                          <Badge
-                            key={tag}
-                            variant="secondary"
-                            className="bg-secondary/50 text-xs"
-                          >
-                            {tag}
-                          </Badge>
-                        ))}
-                        {project.tags.length > 4 && (
-                          <Badge
-                            variant="secondary"
-                            className="bg-secondary/50 text-xs"
-                          >
-                            +{project.tags.length - 4}
-                          </Badge>
-                        )}
-                      </div>
-
-                      {/* Footer */}
-                      <div className="flex items-center justify-between pt-4 border-t border-border/50">
-                        <span className="text-sm text-muted-foreground">
-                          {project.teamRole}
-                        </span>
-                        <span className="flex items-center gap-2 text-primary font-medium text-sm">
-                          View Details
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </span>
-                      </div>
-                    </div>
-                  </article>
-                </Link>
-              </HoverCard>
-            </StaggerItem>
-          ))}
-        </StaggerChildren>
+              <Button
+                type="button"
+                onClick={resetFilters}
+                className="font-mono text-xs font-bold uppercase tracking-widest text-blue-400 transition-colors hover:text-blue-300"
+              >
+                Reset Filters
+              </Button>
+            </div>
+          </FadeUp>
+        ) : (
+          <StaggerChildren className="grid grid-cols-1 gap-8 md:grid-cols-2">
+            {filteredProjects.map((project) => (
+              <StaggerItem key={project.id}>
+                <ProjectCard project={project} />
+              </StaggerItem>
+            ))}
+          </StaggerChildren>
+        )}
       </div>
     </section>
   );

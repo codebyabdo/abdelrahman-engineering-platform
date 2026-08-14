@@ -1,47 +1,43 @@
 'use client'
 
-import { Badge } from '@/components/ui/badge'
-import { FadeUp, StaggerChildren, StaggerItem } from '@/components/animations/motion'
-import { skillCategories } from '@/lib/constants/skill-categories-data'
+import {  TECH_STACK_CATEGORIES } from '@/lib/constants/skill-categories-data'
+import { Code2 } from 'lucide-react'
 
 
 export function SkillsSection() {
   return (
-    <section className="py-24 lg:py-32 border-y border-border/50 bg-card/30">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <FadeUp className="max-w-2xl mb-16 space-y-4">
-          <p className="text-sm text-primary font-medium uppercase tracking-wider">Expertise</p>
-          <h2 className="font-heading font-semibold text-3xl sm:text-4xl">
-            Skills & Technologies
+    <section className="space-y-8">
+        <div className="border-b border-white/10 pb-6">
+          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-500 block">
+            MASTERY MATRIX
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-black tracking-tighter text-white uppercase">
+            Technical Stack Breakdown
           </h2>
-          <p className="text-muted-foreground">
-            A comprehensive overview of my technical skills and areas of expertise.
-          </p>
-        </FadeUp>
+        </div>
 
-        <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, index) => (
-            <StaggerItem key={index}>
-              <div className="space-y-4">
-                <h3 className="font-heading font-medium text-sm text-primary uppercase tracking-wider">
-                  {category.title}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill) => (
-                    <Badge 
-                      key={skill} 
-                      variant="secondary" 
-                      className="bg-background border border-border/50 hover:border-primary/30 transition-colors"
-                    >
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {TECH_STACK_CATEGORIES.map((cat, idx) => (
+            <div key={idx} className="p-6 rounded-2xl bg-[#080808] border border-white/10 space-y-4">
+              <h3 className="text-base font-black uppercase tracking-tight text-white flex items-center gap-2">
+                <Code2 className="w-4 h-4 text-blue-400" /> {cat.category}
+              </h3>
+              <p className="text-xs text-white/50">{cat.description}</p>
+
+              <div className="space-y-3 pt-2">
+                {cat.skills.map((s, i) => (
+                  <div key={i} className="p-3 rounded-xl bg-white/2 border border-white/5 space-y-1">
+                    <div className="flex items-center justify-between text-xs font-mono">
+                      <span className="text-white font-bold">{s.name}</span>
+                      <span className="text-blue-400 font-bold uppercase tracking-wider">{s.level} ({s.experienceYears} yrs)</span>
+                    </div>
+                    <p className="text-[11px] text-white/50">{s.highlight}</p>
+                  </div>
+                ))}
               </div>
-            </StaggerItem>
+            </div>
           ))}
-        </StaggerChildren>
-      </div>
-    </section>
+        </div>
+      </section>
   )
 }

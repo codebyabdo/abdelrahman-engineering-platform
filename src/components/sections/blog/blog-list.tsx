@@ -1,114 +1,127 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { ArrowRight, Calendar, Clock } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { FadeUp, StaggerChildren, StaggerItem, HoverCard } from '@/components/animations/motion'
-import { cn } from '@/lib/utils'
-import { blogCategories, blogPosts } from '@/lib/constants/blog-data'
+import { useMemo, useState } from "react";
+import { ArrowRight, Clock } from "lucide-react";
+
+import { useDialogs } from "@/providers/dialog-provider";
+import { ARTICLES } from "@/lib/constants/blog-content";
+import { Filters } from "@/components/shared/filters";
+import { Button } from "@/components/ui/button";
+import { FadeUp } from "@/components/animations/motion";
+
+
 
 export function BlogList() {
-  const [activeCategory, setActiveCategory] = useState('All')
+  const { openArticle } = useDialogs();
 
-  const filteredPosts = activeCategory === 'All'
-    ? blogPosts
-    : blogPosts.filter((p) => p.category === activeCategory)
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const categories = useMemo(
+    () => [
+      "All",
+      ...Array.from(
+        new Set(ARTICLES.map((article) => article.category)),
+      ),
+    ],
+    [],
+  );
+
+  const filteredArticles = useMemo(() => {
+    const normalizedQuery = searchQuery.trim().toLowerCase();
+
+    return ARTICLES.filter((article) => {
+      const matchesCategory =
+        activeCategory === "All" ||
+        article.category === activeCategory;
+
+      const matchesSearch =
+        !normalizedQuery ||
+        article.title.toLowerCase().includes(normalizedQuery) ||
+        article.excerpt.toLowerCase().includes(normalizedQuery) ||
+        article.tags.some((tag) =>
+          tag.toLowerCase().includes(normalizedQuery),
+        );
+
+      return matchesCategory && matchesSearch;
+    });
+  }, [activeCategory, searchQuery]);
 
   return (
-    <section className="py-24 lg:py-32">
-      <div className="mx-auto max-w-4xl px-6 lg:px-8">
-        {/* Header */}
-        <FadeUp className="max-w-2xl mb-16 space-y-6">
-          <p className="text-sm text-primary font-medium uppercase tracking-wider">Blog</p>
-          <h1 className="font-heading font-semibold text-4xl sm:text-5xl lg:text-6xl text-balance">
-            Thoughts & Articles
-          </h1>
-          <p className="text-lg text-muted-foreground text-pretty">
-            Writing about frontend engineering, architecture decisions, 
-            and lessons learned from building products.
-          </p>
-        </FadeUp>
+    <div className="space-y-8">
+      {/* Filters */}
+      <Filters
+        categories={categories}
+        activeCategory={activeCategory}
+        searchQuery={searchQuery}
+        onCategoryChange={setActiveCategory}
+        onSearchChange={setSearchQuery}
+        searchPlaceholder="Search articles..."
+      />
 
-        {/* Category Filter */}
-        <FadeUp delay={0.1} className="flex flex-wrap gap-2 mb-12">
-          {blogCategories.map((category) => (
-            <Button
-              key={category}
-              variant={activeCategory === category ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setActiveCategory(category)}
-              className={cn(
-                'transition-all',
-                activeCategory === category 
-                  ? '' 
-                  : 'border-border/50 hover:border-primary/50'
-              )}
+      {/* Articles */}
+      {filteredArticles.length > 0 ? (
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          {filteredArticles.map((article) => (
+            <FadeUp
+              key={article.id}
+              className="group flex flex-col justify-between space-y-6 rounded-2xl border border-white/10 border-laser bg-[#080808] p-8 shadow-xl transition-all duration-300 hover:border-blue-500/50"
             >
-              {category}
-            </Button>
+              {/* Content */}
+              <div className="space-y-4">
+                <div className="flex items-center justify-between gap-4 font-mono text-xs text-white/40">
+                  <span className="rounded-full border border-blue-500/30 bg-blue-600/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-blue-400">
+                    {article.category}
+                  </span>
+
+                  <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-white/40">
+                    <Clock className="h-3.5 w-3.5" />
+                    {article.readTime} • {article.publishedAt}
+                  </span>
+                </div>
+
+                <h2 className="text-xl font-black uppercase tracking-tight text-white transition-colors group-hover:text-blue-400 sm:text-2xl">
+                  {article.title}
+                </h2>
+
+                <p className="text-xs font-light leading-relaxed text-white/60 sm:text-sm">
+                  {article.excerpt}
+                </p>
+              </div>
+
+              {/* Footer */}
+              <div className="space-y-4 border-t border-white/5 pt-4">
+                <div className="flex flex-wrap gap-1.5">
+                  {article.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded border border-white/5 bg-white/3px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-white/50"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+
+                <Button
+                  type="button"
+                  onClick={() => openArticle(article.id)}
+                  className="group/btn flex w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white/3 py-3 text-[10px] font-bold uppercase tracking-widest text-blue-400 transition-all hover:bg-blue-600 hover:text-white"
+                >
+                  <span>Read Full Article</span>
+
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-1" />
+                </Button>
+              </div>
+            </FadeUp>
           ))}
-        </FadeUp>
-
-        {/* Blog Posts */}
-        <StaggerChildren className="space-y-6">
-          {filteredPosts.map((post) => (
-            <StaggerItem key={post.slug}>
-              <HoverCard>
-                <Link href={`/blog/${post.slug}`} className="group block">
-                  <article className="p-6 lg:p-8 rounded-2xl border border-border/50 bg-card/50 hover:border-primary/30 hover:bg-card transition-all duration-300">
-                    <div className="flex flex-wrap items-center gap-3 mb-4">
-                      <Badge variant="outline" className="border-primary/30 text-primary">
-                        {post.category}
-                      </Badge>
-                      {post.featured && (
-                        <Badge className="bg-primary/90 text-primary-foreground">Featured</Badge>
-                      )}
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground ml-auto">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-3.5 h-3.5" />
-                          {new Date(post.publishedAt).toLocaleDateString('en-US', {
-                            month: 'short',
-                            day: 'numeric',
-                            year: 'numeric',
-                          })}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3.5 h-3.5" />
-                          {post.readingTime}
-                        </span>
-                      </div>
-                    </div>
-
-                    <h2 className="font-heading font-semibold text-xl lg:text-2xl mb-3 group-hover:text-primary transition-colors">
-                      {post.title}
-                    </h2>
-
-                    <p className="text-muted-foreground leading-relaxed mb-4">
-                      {post.excerpt}
-                    </p>
-
-                    <div className="flex items-center justify-between">
-                      <div className="flex flex-wrap gap-2">
-                        {post.tags.slice(0, 3).map((tag) => (
-                          <Badge key={tag} variant="secondary" className="bg-secondary/50 text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                      <span className="flex items-center gap-2 text-primary font-medium text-sm">
-                        Read Article
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </span>
-                    </div>
-                  </article>
-                </Link>
-              </HoverCard>
-            </StaggerItem>
-          ))}
-        </StaggerChildren>
-      </div>
-    </section>
-  )
+        </div>
+      ) : (
+        <div className="rounded-2xl border border-white/10 bg-[#080808] p-12 text-center">
+          <p className="font-mono text-xs uppercase tracking-widest text-white/40">
+            No articles found matching your filters.
+          </p>
+        </div>
+      )}
+    </div>
+  );
 }
