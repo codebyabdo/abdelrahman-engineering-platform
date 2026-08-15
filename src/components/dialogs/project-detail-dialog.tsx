@@ -13,7 +13,6 @@ import {
   Gauge,
   Layers3,
   Lightbulb,
-  Link,
   Network,
   Search,
   ShieldCheck,
@@ -25,6 +24,7 @@ import {
 
 import { ProjectCaseStudy } from "@/types/featured-projects-data";
 import Image from "next/image";
+import { FaGithub } from "react-icons/fa6";
 
 interface ProjectDetailDialogProps {
   project: ProjectCaseStudy;
@@ -58,7 +58,7 @@ export function ProjectDetailDialog({
             type="button"
             onClick={onClose}
             aria-label="Close project details"
-            className="group absolute right-4 top-4 z-20 flex h-9 w-9 items-center justify-center border border-white/10 bg-black/60 text-white/40 backdrop-blur-md transition-all hover:border-white/20 hover:bg-white/[0.06] hover:text-white"
+            className="group absolute right-4 top-4 z-20 flex h-9 w-9 items-center justify-center border border-white/10 bg-black/60 text-white/40 backdrop-blur-md transition-all hover:border-white/20 hover:bg-white/6 hover:text-white"
           >
             <X className="h-4 w-4 transition-transform group-hover:rotate-90" />
           </button>
@@ -68,7 +68,7 @@ export function ProjectDetailDialog({
             {/* Blue laser border / glow */}
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(37,99,235,0.18),transparent_55%)]" />
 
-            <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/70 to-transparent" />
+            <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-linear-to-r from-transparent via-blue-500/70 to-transparent" />
 
             {/* Optional project image */}
             {project.gallery?.[0] && (
@@ -81,7 +81,7 @@ export function ProjectDetailDialog({
             )}
 
             {/* Dark overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-[#050505]/10" />
+            <div className="absolute inset-0 bg-linear-to-t from-[#050505] via-[#050505]/60 to-[#050505]/10" />
 
             {/* Hero content */}
             <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 lg:p-10">
@@ -114,7 +114,7 @@ export function ProjectDetailDialog({
           </div>
 
           {/* Hero footer */}
-          <div className="flex flex-col gap-4 border-t border-white/10 bg-white/[0.015] px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-4 border-t border-white/10 bg-white/1.5 px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-wrap items-center gap-2">
               <span className="rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 font-mono text-[9px] font-bold uppercase tracking-widest text-blue-400">
                 {project.category}
@@ -213,7 +213,7 @@ export function ProjectDetailDialog({
             {project.responsibilities.map((responsibility) => (
               <div
                 key={responsibility}
-                className="group flex gap-3 border border-white/5 bg-white/[0.015] p-4 transition-colors hover:border-blue-500/20 hover:bg-blue-500/[0.02]"
+                className="group flex gap-3 border border-white/5 bg-white/1.5 p-4 transition-colors hover:border-blue-500/20 hover:bg-blue-500/2"
               >
                 <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
 
@@ -237,7 +237,7 @@ export function ProjectDetailDialog({
             {project.architectureDecisions.map((decision, index) => (
               <div
                 key={decision.title}
-                className="border border-white/5 bg-white/[0.015] p-5"
+                className="border border-white/5 bg-white/1.5 p-5"
               >
                 <div className="flex gap-4">
                   <div className="flex h-8 w-8 shrink-0 items-center justify-center border border-blue-500/20 bg-blue-500/5 font-mono text-[10px] text-blue-400">
@@ -292,7 +292,7 @@ export function ProjectDetailDialog({
                     {node.children.map((child) => (
                       <code
                         key={child}
-                        className="border border-white/5 bg-white/[0.02] px-2 py-1 font-mono text-[9px] text-white/30"
+                        className="border border-white/5 bg-white/2 px-2 py-1 font-mono text-[9px] text-white/30"
                       >
                         {child}
                       </code>
@@ -400,7 +400,7 @@ export function ProjectDetailDialog({
             {project.technicalChallenges.map((item, index) => (
               <article
                 key={`${item.challenge}-${index}`}
-                className="border border-white/5 bg-white/[0.015] p-5"
+                className="border border-white/5 bg-white/1.5 p-5"
               >
                 <div className="grid gap-5 md:grid-cols-2">
                   <DataBlock
@@ -440,7 +440,7 @@ export function ProjectDetailDialog({
             {project.techStackDetails.map((detail) => (
               <div
                 key={detail.category}
-                className="border border-white/5 bg-white/[0.015] p-4"
+                className="border border-white/5 bg-white/1.5 p-4"
               >
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                   <div>
@@ -457,7 +457,7 @@ export function ProjectDetailDialog({
                     {detail.tools.map((tool) => (
                       <span
                         key={tool}
-                        className="border border-white/5 bg-white/[0.02] px-2 py-1 font-mono text-[9px] text-white/35"
+                        className="border border-white/5 bg-white/2 px-2 py-1 font-mono text-[9px] text-white/35"
                       >
                         {tool}
                       </span>
@@ -481,7 +481,7 @@ export function ProjectDetailDialog({
             {project.results.map((result) => (
               <div
                 key={result}
-                className="flex gap-3 border border-emerald-500/10 bg-emerald-500/[0.02] p-4"
+                className="flex gap-3 border border-emerald-500/10 bg-emerald-500/2 p-4"
               >
                 <Trophy className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
 
@@ -503,7 +503,7 @@ export function ProjectDetailDialog({
             {project.lessonsLearned.map((lesson) => (
               <div
                 key={lesson}
-                className="flex gap-3 border border-amber-500/10 bg-amber-500/[0.02] p-4"
+                className="flex gap-3 border border-amber-500/10 bg-amber-500/2 p-4"
               >
                 <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
 
@@ -528,13 +528,14 @@ export function ProjectDetailDialog({
                   key={`${image}-${index}`}
                   className="group relative aspect-video overflow-hidden border border-white/10 bg-[#080808]"
                 >
-                  <img
+                  <Image
                     src={image}
                     alt={`${project.title} preview ${index + 1}`}
+                    fill
                     className="h-full w-full object-cover opacity-70 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
                   />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent" />
                 </div>
               ))}
             </div>
@@ -551,9 +552,9 @@ export function ProjectDetailDialog({
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-1 items-center justify-center gap-2 border border-white/10 bg-white/[0.02] px-4 py-3 font-mono text-[10px] font-bold uppercase tracking-widest text-white/50 transition-all hover:border-white/20 hover:bg-white/[0.05] hover:text-white"
+                className="group flex flex-1 items-center justify-center gap-2 border border-white/10 bg-white/2 px-4 py-3 font-mono text-[10px] font-bold uppercase tracking-widest text-white/50 transition-all hover:border-white/20 hover:bg-white/5 hover:text-white"
               >
-                <Link className="h-3.5 w-3.5" />
+                <FaGithub className="h-3.5 w-3.5"/>
                 View Source
                 <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </a>
@@ -575,7 +576,7 @@ export function ProjectDetailDialog({
             <button
               type="button"
               onClick={onClose}
-              className="group flex items-center justify-center gap-2 border border-white/10 bg-white/[0.02] px-6 py-3 font-mono text-[10px] font-bold uppercase tracking-widest text-white/40 transition-all hover:border-red-500/20 hover:bg-red-500/[0.03] hover:text-red-400"
+              className="group flex items-center justify-center gap-2 border border-white/10 bg-white/2 px-6 py-3 font-mono text-[10px] font-bold uppercase tracking-widest text-white/40 transition-all hover:border-red-500/20 hover:bg-red-500/3 hover:text-red-400"
             >
               <X className="h-3.5 w-3.5 transition-transform group-hover:rotate-90" />
               Close
@@ -588,7 +589,7 @@ export function ProjectDetailDialog({
           {project.techStack.map((technology) => (
             <span
               key={technology}
-              className="border border-white/5 bg-white/[0.02] px-2.5 py-1 font-mono text-[9px] uppercase tracking-wider text-white/30"
+              className="border border-white/5 bg-white/2 px-2.5 py-1 font-mono text-[9px] uppercase tracking-wider text-white/30"
             >
               #{technology}
             </span>
@@ -615,7 +616,7 @@ export function ProjectDetailDialog({
                 type="button"
                 onClick={onPrevious}
                 disabled={!onPrevious}
-                className="group relative flex min-h-20 items-center gap-4 border border-white/10 bg-white/[0.015] p-4 text-left transition-all hover:border-blue-500/30 hover:bg-blue-500/[0.025] disabled:cursor-default"
+                className="group relative flex min-h-20 items-center gap-4 border border-white/10 bg-white/1.5 p-4 text-left transition-all hover:border-blue-500/30 hover:bg-blue-500/2.5 disabled:cursor-default"
               >
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center border border-white/10 bg-black text-white/30 transition-colors group-hover:border-blue-500/30 group-hover:text-blue-400">
                   <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
@@ -636,7 +637,7 @@ export function ProjectDetailDialog({
                 </div>
               </button>
             ) : (
-              <div className="hidden border border-white/5 bg-white/[0.01] p-4 sm:block">
+              <div className="hidden border border-white/5 bg-white/1 p-4 sm:block">
                 <span className="font-mono text-[8px] uppercase tracking-widest text-white/10">
                   No Previous Project
                 </span>
@@ -649,7 +650,7 @@ export function ProjectDetailDialog({
                 type="button"
                 onClick={onNext}
                 disabled={!onNext}
-                className="group relative flex min-h-20 items-center justify-end gap-4 border border-white/10 bg-white/[0.015] p-4 text-right transition-all hover:border-blue-500/30 hover:bg-blue-500/[0.025] disabled:cursor-default"
+                className="group relative flex min-h-20 items-center justify-end gap-4 border border-white/10 bg-white/1.5 p-4 text-right transition-all hover:border-blue-500/30 hover:bg-blue-500/2.5 disabled:cursor-default"
               >
                 <div className="min-w-0">
                   <p className="font-mono text-[8px] font-bold uppercase tracking-[0.2em] text-white/20">
@@ -670,7 +671,7 @@ export function ProjectDetailDialog({
                 </div>
               </button>
             ) : (
-              <div className="hidden border border-white/5 bg-white/[0.01] p-4 text-right sm:block">
+              <div className="hidden border border-white/5 bg-white/1 p-4 text-right sm:block">
                 <span className="font-mono text-[8px] uppercase tracking-widest text-white/10">
                   No Next Project
                 </span>
@@ -731,7 +732,7 @@ function CaseStudyCard({
   children: ReactNode;
 }) {
   return (
-    <div className="border border-white/10 bg-white/[0.015] p-5">
+    <div className="border border-white/10 bg-white/1.5 p-5">
       <div className="flex items-center gap-3">
         <span className="flex h-8 w-8 items-center justify-center border border-blue-500/20 bg-blue-500/5 text-blue-400">
           {icon}
@@ -787,7 +788,7 @@ function MetricCard({
 
 function MetricSmall({ label, value }: { label: string; value: string }) {
   return (
-    <div className="border border-white/5 bg-white/[0.015] p-4">
+    <div className="border border-white/5 bg-white/1.5 p-4">
       <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-white/25">
         {label}
       </p>
@@ -799,7 +800,7 @@ function MetricSmall({ label, value }: { label: string; value: string }) {
 
 function InfoTile({ label, value }: { label: string; value: string }) {
   return (
-    <div className="border border-white/5 bg-white/[0.015] p-3">
+    <div className="border border-white/5 bg-white/1.5 p-3">
       <p className="font-mono text-[8px] font-bold uppercase tracking-[0.15em] text-white/20">
         {label}
       </p>
@@ -865,7 +866,7 @@ function CodeSnippet({
 }) {
   return (
     <div className="mt-5 overflow-hidden border border-white/10 bg-[#030303]">
-      <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.02] px-4 py-2">
+      <div className="flex items-center justify-between border-b border-white/10 bg-white/2 px-4 py-2">
         <span className="font-mono text-[9px] text-white/35">{filename}</span>
 
         <span className="font-mono text-[8px] uppercase tracking-widest text-blue-400/50">

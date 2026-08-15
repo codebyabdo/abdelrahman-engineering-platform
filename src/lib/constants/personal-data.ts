@@ -4,21 +4,21 @@ export const PERSONAL_INFO = {
   title: "Front-End Engineer | React.js & Next.js",
 
   tagline:
-    "Building scalable, responsive web applications with React, Next.js, TypeScript, and modern frontend architecture.",
+    "Building scalable web products with React, Next.js, TypeScript, and modern frontend architecture.",
 
   shortBio:
-    "Front-End Engineer focused on React.js and Next.js, with experience building SaaS platforms, business applications, dashboards, and production-ready web interfaces. I care about clean architecture, reusable components, performance, responsive design, and reliable API integration.",
+    "Front-End Engineer specializing in React.js, Next.js, and TypeScript, with hands-on experience building SaaS platforms, e-commerce systems, dashboards, business applications, and interactive web products. I focus on scalable frontend architecture, reusable components, API integration, performance, responsive UI, and maintainable code. I also have practical experience working with authentication, backend APIs, databases, and technical coordination across project teams.",
 
   location: "Egypt",
 
   availability:
-    "Open to Remote, Hybrid & On-site Opportunities",
+    "Open to Remote Front-End Engineering Opportunities",
 
   email: "abdelrahman.adel.js@gmail.com",
 
   github: "https://github.com/codebyabdo",
 
-  linkedin: "https://linkedin.com/in/abdelrahman-adel",
+  linkedin: "https://www.linkedin.com/in/codebyabdo",
 
   portfolio: "https://codebyabdo.vercel.app",
 
@@ -30,8 +30,21 @@ export const PERSONAL_INFO = {
     "Tailwind CSS",
     "TanStack Query",
     "React Hook Form",
+    "Formik",
+    "Zod",
     "Axios",
     "REST APIs",
+    "PostgreSQL",
+    "MongoDB",
+    "Node.js",
+    "NestJS",
+    "Prisma",
+    "Drizzle ORM",
+    "Better Auth",
+    "JWT",
     "Git",
+    "GitHub",
+    "Vite",
+    "Vercel",
   ],
 };

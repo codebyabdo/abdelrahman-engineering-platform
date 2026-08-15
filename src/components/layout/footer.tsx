@@ -1,10 +1,11 @@
 "use client";
 
-import { ArrowUp, Link2, Mail, MapPin } from "lucide-react";
+import { ArrowUp, Mail, MapPin } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Link } from "@/i18n/navigation";
 import { PERSONAL_INFO } from "@/lib/constants/personal-data";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
 
 export const Footer = () => {
   const [time, setTime] = useState("");
@@ -145,14 +146,14 @@ export const Footer = () => {
 
               <SocialLink
                 href={PERSONAL_INFO.github}
-                icon={<Link2 className="h-3.5 w-3.5" />}
+                icon={<FaGithub className="h-3.5 w-3.5" />}
               >
                 GitHub
               </SocialLink>
 
               <SocialLink
                 href={PERSONAL_INFO.linkedin}
-                icon={<Link2 className="h-3.5 w-3.5" />}
+                icon={<FaLinkedinIn className="h-3.5 w-3.5" />}
               >
                 LinkedIn
               </SocialLink>
