@@ -4,13 +4,6 @@ import { ExperienceTimeline } from "@/components/sections/about/experience-timel
 import { SkillsSection } from "@/components/sections/about/skills-section";
 import { MainHeader } from "@/components/shared/main-header";
 import { Terminal } from "lucide-react";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "About | Frontend Engineer (React & Next.js)",
-  description:
-    "Frontend Engineer with 2.5+ years of experience specializing in SaaS platforms, scalable frontend architectures, dashboards, and performance optimization using React and Next.js.",
-};
 
 const header = {
   title: "About Abd El-Rahman Adel",
