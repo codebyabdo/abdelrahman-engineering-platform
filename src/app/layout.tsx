@@ -1,64 +1,161 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+
+import {
+  Geist,
+  Geist_Mono,
+  Inter,
+} from "next/font/google";
+
 import "./globals.css";
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://codebyabdo.vercel.app";
-const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
+
+import {
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo/metadata";
+
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+});
+
 const geistMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
 });
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
 export const viewport: Viewport = {
   themeColor: "#0B0F14",
   colorScheme: "dark",
+
+  width: "device-width",
+
+  initialScale: 1,
 };
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+
   title: {
-    default: "Abd El-Rahman Adel | Frontend Engineer",
-    template: "%s | Abd El-Rahman Adel",
+    default:
+      "Abd El-Rahman Adel | Frontend Engineer",
+
+    template:
+      "%s | Abd El-Rahman Adel",
   },
+
   description:
-    "Frontend Engineer specializing in React, Next.js, TypeScript, scalable SaaS applications, frontend architecture, and web performance.",
-  keywords: [
-    "Frontend Engineer",
-    "React Developer",
-    "Next.js Developer",
-    "TypeScript",
-    "SaaS Applications",
-    "Frontend Architecture",
-    "Dashboard Systems",
-    "Web Performance Optimization",
+    "Abd El-Rahman Adel is a Frontend Engineer specializing in React, Next.js, TypeScript, scalable SaaS applications, frontend architecture, and web performance.",
+
+  applicationName: SITE_NAME,
+
+  authors: [
+    {
+      name: "Abd El-Rahman Adel",
+      url: SITE_URL,
+    },
   ],
-  authors: [{ name: "Abd El-Rahman Adel", url: SITE_URL }],
+
   creator: "Abd El-Rahman Adel",
+
   publisher: "Abd El-Rahman Adel",
+
+  category: "technology",
+
+  classification:
+    "Frontend Engineering Portfolio",
+
+  referrer: "origin-when-cross-origin",
+
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+
   openGraph: {
     type: "website",
-    siteName: "Abd El-Rahman Adel Portfolio",
+
+    siteName: SITE_NAME,
+
+    title:
+      "Abd El-Rahman Adel | Frontend Engineer",
+
+    description:
+      "Frontend Engineer specializing in React, Next.js, TypeScript, scalable SaaS applications, frontend architecture, and web performance.",
+
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Abd El-Rahman Adel Portfolio",
+        alt:
+          "Abd El-Rahman Adel — Frontend Engineer",
       },
     ],
   },
-  twitter: { card: "summary_large_image", images: ["/og-image.png"] },
+
+  twitter: {
+    card: "summary_large_image",
+
+    title:
+      "Abd El-Rahman Adel | Frontend Engineer",
+
+    description:
+      "Frontend Engineer specializing in React, Next.js, TypeScript, scalable SaaS applications, frontend architecture, and web performance.",
+
+    images: ["/og-image.png"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+
+    googleBot: {
+      index: true,
+      follow: true,
+
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+
   icons: {
     icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/icon-light-32x32.png", media: "(prefers-color-scheme: light)" },
-      { url: "/icon-dark-32x32.png", media: "(prefers-color-scheme: dark)" },
+      {
+        url: "/icon.svg",
+        type: "image/svg+xml",
+      },
+
+      {
+        url: "/icon-light-32x32.png",
+        media:
+          "(prefers-color-scheme: light)",
+      },
+
+      {
+        url: "/icon-dark-32x32.png",
+        media:
+          "(prefers-color-scheme: dark)",
+      },
     ],
+
     apple: "/apple-icon.png",
   },
+
+  manifest: "/manifest.webmanifest",
 };
+
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html
       lang="en"

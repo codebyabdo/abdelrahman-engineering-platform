@@ -1,0 +1,36 @@
+{
+  "title": {
+    "default": "Abd El-Rahman Adel | Frontend Engineer",
+    "template": "%s | Abd El-Rahman Adel"
+  },
+  "description": "Frontend Engineer specializing in React, Next.js, TypeScript, scalable SaaS applications, frontend architecture, and web performance.",
+  "siteName": "Abd El-Rahman Adel Portfolio",
+  "keywords": [
+    "Frontend Engineer",
+    "React Developer",
+    "Next.js Developer",
+    "TypeScript Developer",
+    "SaaS Applications",
+    "Frontend Architecture",
+    "Dashboard Systems",
+    "Web Performance",
+    "React.js",
+    "Next.js",
+    "TypeScript",
+    "Egypt Frontend Developer",
+    "Remote Frontend Engineer"
+  ],
+  "author": "Abd El-Rahman Adel",
+  "jobTitle": "Frontend Engineer",
+  "locale": "en_US",
+  "og": {
+    "title": "Abd El-Rahman Adel | Frontend Engineer",
+    "description": "Frontend Engineer specializing in React, Next.js, TypeScript, scalable SaaS applications, frontend architecture, and web performance.",
+    "imageAlt": "Abd El-Rahman Adel Portfolio"
+  },
+  "twitter": {
+    "title": "Abd El-Rahman Adel | Frontend Engineer",
+    "description": "Frontend Engineer specializing in React, Next.js, TypeScript, scalable SaaS applications, frontend architecture, and web performance.",
+    "imageAlt": "Abd El-Rahman Adel Portfolio"
+  }
+}

@@ -1,84 +1,186 @@
-import type { Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 
-import { getMessages, setRequestLocale } from "next-intl/server";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
 
-import { hasLocale, NextIntlClientProvider } from "next-intl";
+import {
+  hasLocale,
+  NextIntlClientProvider,
+} from "next-intl";
 
 import { notFound } from "next/navigation";
 
 import { routing } from "@/i18n/routing";
+
 import { AppShell } from "@/components/layout/app-shell";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://codebyabdo.vercel.app";
+import {
+  SITE_URL,
+  type Locale,
+} from "@/lib/seo/metadata";
 
 export const viewport: Viewport = {
   themeColor: "#0B0F14",
   colorScheme: "dark",
 };
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: Promise<{ locale: string }>;
-// }): Promise<Metadata> {
-//   const { locale } = await params;
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({
+    locale,
+  }));
+}
 
-//   const t = await getTranslations({
-//     locale,
-//     namespace: "metadata",
-//   });
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{
+    locale: string;
+  }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
 
-//   return {
-//     title: {
-//       default: t("title.default"),
-//       template: t("title.template"),
-//     },
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
 
-//     description: t("description"),
+  const currentLocale = locale as Locale;
 
-//     alternates: {
-//       canonical: `${SITE_URL}/${locale}`,
+  const t = await getTranslations({
+    locale: currentLocale,
+    namespace: "metadata",
+  });
 
-//       languages: {
-//         en: `${SITE_URL}/en`,
-//         ar: `${SITE_URL}/ar`,
-//       },
-//     },
+  const canonical = `${SITE_URL}/${currentLocale}`;
 
-//     openGraph: {
-//       type: "website",
-//       url: `${SITE_URL}/${locale}`,
-//       title: t("title.default"),
-//       description: t("description"),
-//       siteName: t("siteName"),
-//       locale: locale === "ar" ? "ar_EG" : "en_US",
+  const englishUrl = `${SITE_URL}/en`;
 
-//       images: [
-//         {
-//           url: "/og-image.png",
-//           width: 1200,
-//           height: 630,
-//           alt: "Abd El-Rahman Adel Portfolio",
-//         },
-//       ],
-//     },
+  const arabicUrl = `${SITE_URL}/ar`;
 
-//     twitter: {
-//       card: "summary_large_image",
-//       title: t("title.default"),
-//       description: t("description"),
-//       images: ["/og-image.png"],
-//     },
-//   };
-// }
+  return {
+    metadataBase: new URL(SITE_URL),
+
+    title: {
+      default: t("title.default"),
+
+      template: t("title.template"),
+    },
+
+    description: t("description"),
+
+    applicationName: t("siteName"),
+
+    authors: [
+      {
+        name: t("author"),
+        url: SITE_URL,
+      },
+    ],
+
+    creator: t("author"),
+
+    publisher: t("author"),
+
+    alternates: {
+      canonical,
+
+      languages: {
+        en: englishUrl,
+        ar: arabicUrl,
+        "x-default": englishUrl,
+      },
+    },
+
+    openGraph: {
+      type: "website",
+
+      url: canonical,
+
+      siteName: t("siteName"),
+
+      title: t("title.default"),
+
+      description: t("description"),
+
+      locale:
+        currentLocale === "ar"
+          ? "ar_EG"
+          : "en_US",
+
+      alternateLocale:
+        currentLocale === "ar"
+          ? ["en_US"]
+          : ["ar_EG"],
+
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: t("og.imageAlt"),
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+
+      title: t("title.default"),
+
+      description: t("description"),
+
+      images: ["/og-image.png"],
+    },
+
+    robots: {
+      index: true,
+      follow: true,
+
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
+
+    icons: {
+      icon: [
+        {
+          url: "/icon.svg",
+          type: "image/svg+xml",
+        },
+
+        {
+          url: "/icon-light-32x32.png",
+          media:
+            "(prefers-color-scheme: light)",
+        },
+
+        {
+          url: "/icon-dark-32x32.png",
+          media:
+            "(prefers-color-scheme: dark)",
+        },
+      ],
+
+      apple: "/apple-icon.png",
+    },
+  };
+}
 
 export default async function LocaleLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+
+  params: Promise<{
+    locale: string;
+  }>;
 }) {
   const { locale } = await params;
 
@@ -91,8 +193,12 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <NextIntlClientProvider messages={messages}>
-      <AppShell>{children}</AppShell>
+    <NextIntlClientProvider
+      messages={messages}
+    >
+      <AppShell>
+        {children}
+      </AppShell>
     </NextIntlClientProvider>
   );
 }
