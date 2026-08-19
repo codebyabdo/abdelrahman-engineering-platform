@@ -25,11 +25,17 @@ export async function generateMetadata({
 
     title: isArabic
       ? "المدونة | هندسة الواجهات وتطوير الويب"
-      : "Blog | Frontend Engineering & Architecture",
+      : "Blog | Frontend Engineering & Web Development",
 
     description: isArabic
-      ? "مقالات تقنية حول React وNext.js وTypeScript وهندسة الواجهات الأمامية وتطبيقات SaaS وتحسين الأداء وتكامل APIs وممارسات تطوير البرمجيات."
-      : "Technical articles and engineering insights about React, Next.js, TypeScript, frontend architecture, SaaS applications, API integration, performance optimization, and real-world frontend development.",
+      ? "مقالات وملاحظات تقنية حول React وNext.js وTypeScript وهندسة الواجهات الأمامية وتطبيقات SaaS ولوحات التحكم وتكامل APIs وتحسين الأداء."
+      : "Technical articles and engineering notes about React, Next.js, TypeScript, frontend architecture, SaaS applications, dashboards, API integration, and frontend performance.",
+
+    type: "website",
+
+    imageAlt: isArabic
+      ? "مدونة عبد الرحمن عادل — هندسة الواجهات الأمامية"
+      : "Abd El-Rahman Adel Blog — Frontend Engineering",
   });
 }
 

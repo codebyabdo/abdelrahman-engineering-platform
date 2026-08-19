@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { PERSONAL_INFO } from "@/lib/constants/personal-data";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
+import { LogoBrand } from "../shared/logo-brand";
 
 export const Footer = () => {
   const [time, setTime] = useState("");
@@ -65,26 +66,7 @@ export const Footer = () => {
 
           {/* Brand */}
           <div className="space-y-5 md:col-span-6">
-            <div>
-              <Link
-                href="/"
-                className="inline-flex items-center gap-3"
-              >
-                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 text-xs font-bold tracking-tight text-white shadow-lg shadow-blue-600/20">
-                  AA
-                </span>
-
-                <div>
-                  <p className="text-sm font-bold uppercase tracking-tight text-white">
-                    Abd El-Rahman Adel
-                  </p>
-
-                  <p className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-blue-400">
-                    Front-End Engineer
-                  </p>
-                </div>
-              </Link>
-            </div>
+            <LogoBrand/>
 
             <p className="max-w-md text-sm leading-7 text-white/45">
               Front-End Engineer focused on building scalable web applications,

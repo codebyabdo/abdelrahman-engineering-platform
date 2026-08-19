@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  ArrowLeft,
-  ArrowRight,
-  BookOpen,
-  Share2,
-  X,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Share2, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import type { Article } from "@/types/blog";
@@ -190,38 +184,38 @@ export function BlogDetailDialog({
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
                 {previousArticle ? (
                   <Button
                     type="button"
                     onClick={onPrevious}
-                    className="group rounded-xl border border-white/10 bg-white/2 p-4 text-left transition-all hover:border-blue-500/40 hover:bg-blue-600/4"
+                    className="group flex h-auto w-full min-w-0 flex-col items-stretch whitespace-normal rounded-xl border border-white/10 bg-white/2 p-5 text-left transition-all hover:border-blue-500/40 hover:bg-blue-600/4 sm:p-6"
                   >
                     <div className="mb-3 flex items-center gap-2 text-[9px] font-mono uppercase tracking-widest text-white/30">
-                      <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1" />
-                      Previous Article
+                      <ArrowLeft className="h-3.5 w-3.5 shrink-0 transition-transform group-hover:-translate-x-1" />
+                      <span>Previous Article</span>
                     </div>
 
-                    <div className="text-sm font-bold text-white transition-colors group-hover:text-blue-400">
+                    <div className="w-full min-w-0 whitespace-normal wrap-break-word text-sm font-bold leading-5 text-white transition-colors group-hover:text-blue-400 sm:text-base sm:leading-6">
                       {previousArticle.title}
                     </div>
                   </Button>
                 ) : (
-                  <div />
+                  <div className="hidden sm:block" />
                 )}
 
                 {nextArticle && (
                   <Button
                     type="button"
                     onClick={onNext}
-                    className="group rounded-xl border border-white/10 bg-white/2 p-4 text-right transition-all hover:border-blue-500/40 hover:bg-blue-600/4"
+                    className="group flex h-auto w-full min-w-0 flex-col items-stretch whitespace-normal rounded-xl border border-white/10 bg-white/2 p-5 text-left transition-all hover:border-blue-500/40 hover:bg-blue-600/4 sm:p-6 sm:text-right"
                   >
-                    <div className="mb-3 flex items-center justify-end gap-2 text-[9px] font-mono uppercase tracking-widest text-white/30">
-                      Next Article
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                    <div className="mb-3 flex items-center gap-2 text-[9px] font-mono uppercase tracking-widest text-white/30 sm:justify-end">
+                      <span>Next Article</span>
+                      <ArrowRight className="h-3.5 w-3.5 shrink-0 transition-transform group-hover:translate-x-1" />
                     </div>
 
-                    <div className="text-sm font-bold text-white transition-colors group-hover:text-blue-400">
+                    <div className="w-full min-w-0 whitespace-normal break-words text-sm font-bold leading-5 text-white transition-colors group-hover:text-blue-400 sm:text-base sm:leading-6">
                       {nextArticle.title}
                     </div>
                   </Button>

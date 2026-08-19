@@ -33,7 +33,6 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 
   width: "device-width",
-
   initialScale: 1,
 };
 
@@ -41,11 +40,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: {
-    default:
-      "Abd El-Rahman Adel | Frontend Engineer",
-
-    template:
-      "%s | Abd El-Rahman Adel",
+    default: "Abd El-Rahman Adel | Frontend Engineer",
+    template: "%s | Abd El-Rahman Adel",
   },
 
   description:
@@ -66,8 +62,7 @@ export const metadata: Metadata = {
 
   category: "technology",
 
-  classification:
-    "Frontend Engineering Portfolio",
+  classification: "Frontend Engineering Portfolio",
 
   referrer: "origin-when-cross-origin",
 
@@ -77,40 +72,6 @@ export const metadata: Metadata = {
     telephone: false,
   },
 
-  openGraph: {
-    type: "website",
-
-    siteName: SITE_NAME,
-
-    title:
-      "Abd El-Rahman Adel | Frontend Engineer",
-
-    description:
-      "Frontend Engineer specializing in React, Next.js, TypeScript, scalable SaaS applications, frontend architecture, and web performance.",
-
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt:
-          "Abd El-Rahman Adel — Frontend Engineer",
-      },
-    ],
-  },
-
-  twitter: {
-    card: "summary_large_image",
-
-    title:
-      "Abd El-Rahman Adel | Frontend Engineer",
-
-    description:
-      "Frontend Engineer specializing in React, Next.js, TypeScript, scalable SaaS applications, frontend architecture, and web performance.",
-
-    images: ["/og-image.png"],
-  },
-
   robots: {
     index: true,
     follow: true,
@@ -118,7 +79,6 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-
       "max-image-preview": "large",
       "max-snippet": -1,
       "max-video-preview": -1,
@@ -131,21 +91,19 @@ export const metadata: Metadata = {
         url: "/icon.svg",
         type: "image/svg+xml",
       },
-
       {
-        url: "/icon-light-32x32.png",
-        media:
-          "(prefers-color-scheme: light)",
-      },
-
-      {
-        url: "/icon-dark-32x32.png",
-        media:
-          "(prefers-color-scheme: dark)",
+        url: "/favicon.ico",
+        sizes: "any",
       },
     ],
 
-    apple: "/apple-icon.png",
+    apple: [
+      {
+        url: "/apple-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
   },
 
   manifest: "/manifest.webmanifest",
@@ -159,6 +117,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      dir="ltr"
       className={`${inter.variable} ${geist.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >

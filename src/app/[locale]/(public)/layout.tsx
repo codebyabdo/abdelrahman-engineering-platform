@@ -25,6 +25,9 @@ import {
 export const viewport: Viewport = {
   themeColor: "#0B0F14",
   colorScheme: "dark",
+
+  width: "device-width",
+  initialScale: 1,
 };
 
 export function generateStaticParams() {
@@ -59,12 +62,13 @@ export async function generateMetadata({
 
   const arabicUrl = `${SITE_URL}/ar`;
 
+  const isArabic = currentLocale === "ar";
+
   return {
     metadataBase: new URL(SITE_URL),
 
     title: {
       default: t("title.default"),
-
       template: t("title.template"),
     },
 
@@ -82,6 +86,18 @@ export async function generateMetadata({
     creator: t("author"),
 
     publisher: t("author"),
+
+    category: "technology",
+
+    classification: "Frontend Engineering Portfolio",
+
+    referrer: "origin-when-cross-origin",
+
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
 
     alternates: {
       canonical,
@@ -104,34 +120,31 @@ export async function generateMetadata({
 
       description: t("description"),
 
-      locale:
-        currentLocale === "ar"
-          ? "ar_EG"
-          : "en_US",
+      locale: isArabic ? "ar_EG" : "en_US",
 
-      alternateLocale:
-        currentLocale === "ar"
-          ? ["en_US"]
-          : ["ar_EG"],
+      alternateLocale: isArabic
+        ? ["en_US"]
+        : ["ar_EG"],
 
       images: [
         {
-          url: "/og-image.png",
-          width: 1200,
-          height: 630,
+          url: "/logo.svg",
+          width: 512,
+          height: 512,
           alt: t("og.imageAlt"),
+          type: "image/svg+xml",
         },
       ],
     },
 
     twitter: {
-      card: "summary_large_image",
+      card: "summary",
 
       title: t("title.default"),
 
       description: t("description"),
 
-      images: ["/og-image.png"],
+      images: ["/logo.svg"],
     },
 
     robots: {
@@ -155,20 +168,21 @@ export async function generateMetadata({
         },
 
         {
-          url: "/icon-light-32x32.png",
-          media:
-            "(prefers-color-scheme: light)",
-        },
-
-        {
-          url: "/icon-dark-32x32.png",
-          media:
-            "(prefers-color-scheme: dark)",
+          url: "/favicon.ico",
+          sizes: "any",
         },
       ],
 
-      apple: "/apple-icon.png",
+      apple: [
+        {
+          url: "/apple-icon.png",
+          sizes: "180x180",
+          type: "image/png",
+        },
+      ],
     },
+
+    manifest: "/manifest.webmanifest",
   };
 }
 
@@ -193,9 +207,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <NextIntlClientProvider
-      messages={messages}
-    >
+    <NextIntlClientProvider messages={messages}>
       <AppShell>
         {children}
       </AppShell>

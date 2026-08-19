@@ -1,33 +1,41 @@
 export const systemDiagramContent = {
-  title: "High-Level Data Flow & Rendering Pipeline",
+  title: "High-Level Frontend Architecture",
+
   layers: [
     {
-      label: "LAYER 1: CLIENT EDGE",
+      label: "LAYER 1: APPLICATION",
       labelColor: "blue",
-      title: "Next.js 15 App Router",
+      title: "Next.js / React Application",
+
       description:
-        "Server Component streaming, automatic layouts, Edge middleware routing & auth check.",
+        "Route-based application structure with reusable layouts, pages, components, and clear separation between client and server responsibilities.",
     },
+
     {
-      label: "LAYER 2: STATE & CACHE",
+      label: "LAYER 2: DATA & STATE",
       labelColor: "emerald",
-      title: "TanStack Query + CRDT",
+      title: "TanStack Query + Application State",
+
       description:
-        "Optimistic state updates, stale-while-revalidate caching, IndexedDB offline persistence.",
+        "Server-state fetching, caching, mutations, invalidation, and predictable client-side state management for API-driven applications.",
     },
+
     {
-      label: "LAYER 3: WORKER THREAD",
+      label: "LAYER 3: API & SERVICES",
       labelColor: "amber",
-      title: "Web Workers Pipeline",
+      title: "REST APIs + Service Layer",
+
       description:
-        "Off-main-thread WebSocket message parsing, ring buffers, data aggregation for <40ms INP.",
+        "Centralized API communication using Axios and service abstractions for authentication, CRUD operations, error handling, and backend integration.",
     },
+
     {
-      label: "LAYER 4: RENDER SURFACE",
+      label: "LAYER 4: UI SYSTEM",
       labelColor: "purple",
-      title: "React 19 + Canvas2D",
+      title: "Reusable Components + Tailwind CSS",
+
       description:
-        "Auto-compiled React primitives, Canvas2D high-speed charts, Tailwind v4 design tokens.",
+        "Reusable UI primitives, responsive layouts, consistent design patterns, accessible interactions, and maintainable styling conventions.",
     },
   ],
 } as const;

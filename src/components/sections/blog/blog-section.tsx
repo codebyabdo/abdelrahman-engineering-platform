@@ -1,27 +1,25 @@
-'use client'
+"use client";
 
-import { BookOpen} from 'lucide-react'
+import { BookOpen } from "lucide-react";
 
-import { MainHeader } from '@/components/shared/main-header'
-import { BlogList } from './blog-list';
-
+import { MainHeader } from "@/components/shared/main-header";
+import { BlogList } from "./blog-list";
 
 const header = {
-  title: "Technical Writing & Thought Leadership",
+  title: "Frontend Engineering Notes",
   description:
-    "Deep architectural analyses, performance benchmark breakdowns, and lessons learned building high-scale web platforms.",
-  subtitle: "ARTICLES & RESEARCH",
-  highligh: "Engineering Articles & Research",
+    "Practical articles and engineering notes about React, Next.js, TypeScript, frontend architecture, SaaS applications, dashboards, APIs, and performance.",
+  subtitle: "ARTICLES & ENGINEERING NOTES",
+  highligh: "Frontend Development & Engineering",
   icon: BookOpen,
 };
 
 export function BlogSection() {
-
-
   return (
-    <div className="space-y-12 pb-16 pt-24 sm:pt-32 px-4 sm:px-6 max-w-7xl mx-auto">
-        <MainHeader header={header}/>
-        <BlogList/>
-      </div>
-  )
+    <div className="mx-auto max-w-7xl space-y-12 px-4 pb-16 pt-24 sm:px-6 sm:pt-32">
+      <MainHeader header={header} />
+
+      <BlogList />
+    </div>
+  );
 }
