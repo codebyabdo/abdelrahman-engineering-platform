@@ -20,7 +20,6 @@ export async function generateMetadata({
 
   return createMetadata({
     locale,
-
     path: "/architecture",
 
     title: isArabic
@@ -28,8 +27,8 @@ export async function generateMetadata({
       : "Frontend Architecture | Abd El-Rahman Adel",
 
     description: isArabic
-      ? "استكشف منهجية عبد الرحمن عادل في هندسة الواجهات الأمامية، وبناء أنظمة React وNext.js القابلة للتوسع، والمكونات القابلة لإعادة الاستخدام، وإدارة الحالة، وتكامل APIs والأداء."
-      : "Explore Abd El-Rahman Adel's approach to frontend architecture, scalable React and Next.js applications, reusable component systems, state management, API integration, and web performance.",
+      ? "استكشف منهجية عبد الرحمن عادل في بناء تطبيقات React وNext.js القابلة للتوسع، وتنظيم المشاريع، والمكونات القابلة لإعادة الاستخدام، وإدارة حالة الخادم، وتكامل REST APIs، وتحسين الأداء."
+      : "Explore Abd El-Rahman Adel's approach to scalable React and Next.js applications, feature-based architecture, reusable components, server-state management, REST API integration, authentication, and web performance.",
   });
 }
 

@@ -2,7 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { FadeUp } from "@/components/animations/motion";
+
+import { LogoBrand } from "../shared/logo-brand";
 
 const STORAGE_KEY = "portfolio-intro-seen";
 const MIN_DURATION = 2000;
@@ -12,7 +13,9 @@ export function IntroLoader() {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
       return;
     }
 
@@ -24,32 +27,54 @@ export function IntroLoader() {
 
     let cancelled = false;
 
+    const wait = (duration: number) =>
+      new Promise<void>((resolve) => {
+        setTimeout(resolve, duration);
+      });
+
     async function initialize() {
       setLoading(true);
 
       try {
+        /*
+         * Step 0
+         * Initializing
+         */
+        setStep(0);
+
         if ("fonts" in document) {
           await document.fonts.ready;
         }
 
         if (cancelled) return;
+
+        /*
+         * Step 1
+         * Reveal Logo
+         */
         setStep(1);
 
-        await new Promise((resolve) =>
-          setTimeout(resolve, MIN_DURATION * 0.35)
-        );
+        await wait(MIN_DURATION * 0.35);
 
         if (cancelled) return;
+
+        /*
+         * Step 2
+         * Reveal Role
+         */
         setStep(2);
 
-        await new Promise((resolve) =>
-          setTimeout(resolve, MIN_DURATION * 0.35)
-        );
+        await wait(MIN_DURATION * 0.35);
 
         if (cancelled) return;
+
+        /*
+         * Step 3
+         * Ready
+         */
         setStep(3);
 
-        await new Promise((resolve) => setTimeout(resolve, MIN_DURATION * 0.3));
+        await wait(MIN_DURATION * 0.3);
       } finally {
         if (!cancelled) {
           setLoading(false);
@@ -76,80 +101,159 @@ export function IntroLoader() {
               ease: [0.76, 0, 0.24, 1],
             },
           }}
-          className="fixed inset-0 z-100 flex select-none flex-col items-center justify-center bg-[#050505] p-4 sm:p-6"
+          className="fixed inset-0 z-100 flex select-none flex-col items-center justify-center overflow-hidden bg-[#050505] p-4 sm:p-6"
         >
-          {/* Grid Pattern from CSS */}
-          <div className="pointer-events-none absolute inset-0 bg-grid-pattern opacity-20" />
-          
-          {/* Radial Glow Effects from CSS */}
-          <div className="pointer-events-none absolute inset-0 bg-radial-glow" />
-          <div className="pointer-events-none absolute inset-0 bg-radial-glow-bottom" />
+          {/* =====================================================
+              Background
+          ===================================================== */}
 
-          {/* Subtle Glow */}
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-40">
-            <div className="h-100 w-100 rounded-full bg-blue-500/5 blur-[120px]" />
-          </div>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-grid-pattern opacity-20"
+          />
 
-          <div className="relative z-10 flex w-full max-w-sm flex-col items-center text-center px-2 sm:max-w-md">
-            {/* Minimal Status */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-radial-glow"
+          />
+
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-radial-glow-bottom"
+          />
+
+          {/* Central ambient glow */}
+          <motion.div
+            aria-hidden="true"
+            initial={{ opacity: 0, scale: 0.7 }}
+            animate={{
+              opacity: step >= 1 ? 1 : 0,
+              scale: step >= 1 ? 1 : 0.7,
+            }}
+            transition={{
+              duration: 1.2,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/4 blur-[100px] sm:h-96 sm:w-96"
+          />
+
+          {/* =====================================================
+              Main Content
+          ===================================================== */}
+
+          <div className="relative z-10 flex w-full max-w-sm flex-col items-center px-2 text-center sm:max-w-md">
+            {/* =================================================
+                Status Indicator
+            ================================================= */}
+
             <motion.div
               initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-8 text-[10px] font-light tracking-[0.2em] text-white/20 sm:text-xs"
-            >
-              {step === 0 && "●"}
-              {step === 1 && "●"}
-              {step === 2 && "●"}
-              {step >= 3 && "✦"}
-            </motion.div>
-
-            {/* Logo with Laser Border */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.7 }}
               animate={{
-                opacity: step >= 1 ? 1 : 0,
-                scale: step >= 1 ? 1 : 0.7,
+                opacity: 1,
+                y: 0,
               }}
               transition={{
-                duration: 0.8,
+                duration: 0.6,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="mb-8 flex h-4 items-center justify-center font-mono text-[10px] tracking-[0.2em] text-white/20 sm:text-xs"
+              aria-hidden="true"
+            >
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={step >= 3 ? "ready" : "loading"}
+                  initial={{
+                    opacity: 0,
+                    scale: 0.7,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                  }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0.7,
+                  }}
+                  transition={{
+                    duration: 0.25,
+                  }}
+                >
+                  {step >= 3 ? "✦" : "●"}
+                </motion.span>
+              </AnimatePresence>
+            </motion.div>
+
+            {/* =================================================
+                Logo
+            ================================================= */}
+
+            <motion.div
+              initial={{
+                opacity: 0,
+                scale: 0.72,
+                y: 10,
+              }}
+              animate={{
+                opacity: step >= 1 ? 1 : 0,
+                scale: step >= 1 ? 1 : 0.72,
+                y: step >= 1 ? 0 : 10,
+              }}
+              transition={{
+                duration: 0.85,
                 ease: [0.34, 1.56, 0.64, 1],
               }}
-              className="border-laser relative mb-5 rounded-full p-6"
+              className="relative mb-6"
             >
-              <div className="relative">
-                <span className="font-light text-4xl tracking-[0.15em] text-white/90 sm:text-5xl">
-                  AA
-                </span>
+              {/* Laser border */}
+              <div className="border-laser relative rounded-full p-5 sm:p-6">
+                {/* Inner glow */}
+                <motion.div
+                  aria-hidden="true"
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: step >= 1 ? 1 : 0,
+                  }}
+                  transition={{
+                    duration: 0.8,
+                  }}
+                  className="pointer-events-none absolute inset-0 rounded-full bg-blue-500/4 blur-xl"
+                />
+
+                {/* Brand Logo */}
+                <div className="relative flex items-center justify-center">
+                  <LogoBrand />
+                </div>
               </div>
             </motion.div>
 
-            {/* Name with FadeUp Animation */}
-            <div className="flex h-12 items-center justify-center overflow-hidden sm:h-14">
-              <AnimatePresence mode="wait">
-                {step >= 1 && (
-                  <FadeUp delay={0.1} duration={0.5}>
-                    <h1 className="text-base font-light tracking-[0.12em] text-white/80 sm:text-lg">
-                      Abd El-Rahman Adel
-                    </h1>
-                  </FadeUp>
-                )}
-              </AnimatePresence>
-            </div>
+            {/* =================================================
+                Brand / Role
+            ================================================= */}
 
-            {/* Title */}
-            <div className="mt-1 h-5 overflow-hidden">
+            <div className="flex h-6 items-center justify-center overflow-hidden">
               <AnimatePresence mode="wait">
                 {step >= 2 && (
                   <motion.p
-                    initial={{ y: 8, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
+                    key="frontend-engineer"
+                    initial={{
+                      opacity: 0,
+                      y: 10,
+                      filter: "blur(4px)",
+                    }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      filter: "blur(0px)",
+                    }}
+                    exit={{
+                      opacity: 0,
+                      y: -10,
+                    }}
                     transition={{
-                      duration: 0.4,
-                      delay: 0.1,
+                      duration: 0.5,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className="text-[10px] font-light tracking-[0.3em] text-white/30 sm:text-xs"
+                    className="text-[10px] font-light uppercase tracking-[0.3em] text-white/35 sm:text-xs"
                   >
                     Frontend Engineer
                   </motion.p>
@@ -157,49 +261,84 @@ export function IntroLoader() {
               </AnimatePresence>
             </div>
 
-            {/* Progress Line */}
+            {/* =================================================
+                Progress Line
+            ================================================= */}
+
+            <div className="mt-8 flex h-px w-16 items-center justify-center sm:mt-10">
+              <motion.div
+                initial={{
+                  scaleX: 0,
+                  opacity: 0,
+                }}
+                animate={{
+                  scaleX: step >= 3 ? 1 : 0,
+                  opacity: step >= 3 ? 1 : 0,
+                }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.1,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="h-px w-full origin-center bg-linear-to-r from-transparent via-blue-500/50 to-transparent"
+              />
+            </div>
+
+            {/* =================================================
+                Status Text
+            ================================================= */}
+
+            <div className="mt-4 flex h-4 items-center justify-center sm:mt-5">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={step >= 3 ? "ready" : step}
+                  initial={{
+                    opacity: 0,
+                    y: 5,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  exit={{
+                    opacity: 0,
+                    y: -5,
+                  }}
+                  transition={{
+                    duration: 0.3,
+                  }}
+                  className={`text-[9px] font-light tracking-[0.15em] sm:text-[10px] ${
+                    step >= 3
+                      ? "text-blue-400/60"
+                      : "text-white/15"
+                  }`}
+                >
+                  {step === 0 && "initializing"}
+                  {step === 1 && "loading components"}
+                  {step === 2 && "building experience"}
+                  {step >= 3 && "ready"}
+                </motion.span>
+              </AnimatePresence>
+            </div>
+
+            {/* =================================================
+                Version
+            ================================================= */}
+
             <motion.div
-              initial={{ width: 0, opacity: 0 }}
+              initial={{
+                opacity: 0,
+                y: 5,
+              }}
               animate={{
-                width: step >= 3 ? 60 : 0,
                 opacity: step >= 3 ? 1 : 0,
+                y: step >= 3 ? 0 : 5,
               }}
               transition={{
-                duration: 0.8,
                 delay: 0.2,
-                ease: [0.16, 1, 0.3, 1],
+                duration: 0.5,
               }}
-              className="mt-8 h-px bg-linear-to-r from-transparent via-blue-500/30 to-transparent sm:mt-10"
-            />
-
-            {/* Status Text */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="mt-4 text-[9px] font-light tracking-[0.15em] text-white/15 sm:mt-5 sm:text-[10px]"
-            >
-              {step === 0 && "initializing"}
-              {step === 1 && "loading components"}
-              {step === 2 && "building experience"}
-              {step >= 3 && (
-                <motion.span
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="text-blue-400/50"
-                >
-                  ready
-                </motion.span>
-              )}
-            </motion.div>
-
-            {/* Version */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: step >= 3 ? 1 : 0 }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-              className="mt-4 text-[8px] font-light tracking-[0.15em] text-white/10 sm:mt-5 sm:text-[9px]"
+              className="mt-4 font-mono text-[8px] font-light tracking-[0.15em] text-white/10 sm:mt-5 sm:text-[9px]"
             >
               v2026
             </motion.div>

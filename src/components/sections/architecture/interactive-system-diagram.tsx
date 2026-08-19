@@ -12,9 +12,10 @@ const labelColors = {
 
 export function InteractiveSystemDiagram() {
   return (
-    <div className="relative overflow-hidden space-y-6 rounded-2xl border border-white/10 bg-[#080808] bg-grid-pattern p-8">
+    <div className="relative space-y-6 overflow-hidden rounded-2xl border border-white/10 bg-[#080808] bg-grid-pattern p-8">
       <h2 className="flex items-center gap-2 text-lg font-black uppercase tracking-tight text-white">
         <Cpu className="h-5 w-5 text-blue-400" />
+
         {systemDiagramContent.title}
       </h2>
 
@@ -22,7 +23,7 @@ export function InteractiveSystemDiagram() {
         {systemDiagramContent.layers.map((layer) => (
           <div
             key={layer.label}
-            className="space-y-2 rounded-xl border border-white/5 bg-white/2 p-4"
+            className="space-y-2 rounded-xl border border-white/5 bg-white/[0.02] p-4"
           >
             <span
               className={`text-[10px] font-bold uppercase tracking-widest ${

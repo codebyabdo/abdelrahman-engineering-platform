@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FileText, X } from "lucide-react";
 
 import { Link, usePathname } from "@/i18n/navigation";
+import { useDialogs } from "@/providers/dialog-provider";
 
 interface MobileMenuProps {
   open: boolean;
@@ -19,20 +20,14 @@ const NAV_ITEMS = [
   { key: "contact", href: "/contact" },
 ] as const;
 
-export function MobileMenu({
-  open,
-  onOpenChange,
-}: MobileMenuProps) {
+export function MobileMenu({ open, onOpenChange }: MobileMenuProps) {
   const pathname = usePathname();
+
+  const { openResume } = useDialogs();
 
   const handleClose = () => {
     onOpenChange(false);
   };
-
-  const handleResume = () => {
-    handleClose();
-  };
-
 
   return (
     <AnimatePresence>
@@ -41,7 +36,7 @@ export function MobileMenu({
           {/* Backdrop */}
           <motion.button
             type="button"
-            aria-label={("closeMenu")}
+            aria-label={"closeMenu"}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -65,13 +60,13 @@ export function MobileMenu({
             {/* Header */}
             <div className="mb-3 flex items-center justify-between">
               <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/40">
-              Menu
+                Menu
               </span>
 
               <button
                 type="button"
                 onClick={handleClose}
-                aria-label={("closeMenu")}
+                aria-label={"closeMenu"}
                 className="rounded-full border border-white/10 bg-white/3 p-2 text-white/50 transition-colors hover:border-white/20 hover:text-white"
               >
                 <X className="h-4 w-4" />
@@ -80,7 +75,7 @@ export function MobileMenu({
 
             {/* Navigation */}
             <nav
-              aria-label={("mobileNavigation")}
+              aria-label={"mobileNavigation"}
               className="flex flex-col gap-1.5"
             >
               {NAV_ITEMS.map((item) => {
@@ -119,13 +114,12 @@ export function MobileMenu({
             <div className="mt-4 flex items-center gap-2 border-t border-white/10 pt-4">
               <button
                 type="button"
-                onClick={handleResume}
+                onClick={openResume}
                 className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-blue-500/30 bg-blue-500/10 px-4 py-2.5 text-xs font-semibold text-blue-400 transition-all hover:border-blue-500/50 hover:bg-blue-500/20 hover:text-blue-300"
               >
                 <FileText className="h-3.5 w-3.5" />
                 <span>resume</span>
               </button>
-
             </div>
           </motion.div>
         </>

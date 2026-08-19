@@ -28,14 +28,14 @@ export async function generateMetadata({
       : "About | Abd El-Rahman Adel",
 
     description: isArabic
-      ? "تعرف على عبد الرحمن عادل، مهندس واجهات أمامية متخصص في React وNext.js وTypeScript وهندسة الواجهات وبناء تطبيقات الويب القابلة للتوسع."
-      : "Learn more about Abd El-Rahman Adel, a Frontend Engineer specializing in React, Next.js, TypeScript, frontend architecture, scalable web applications, and modern user experiences.",
+      ? "تعرف على عبد الرحمن عادل، مهندس واجهات أمامية متخصص في React وNext.js وTypeScript، مع خبرة عملية في بناء منصات SaaS وأنظمة الأعمال ولوحات التحكم وتطبيقات الويب القابلة للتوسع."
+      : "Learn more about Abd El-Rahman Adel, a Front-End Engineer specializing in React, Next.js, and TypeScript, with hands-on experience building SaaS platforms, business systems, dashboards, and scalable web applications.",
 
     type: "profile",
 
     imageAlt: isArabic
       ? "عبد الرحمن عادل — مهندس واجهات أمامية"
-      : "Abd El-Rahman Adel — Frontend Engineer",
+      : "Abd El-Rahman Adel — Front-End Engineer",
   });
 }
 

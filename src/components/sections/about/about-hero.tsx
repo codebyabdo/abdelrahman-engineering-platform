@@ -4,62 +4,92 @@ import { PERSONAL_INFO } from "@/lib/constants/personal-data";
 
 export function AboutHero() {
   return (
-    <section className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-      <div className="md:col-span-7 space-y-6 text-white/70 text-sm leading-relaxed">
-        <h2 className="text-2xl font-black uppercase tracking-tight text-white font-sans">
+    <section className="grid grid-cols-1 items-start gap-8 md:grid-cols-12">
+      <div className="space-y-6 text-sm leading-relaxed text-white/70 md:col-span-7">
+        <h2 className="font-sans text-2xl font-black uppercase tracking-tight text-white">
           How I Think As An Engineer
         </h2>
+
         <p>
-          I treat frontend engineering as a rigorous discipline combining
-          computer science fundamentals—memory management, streaming, web
-          workers, tree-shaking—with luxury product design.
+          I approach frontend engineering as a balance between solid technical
+          architecture and thoughtful user experience. My focus is building
+          interfaces that are scalable, maintainable, responsive, and easy for
+          engineering teams to extend.
         </p>
+
         <p>
-          My engineering career has centered on solving high-throughput UI
-          bottlenecks. From streaming 10,000 WebSocket updates/sec in
-          institutional trading terminals to building headless component design
-          systems that scale across multi-brand product suites, my focus is
-          delivering zero-latency user experiences.
+          My professional experience has centered around React and Next.js
+          applications, SaaS platforms, enterprise dashboards, e-commerce
+          systems, accounting applications, and API-driven business products.
+          I enjoy turning complex business requirements into clear and
+          reusable frontend experiences.
         </p>
+
         <p>
-          I believe that software should be performant by default, WCAG 2.1 AA
-          accessible, and architected with strict TypeScript contracts so that
-          engineering teams can ship features with speed and total confidence.
+          I place strong emphasis on reusable components, feature-based
+          organization, predictable data fetching, type-safe development,
+          responsive design, API integration, authentication flows, and
+          performance-conscious implementation.
+        </p>
+
+        <p>
+          Beyond implementation, I have experience contributing to technical
+          planning, feature estimation, code reviews, and team coordination,
+          particularly while working as a Team Lead on business applications.
         </p>
       </div>
 
-      {/* Quick Highlights Card */}
-      <div className="md:col-span-5 p-6 rounded-2xl bg-[#080808] border border-white/10 space-y-4">
-        <h3 className="text-[10px] font-bold text-blue-500 uppercase tracking-[0.2em]">
+      <div className="space-y-4 rounded-2xl border border-white/10 bg-[#080808] p-6 md:col-span-5">
+        <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-500">
           ENGINEER AT A GLANCE
         </h3>
+
         <ul className="space-y-3 font-mono text-xs text-white/70">
-          <li className="flex items-center justify-between border-b border-white/5 pb-2">
+          <li className="flex items-center justify-between gap-4 border-b border-white/5 pb-2">
             <span className="text-white/40">Location:</span>
-            <span className="text-white font-bold">
+
+            <span className="font-bold text-white">
               {PERSONAL_INFO.location}
             </span>
           </li>
-          <li className="flex items-center justify-between border-b border-white/5 pb-2">
+
+          <li className="flex items-center justify-between gap-4 border-b border-white/5 pb-2">
             <span className="text-white/40">Status:</span>
-            <span className="text-emerald-400 font-bold">
+
+            <span className="font-bold text-emerald-400">
               {PERSONAL_INFO.availability}
             </span>
           </li>
-          <li className="flex items-center justify-between border-b border-white/5 pb-2">
+
+          <li className="flex items-center justify-between gap-4 border-b border-white/5 pb-2">
             <span className="text-white/40">Primary Focus:</span>
-            <span className="text-blue-400 font-bold">
-              React 19 & Next.js 15
+
+            <span className="font-bold text-blue-400">
+              React · Next.js · TypeScript
             </span>
           </li>
-          <li className="flex items-center justify-between border-b border-white/5 pb-2">
-            <span className="text-white/40">Accessibility:</span>
-            <span className="text-white/80">WCAG 2.1 AA Certified</span>
+
+          <li className="flex items-center justify-between gap-4 border-b border-white/5 pb-2">
+            <span className="text-white/40">Specialization:</span>
+
+            <span className="text-right text-white/80">
+              SaaS & Business Applications
+            </span>
           </li>
-          <li className="flex items-center justify-between">
-            <span className="text-white/40">Languages:</span>
+
+          <li className="flex items-center justify-between gap-4 border-b border-white/5 pb-2">
+            <span className="text-white/40">Experience:</span>
+
             <span className="text-white/80">
-              English (Fluent) • Arabic (Native)
+              2+ Years Hands-on Experience
+            </span>
+          </li>
+
+          <li className="flex items-center justify-between gap-4">
+            <span className="text-white/40">Languages:</span>
+
+            <span className="text-right text-white/80">
+              Arabic (Native) · English
             </span>
           </li>
         </ul>

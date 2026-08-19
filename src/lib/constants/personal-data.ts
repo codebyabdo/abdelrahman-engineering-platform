@@ -7,7 +7,7 @@ export const PERSONAL_INFO = {
     "Building scalable web products with React, Next.js, TypeScript, and modern frontend architecture.",
 
   shortBio:
-    "Front-End Engineer specializing in React.js, Next.js, and TypeScript, with hands-on experience building SaaS platforms, e-commerce systems, dashboards, business applications, and interactive web products. I focus on scalable frontend architecture, reusable components, API integration, performance, responsive UI, and maintainable code. I also have practical experience working with authentication, backend APIs, databases, and technical coordination across project teams.",
+    "Front-End Engineer specializing in React.js, Next.js, and TypeScript, with hands-on experience building SaaS platforms, e-commerce systems, enterprise dashboards, accounting applications, and interactive web products. I focus on scalable frontend architecture, reusable components, API integration, authentication, performance, responsive UI, and maintainable code. I also have practical backend knowledge and experience contributing to technical planning, code reviews, and team coordination.",
 
   location: "Egypt",
 
@@ -28,15 +28,20 @@ export const PERSONAL_INFO = {
     "TypeScript",
     "JavaScript",
     "Tailwind CSS",
+    "shadcn/ui",
+    "Framer Motion",
     "TanStack Query",
     "React Hook Form",
     "Formik",
+    "Yup",
     "Zod",
     "Axios",
     "REST APIs",
+    "React Router",
     "PostgreSQL",
     "MongoDB",
     "Node.js",
+    "Express.js",
     "NestJS",
     "Prisma",
     "Drizzle ORM",

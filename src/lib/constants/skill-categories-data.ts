@@ -4,7 +4,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
   {
     category: "Frontend Development",
     description:
-      "Modern frontend development focused on scalable React applications and maintainable user interfaces.",
+      "Building scalable web applications with React, Next.js, TypeScript, and modern frontend development practices.",
     skills: [
       {
         name: "React.js",
@@ -12,7 +12,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 3,
         icon: "Code2",
         highlight:
-          "Reusable components, hooks, responsive interfaces, application architecture",
+          "Reusable components, hooks, responsive interfaces, dashboards, and application architecture.",
       },
       {
         name: "Next.js",
@@ -20,7 +20,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 2,
         icon: "Globe",
         highlight:
-          "App Router, layouts, dynamic routes, server/client components, SEO",
+          "App Router, layouts, dynamic routes, server and client components, and SEO-focused applications.",
       },
       {
         name: "TypeScript",
@@ -28,7 +28,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 2,
         icon: "FileCode",
         highlight:
-          "Typed components, interfaces, API models, reusable utility types",
+          "Typed components, interfaces, API contracts, reusable utility types, and maintainable application code.",
       },
       {
         name: "JavaScript",
@@ -36,7 +36,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 3,
         icon: "Braces",
         highlight:
-          "ES6+, asynchronous programming, DOM APIs, modules, modern browser APIs",
+          "ES6+, asynchronous programming, modules, browser APIs, DOM manipulation, and modern application development.",
       },
     ],
   },
@@ -44,7 +44,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
   {
     category: "UI & Styling",
     description:
-      "Building responsive, accessible, and consistent interfaces with modern styling systems.",
+      "Creating responsive, reusable, and visually consistent interfaces across SaaS, business, and corporate applications.",
     skills: [
       {
         name: "Tailwind CSS",
@@ -52,7 +52,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 3,
         icon: "Palette",
         highlight:
-          "Responsive layouts, design tokens, reusable utility patterns, dark interfaces",
+          "Responsive layouts, reusable utility patterns, design systems, dashboards, and modern UI implementation.",
       },
       {
         name: "shadcn/ui",
@@ -60,7 +60,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 1,
         icon: "Box",
         highlight:
-          "Reusable UI primitives, accessible components, dialogs, forms and dashboards",
+          "Reusable accessible UI primitives for forms, dialogs, navigation, dashboards, and application interfaces.",
       },
       {
         name: "Framer Motion",
@@ -68,7 +68,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 1,
         icon: "Activity",
         highlight:
-          "Page transitions, entrance animations, micro-interactions and motion UI",
+          "Page transitions, entrance animations, micro-interactions, and modern motion experiences.",
       },
       {
         name: "Responsive Design",
@@ -76,7 +76,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 3,
         icon: "MonitorSmartphone",
         highlight:
-          "Mobile-first layouts, cross-device interfaces and adaptive UI systems",
+          "Mobile-first layouts, responsive dashboards, adaptive interfaces, and cross-device experiences.",
       },
     ],
   },
@@ -84,7 +84,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
   {
     category: "Data & Application State",
     description:
-      "Managing server state, API communication, forms, validation, and application workflows.",
+      "Managing API-driven applications, server state, forms, validation, and business workflows.",
     skills: [
       {
         name: "TanStack Query",
@@ -92,7 +92,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 2,
         icon: "Database",
         highlight:
-          "Server-state management, caching, mutations, invalidation and asynchronous workflows",
+          "Server-state management, caching, mutations, invalidation, loading states, and API-driven workflows.",
       },
       {
         name: "Axios",
@@ -100,7 +100,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 2,
         icon: "ArrowLeftRight",
         highlight:
-          "API clients, request configuration, interceptors and REST API integration",
+          "API clients, request configuration, interceptors, error handling, and REST API integration.",
       },
       {
         name: "React Hook Form",
@@ -108,7 +108,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 1,
         icon: "ClipboardCheck",
         highlight:
-          "Form state, controlled inputs, validation and reusable form components",
+          "Form state management, reusable form components, validation, and complex business forms.",
       },
       {
         name: "Formik & Yup",
@@ -116,7 +116,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 1,
         icon: "FileCheck",
         highlight:
-          "Structured forms, schema validation and business-data workflows",
+          "Structured forms, schema validation, and business-data workflows in React applications.",
       },
     ],
   },
@@ -124,7 +124,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
   {
     category: "Backend & Data Knowledge",
     description:
-      "Practical backend knowledge that supports effective frontend and full-stack collaboration.",
+      "Practical backend and database knowledge that supports effective frontend architecture and full-stack collaboration.",
     skills: [
       {
         name: "REST APIs",
@@ -132,7 +132,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 2,
         icon: "Globe2",
         highlight:
-          "API integration, authentication flows, CRUD operations and error handling",
+          "API integration, authentication flows, CRUD operations, request handling, and error management.",
       },
       {
         name: "Node.js",
@@ -140,7 +140,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 1,
         icon: "Server",
         highlight:
-          "Backend fundamentals, API development and frontend/backend integration",
+          "Backend fundamentals, API development, and frontend/backend integration.",
       },
       {
         name: "Express.js",
@@ -148,7 +148,15 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 1,
         icon: "ServerCog",
         highlight:
-          "REST endpoints, middleware and backend integration",
+          "REST endpoints, middleware, request handling, and backend integration.",
+      },
+      {
+        name: "NestJS",
+        level: "Proficient",
+        experienceYears: 1,
+        icon: "Server",
+        highlight:
+          "Structured backend architecture and API integration in modern TypeScript applications.",
       },
       {
         name: "PostgreSQL & MongoDB",
@@ -156,7 +164,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 1,
         icon: "Database",
         highlight:
-          "Data modeling concepts, queries and frontend application integration",
+          "Database concepts, data modeling, queries, and integration with web applications.",
       },
     ],
   },
@@ -164,7 +172,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
   {
     category: "Development Tools",
     description:
-      "Tools and workflows used for development, collaboration, testing, and deployment.",
+      "Tools used for development, version control, API testing, collaboration, and deployment.",
     skills: [
       {
         name: "Git & GitHub",
@@ -172,7 +180,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 3,
         icon: "GitBranch",
         highlight:
-          "Version control, branching, pull requests and collaborative workflows",
+          "Version control, branching, pull requests, merge requests, code reviews, and collaborative workflows.",
       },
       {
         name: "Vite",
@@ -180,7 +188,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 2,
         icon: "Zap",
         highlight:
-          "Fast development environments, React applications and production builds",
+          "React development environments, fast builds, and production-ready frontend applications.",
       },
       {
         name: "Postman & Apidog",
@@ -188,7 +196,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 2,
         icon: "Send",
         highlight:
-          "API testing, request inspection and backend integration workflows",
+          "API testing, request inspection, debugging, and frontend-backend integration workflows.",
       },
       {
         name: "Vercel",
@@ -196,7 +204,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 2,
         icon: "Cloud",
         highlight:
-          "Frontend deployment, previews and production hosting",
+          "Frontend deployment, preview environments, and production hosting.",
       },
     ],
   },
@@ -204,7 +212,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
   {
     category: "Engineering Practices",
     description:
-      "Engineering practices that support maintainable, scalable, and production-ready frontend applications.",
+      "Engineering practices focused on maintainable architecture, reusable systems, and effective team collaboration.",
     skills: [
       {
         name: "Frontend Architecture",
@@ -212,7 +220,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 2,
         icon: "Layers",
         highlight:
-          "Feature organization, reusable components and scalable project structure",
+          "Feature-based organization, reusable components, service layers, shared UI systems, and scalable project structure.",
       },
       {
         name: "Performance Optimization",
@@ -220,7 +228,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 2,
         icon: "Gauge",
         highlight:
-          "Rendering optimization, bundle awareness, loading performance and UI responsiveness",
+          "Loading performance, rendering optimization, bundle awareness, responsive interfaces, and Lighthouse improvements.",
       },
       {
         name: "Authentication & Authorization",
@@ -228,7 +236,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 1,
         icon: "ShieldCheck",
         highlight:
-          "Authentication flows, protected routes and role-based application access",
+          "Authentication flows, protected routes, role-based access, and frontend authorization workflows.",
       },
       {
         name: "Technical Planning",
@@ -236,7 +244,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
         experienceYears: 1,
         icon: "Workflow",
         highlight:
-          "Feature planning, estimation, technical decisions and team coordination",
+          "Feature planning, estimation, technical decisions, code reviews, and team coordination.",
       },
     ],
   },

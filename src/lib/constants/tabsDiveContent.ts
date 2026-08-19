@@ -2,104 +2,138 @@ export const tabsDiveContent = {
   tabs: [
     {
       id: "structure",
-      label: "1. Modular Directory Layout",
+      label: "1. Project Structure",
     },
     {
       id: "state",
-      label: "2. State & Caching Rules",
+      label: "2. State & Data",
     },
     {
       id: "performance",
-      label: "3. INP & Performance Blueprint",
+      label: "3. Performance",
     },
     {
       id: "testing",
-      label: "4. Testing & Quality Discipline",
+      label: "4. Quality",
     },
   ],
 
   structure: {
-    title: "Production-Ready Directory Structure",
+    title: "Feature-Oriented Project Structure",
+
     description:
-      "Strict feature-folder separation ensuring scalable modularity across large engineering teams.",
+      "I organize applications around reusable components, domain features, shared utilities, and clear application boundaries. The exact structure adapts to the size and requirements of each project.",
+
     code: `src/
-├── app/                      # Next.js 15 App Router pages & server layouts
-│   ├── (dashboard)/          # Grouped route layouts for authenticated views
-│   ├── api/                  # Express / Edge API proxies (Hides API Secrets)
-│   ├── layout.tsx            # Root Server Layout with AuraProvider
-│   └── page.tsx              # High-level entry page
-├── components/               # Modular UI Component Library
-│   ├── ui/                   # Headless Radix / Tailwind v4 primitives (Button, Dialog)
-│   ├── charts/               # Canvas2D & Recharts data visualizers
-│   └── layout/               # Navbars, Sidebars, Command Palette
-├── features/                 # Domain-driven feature modules
-│   ├── trading/              # Order book, Web Workers, Tick batchers
-│   └── analytics/            # D3.js force graphs & risk calculations
-├── lib/                      # Core System Utilities & API clients
-│   ├── queryClient.ts        # TanStack Query configuration & hydration
-│   └── workerPool.ts         # Dedicated Web Worker thread pool
-└── types/                    # Shared strict TypeScript contracts & interfaces`,
+├── app/ or pages/           # Application routes
+├── components/              # Shared and reusable UI
+│   ├── ui/                  # Reusable interface primitives
+│   ├── layout/              # Navigation and layout components
+│   └── shared/              # Cross-feature components
+├── features/                # Domain and business features
+├── hooks/                   # Reusable React hooks
+├── services/                # API and external service layer
+├── lib/                     # Shared configuration and utilities
+├── providers/               # Application providers
+├── types/                   # Shared TypeScript types
+├── utils/                   # General utility functions
+└── styles/                  # Global styling and design tokens`,
   },
 
   state: {
-    title: "State Management & Caching Strategy",
+    title: "State Management & Data Strategy",
+
     cards: [
       {
-        title: "Server & Async State (TanStack Query)",
+        title: "Server State — TanStack Query",
         color: "blue",
+
         description:
-          "All server data fetching, mutations, and cache invalidation are delegated to TanStack Query. We enforce strict query keys and optimistic UI mutators for instantaneous user feedback.",
+          "API-driven data is managed with TanStack Query for fetching, caching, mutations, loading states, error handling, and query invalidation.",
       },
+
       {
-        title: "UI & Local Transient State",
+        title: "Local UI State",
         color: "emerald",
+
         description:
-          "Local component state stays inside primitive hooks. Global transient preferences (theme, command palette visibility) use atomic Context or Zustand stores to avoid top-level app re-render cascades.",
+          "Transient interface state stays close to the components that own it. Shared state is introduced only when multiple parts of the application genuinely depend on it.",
+      },
+
+      {
+        title: "Forms & Validation",
+        color: "amber",
+
+        description:
+          "Business forms use tools such as React Hook Form or Formik with schema validation through Zod or Yup depending on the project requirements.",
+      },
+
+      {
+        title: "API Abstraction",
+        color: "blue",
+
+        description:
+          "Axios-based API clients and service abstractions help keep networking logic separate from presentation components and make API integration easier to maintain.",
       },
     ],
   },
 
   performance: {
-    title: "Sub-40ms INP Performance Rules",
+    title: "Practical Performance Principles",
+
     rules: [
       {
-        title: "Web Worker Offloading",
+        title: "Component Boundaries",
         description:
-          "Never run heavy JSON parsing, sorting, or mathematical calculations on the JavaScript main thread.",
+          "Keep components focused and avoid unnecessary application-wide re-renders by placing state close to where it is actually needed.",
       },
+
       {
-        title: "React 19 Compiler",
+        title: "Code Splitting & Lazy Loading",
         description:
-          "Rely on React 19 static compilation for fine-grained re-render boundaries without manual dependency array bugs.",
+          "Load heavier pages and features only when necessary to reduce initial JavaScript and improve perceived loading performance.",
       },
+
       {
-        title: "Zero CLS Layout Rules",
+        title: "Optimized Rendering",
         description:
-          "Reserve explicitly sized layout containers using CSS containment (`contain: layout size`) before async assets stream in.",
+          "Use appropriate rendering strategies, memoization where justified, efficient data fetching, and optimized assets to maintain responsive interfaces.",
+      },
+
+      {
+        title: "Responsive Performance",
+        description:
+          "Design interfaces with mobile-first principles while ensuring dashboards and complex business applications remain efficient across larger screens.",
       },
     ],
   },
 
   testing: {
-    title: "Testing & Quality Discipline",
+    title: "Quality & Engineering Discipline",
+
     cards: [
       {
-        title: "Unit Testing (Vitest)",
+        title: "Type Safety",
         color: "blue",
+
         description:
-          "Verifying utility functions, state mutations, and custom hooks with 90%+ code coverage.",
+          "TypeScript is used to improve contracts between components, API models, forms, and reusable application utilities.",
       },
+
       {
-        title: "E2E Testing (Playwright)",
+        title: "Code Review",
         color: "emerald",
+
         description:
-          "Automating critical user flows: authentication, trading execution, and form submission.",
+          "In team environments, I participate in code reviews and merge request reviews to maintain consistency and catch implementation issues early.",
       },
+
       {
-        title: "Accessibility (axe-core)",
+        title: "API Testing",
         color: "amber",
+
         description:
-          "Running automated axe-core audits on every build commit to catch screen reader & focus regressions.",
+          "Tools such as Postman and Apidog are used to inspect API behavior, validate requests, and support frontend-backend integration.",
       },
     ],
   },
