@@ -25,61 +25,65 @@ export function ContactOwnerEmail({
 
       <Tailwind>
         <Body
-          className="m-0 bg-[#FDFBF7] px-6 py-10"
+          className="m-0 px-6 py-10"
           style={{
-            fontFamily: "Inter, Arial, Helvetica, sans-serif",
+            backgroundColor: "#050505", // --bg-main
+            fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
           }}
         >
           <Container
-            className="mx-auto overflow-hidden rounded-3xl border"
+            className="mx-auto overflow-hidden rounded-3xl"
             style={{
               maxWidth: "680px",
-              borderColor: "#EFE7D3",
-              backgroundColor: "#FFFFFF",
+              backgroundColor: "#080808", // --bg-card
+              border: "1px solid rgba(255, 255, 255, 0.08)", // --bg-card-border
             }}
           >
+            {/* Header */}
             <Section
               className="px-12 py-10"
               style={{
-                background: "#0A0A0A",
+                background: "radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.15) 0%, transparent 70%)", // --bg-radial-glow
+                borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
               }}
             >
               <Text
                 className="m-0 text-[11px] uppercase tracking-[6px]"
                 style={{
-                  color: "#D4AF37",
+                  color: "#60a5fa", // --accent-blue-light
                 }}
               >
-                ASMAA ADEL
+                ABD EL-RAHMAN ADEL
               </Text>
 
               <Heading
-                className="mt-6 mb-0 text-[38px] font-normal leading-tight"
+                className="mt-6 mb-0 text-[38px] font-semibold leading-tight"
                 style={{
-                  color: "#FFFFFF",
-                  fontFamily: "Cormorant Garamond, Georgia, serif",
+                  color: "#f5f5f5", // --text-primary
+                  fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
                 }}
               >
-                New Project Inquiry
+                New Portfolio Inquiry
               </Heading>
 
               <Text
                 className="mt-5 mb-0 text-base"
                 style={{
-                  color: "#BBBBBB",
+                  color: "rgba(255, 255, 255, 0.6)", // --text-muted
                 }}
               >
                 A new contact request has been submitted through the website.
               </Text>
             </Section>
 
+            {/* Body */}
             <Section className="px-12 py-10">
               <Heading
                 as="h2"
-                className="m-0 text-[26px]"
+                className="m-0 text-[22px] font-semibold"
                 style={{
-                  color: "#0A0A0A",
-                  fontFamily: "Cormorant Garamond, Georgia, serif",
+                  color: "#f5f5f5",
+                  fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
                 }}
               >
                 Contact Details
@@ -88,7 +92,7 @@ export function ContactOwnerEmail({
               <Hr
                 className="my-8"
                 style={{
-                  borderColor: "#EFE7D3",
+                  borderColor: "rgba(255, 255, 255, 0.08)", // --bg-card-border
                 }}
               />
 
@@ -99,13 +103,14 @@ export function ContactOwnerEmail({
               <Section
                 className="mt-10 rounded-2xl p-8"
                 style={{
-                  backgroundColor: "#F8F6F2",
+                  backgroundColor: "rgba(255, 255, 255, 0.03)",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
                 }}
               >
                 <Text
                   className="mt-0 mb-4 text-[11px] uppercase tracking-[3px]"
                   style={{
-                    color: "#D4AF37",
+                    color: "#2563eb", // --accent-blue
                   }}
                 >
                   Message
@@ -114,7 +119,7 @@ export function ContactOwnerEmail({
                 <Text
                   className="m-0 whitespace-pre-wrap text-[15px] leading-8"
                   style={{
-                    color: "#444444",
+                    color: "#f5f5f5", // --text-primary
                   }}
                 >
                   {message}
@@ -122,20 +127,22 @@ export function ContactOwnerEmail({
               </Section>
             </Section>
 
+            {/* Footer */}
             <Section
               className="px-12 py-8"
               style={{
-                backgroundColor: "#F8F6F2",
+                backgroundColor: "#050505",
+                borderTop: "1px solid rgba(255, 255, 255, 0.08)",
               }}
             >
               <Text
                 className="m-0 text-center text-xs"
                 style={{
-                  color: "#777777",
+                  color: "rgba(255, 255, 255, 0.6)",
                 }}
               >
-                This message was automatically generated from the contact form
-                on the Asmaa Adel portfolio website.
+                This message was automatically generated from the Abd El-Rahman
+                Adel portfolio contact form.
               </Text>
             </Section>
           </Container>
@@ -156,7 +163,7 @@ function Info({ label, value }: InfoProps) {
       <Text
         className="mb-2 text-[11px] uppercase tracking-[3px]"
         style={{
-          color: "#D4AF37",
+          color: "#2563eb", // --accent-blue
         }}
       >
         {label}
@@ -165,7 +172,7 @@ function Info({ label, value }: InfoProps) {
       <Text
         className="m-0 text-base"
         style={{
-          color: "#111111",
+          color: "#f5f5f5", // --text-primary
         }}
       >
         {value}
