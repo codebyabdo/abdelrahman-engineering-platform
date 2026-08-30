@@ -1,43 +1,33 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 
-import { FadeUp, StaggerChildren } from "@/components/animations/motion";
+import {
+  FadeUp,
+  StaggerChildren,
+} from "@/components/animations/motion";
 
 import { ContactInfoCard } from "./contact-info-card";
 import { ContactForm } from "./contact-form";
 import { ContactSuccess } from "./contact-success";
+
 import { MainHeader } from "@/components/shared/main-header";
 import { Mail } from "lucide-react";
-
-interface ContactFormData {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
-
-const INITIAL_FORM: ContactFormData = {
-  name: "",
-  email: "",
-  subject: "Senior Frontend Engineering Role",
-  message: "",
-};
-
 
 const header = {
   title: "Let's Build Something Exceptional",
   description:
-    "Open to Senior Frontend Engineer & Design Architect positions, high-throughput web platform advisory, and design system consulting.",
+    "Open to frontend engineering opportunities, freelance projects, SaaS development, and teams looking for scalable, maintainable web products.",
   subtitle: "CONTACT & INQUIRIES",
   highligh: "Direct Communication Protocol",
   icon: Mail,
 };
 
-
 export function ContactSection() {
-  const [form, setForm] = useState<ContactFormData>(INITIAL_FORM);
-  const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [time, setTime] = useState("");
 
@@ -53,49 +43,33 @@ export function ContactSection() {
         hour12: true,
       };
 
-      setTime(new Intl.DateTimeFormat("en-US", options).format(now));
+      setTime(
+        new Intl.DateTimeFormat(
+          "en-US",
+          options,
+        ).format(now),
+      );
     };
 
     updateClock();
 
-    const timer = window.setInterval(updateClock, 1000);
+    const timer = window.setInterval(
+      updateClock,
+      1000,
+    );
 
-    return () => window.clearInterval(timer);
+    return () => {
+      window.clearInterval(timer);
+    };
   }, []);
 
-  const updateField = <K extends keyof ContactFormData>(
-    field: K,
-    value: ContactFormData[K],
-  ) => {
-    setForm((current) => ({
-      ...current,
-      [field]: value,
-    }));
-  };
+  const handleSuccess = useCallback(() => {
+    setSubmitted(true);
+  }, []);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (
-      !form.name.trim() ||
-      !form.email.trim() ||
-      !form.message.trim()
-    ) {
-      return;
-    }
-
-    setSubmitting(true);
-
-    window.setTimeout(() => {
-      setSubmitting(false);
-      setSubmitted(true);
-    }, 1200);
-  };
-
-  const handleReset = () => {
-    setForm(INITIAL_FORM);
+  const handleReset = useCallback(() => {
     setSubmitted(false);
-  };
+  }, []);
 
   return (
     <div className="mx-auto max-w-7xl space-y-12 px-4 pb-16 pt-24 sm:px-6 sm:pt-32">
@@ -125,13 +99,12 @@ export function ContactSection() {
 
             <div className="relative p-8 sm:p-10">
               {submitted ? (
-                <ContactSuccess onReset={handleReset} />
+                <ContactSuccess
+                  onReset={handleReset}
+                />
               ) : (
                 <ContactForm
-                  form={form}
-                  submitting={submitting}
-                  onSubmit={handleSubmit}
-                  onUpdate={updateField}
+                  onSuccess={handleSuccess}
                 />
               )}
             </div>
