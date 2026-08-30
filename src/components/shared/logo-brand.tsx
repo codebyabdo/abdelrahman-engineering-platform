@@ -1,7 +1,7 @@
 "use client";
 
 import { Logo } from "@/components/shared/logo";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 
 export function LogoBrand() {
   return (

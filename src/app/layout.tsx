@@ -1,17 +1,11 @@
 import type { Metadata, Viewport } from "next";
 
-import {
-  Geist,
-  Geist_Mono,
-  Inter,
-} from "next/font/google";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
 
 import "./globals.css";
 
-import {
-  SITE_NAME,
-  SITE_URL,
-} from "@/lib/seo/metadata";
+import { SITE_NAME, SITE_URL } from "@/lib/seo/metadata";
+import { IntroLoader } from "@/components/layout/intro-loader";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -122,7 +116,14 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-screen overflow-x-hidden bg-background text-foreground antialiased">
-        {children}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-9999 rounded-md bg-black px-4 py-2 text-white "
+        >
+          Skip to content
+        </a>
+        <IntroLoader/>
+        <main id="main-content">{children}</main>
       </body>
     </html>
   );
