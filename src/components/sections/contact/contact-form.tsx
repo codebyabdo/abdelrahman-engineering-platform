@@ -1,13 +1,8 @@
 "use client";
 
-import {
-  useActionState,
-  useEffect,
-  useRef,
-} from "react";
+import { useActionState, useEffect, useId, useRef } from "react";
 
 import { Send } from "lucide-react";
-import { motion } from "framer-motion";
 import { useFormStatus } from "react-dom";
 
 import {
@@ -15,14 +10,7 @@ import {
   sendContactEmail,
 } from "@/actions/send-contact-email";
 
-import { FadeUp } from "@/components/animations/motion";
-
-export interface ContactFormData {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
+import { FadeUp, MotionButton } from "@/components/animations/motion";
 
 interface ContactFormProps {
   onSuccess?: () => void;
@@ -42,30 +30,50 @@ const initialState: ContactFormState = {
 const INPUT_CLASS =
   "w-full rounded-full border border-white/10 bg-white/[0.03] px-4 py-3 font-mono text-xs tracking-wider text-white placeholder-white/30 transition-all duration-300 focus:border-blue-500/50 focus:bg-blue-500/[0.02] focus:outline-none focus:ring-1 focus:ring-blue-500/20";
 
-export function ContactForm({
-  onSuccess,
-}: ContactFormProps) {
-  const [state, formAction] = useActionState(
-    sendContactEmail,
-    initialState,
-  );
+const TEXTAREA_CLASS =
+  "min-h-36 w-full resize-y rounded-2xl border border-white/10 bg-white/[0.03] p-4 font-mono text-xs text-white placeholder-white/30 transition-all duration-300 focus:border-blue-500/50 focus:bg-blue-500/[0.02] focus:outline-none focus:ring-1 focus:ring-blue-500/20";
+
+export function ContactForm({ onSuccess }: ContactFormProps) {
+  const [state, formAction] = useActionState(sendContactEmail, initialState);
 
   const formRef = useRef<HTMLFormElement>(null);
 
+  /**
+   * useId is hydration-safe.
+   *
+   * Do NOT use crypto.randomUUID() directly during render
+   * because the component is also rendered on the server.
+   */
+  const reactId = useId();
+
+  const submissionId = `contact-${reactId.replace(/:/g, "")}`;
+
+  /* =====================================================
+     Success
+  ===================================================== */
+
   useEffect(() => {
-    if (state.success) {
-      formRef.current?.reset();
-      onSuccess?.();
+    if (!state.success) {
+      return;
     }
+
+    formRef.current?.reset();
+
+    onSuccess?.();
   }, [state.success, onSuccess]);
 
   return (
-    <form
-      ref={formRef}
-      action={formAction}
-      className="space-y-6"
-    >
-      {/* Header */}
+    <form ref={formRef} action={formAction} className="space-y-6">
+      {/* =================================================
+          Submission ID
+      ================================================= */}
+
+      <input type="hidden" name="submissionId" value={submissionId} />
+
+      {/* =================================================
+          Header
+      ================================================= */}
+
       <FadeUp duration={0.45}>
         <div className="space-y-2">
           <div className="flex items-center gap-2">
@@ -81,18 +89,18 @@ export function ContactForm({
           </h3>
 
           <p className="max-w-xl text-xs leading-relaxed text-white/45">
-            Tell me about the role, project, technical challenge,
-            or collaboration you have in mind.
+            Tell me about the role, project, technical challenge, or
+            collaboration you have in mind.
           </p>
         </div>
       </FadeUp>
 
-      {/* Name + Email */}
+      {/* =================================================
+          Name + Email
+      ================================================= */}
+
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        <FormField
-          label="Your Name"
-          error={state.fieldErrors?.name}
-        >
+        <FormField label="Your Name" error={state.fieldErrors?.name}>
           <input
             name="name"
             type="text"
@@ -100,13 +108,14 @@ export function ContactForm({
             autoComplete="name"
             placeholder="e.g. Sarah Vance"
             className={INPUT_CLASS}
+            aria-invalid={Boolean(state.fieldErrors?.name)}
+            aria-describedby={
+              state.fieldErrors?.name ? "name-error" : undefined
+            }
           />
         </FormField>
 
-        <FormField
-          label="Your Email"
-          error={state.fieldErrors?.email}
-        >
+        <FormField label="Your Email" error={state.fieldErrors?.email}>
           <input
             name="email"
             type="email"
@@ -114,54 +123,68 @@ export function ContactForm({
             autoComplete="email"
             placeholder="s.vance@company.com"
             className={INPUT_CLASS}
+            aria-invalid={Boolean(state.fieldErrors?.email)}
+            aria-describedby={
+              state.fieldErrors?.email ? "email-error" : undefined
+            }
           />
         </FormField>
       </div>
 
-      {/* Subject */}
-      <FormField
-        label="Inquiry Type"
-        error={state.fieldErrors?.subject}
-      >
+      {/* =================================================
+          Subject
+      ================================================= */}
+
+      <FormField label="Inquiry Type" error={state.fieldErrors?.subject}>
         <input
           name="subject"
           type="text"
           required
           placeholder="Frontend Engineer / Freelance Project / Collaboration"
           className={INPUT_CLASS}
+          aria-invalid={Boolean(state.fieldErrors?.subject)}
+          aria-describedby={
+            state.fieldErrors?.subject ? "subject-error" : undefined
+          }
         />
       </FormField>
 
-      {/* Message */}
-      <FormField
-        label="Message"
-        error={state.fieldErrors?.message}
-      >
+      {/* =================================================
+          Message
+      ================================================= */}
+
+      <FormField label="Message" error={state.fieldErrors?.message}>
         <textarea
           name="message"
           required
           rows={6}
           placeholder="Tell me about the role, team, technology stack, and business goals..."
-          className="min-h-36 w-full resize-y rounded-2xl border border-white/10 bg-white/3 p-4 font-mono text-xs text-white placeholder-white/30 transition-all duration-300 focus:border-blue-500/50 focus:bg-blue-500/2 focus:outline-none focus:ring-1 focus:ring-blue-500/20"
+          className={TEXTAREA_CLASS}
+          aria-invalid={Boolean(state.fieldErrors?.message)}
+          aria-describedby={
+            state.fieldErrors?.message ? "message-error" : undefined
+          }
         />
       </FormField>
 
-      {/* Server Message */}
-      {state.message && (
+      {/* =================================================
+          Server Message
+      ================================================= */}
+
+      {state.message && !state.success && (
         <p
-          role="status"
-          aria-live="polite"
-          className={
-            state.success
-              ? "text-center font-mono text-[10px] text-emerald-400"
-              : "text-center font-mono text-[10px] text-red-400"
-          }
+          role="alert"
+          aria-live="assertive"
+          className="text-center font-mono text-[10px] text-red-400"
         >
           {state.message}
         </p>
       )}
 
-      {/* Submit */}
+      {/* =================================================
+          Submit
+      ================================================= */}
+
       <SubmitButton />
 
       <p className="text-center font-mono text-[9px] uppercase tracking-wider text-white/25">
@@ -171,11 +194,15 @@ export function ContactForm({
   );
 }
 
+/* =========================================================
+   Submit Button
+========================================================= */
+
 function SubmitButton() {
   const { pending } = useFormStatus();
 
   return (
-    <motion.button
+    <MotionButton
       type="submit"
       disabled={pending}
       whileHover={!pending ? { y: -2 } : undefined}
@@ -186,18 +213,15 @@ function SubmitButton() {
       <span className="flex items-center justify-center gap-3">
         {pending ? "Transmitting..." : "Submit Inquiry"}
 
-        <Send
-          size={14}
-          className={
-            pending
-              ? "animate-pulse"
-              : ""
-          }
-        />
+        <Send size={14} className={pending ? "animate-pulse" : ""} />
       </span>
-    </motion.button>
+    </MotionButton>
   );
 }
+
+/* =========================================================
+   Form Field
+========================================================= */
 
 function FormField({
   label,
@@ -208,6 +232,8 @@ function FormField({
   error?: string;
   children: React.ReactNode;
 }) {
+  const errorId = `${label.toLowerCase().replace(/\s+/g, "-")}-error`;
+
   return (
     <div className="space-y-2">
       <label className="block font-mono text-[10px] font-bold uppercase tracking-wider text-white/60">
@@ -218,6 +244,7 @@ function FormField({
 
       {error && (
         <p
+          id={errorId}
           role="alert"
           className="px-2 font-mono text-[9px] text-red-400"
         >

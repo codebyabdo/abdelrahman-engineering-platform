@@ -1,10 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { FolderGit2, Search } from "lucide-react";
+import { FolderGit2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 import {
   FadeUp,
@@ -12,7 +11,6 @@ import {
   StaggerItem,
 } from "@/components/animations/motion";
 
-import { cn } from "@/lib/utils";
 import { PROJECTS, categories } from "@/lib/constants/featured-projects-data";
 
 import { ProjectCard } from "./project-card";

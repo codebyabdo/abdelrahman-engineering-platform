@@ -20,7 +20,7 @@ export const PERSONAL_INFO = {
 
   linkedin: "https://www.linkedin.com/in/codebyabdo",
 
-  portfolio: "https://codebyabdo.vercel.app",
+  portfolio: "https://codebyabdo.me",
 
   stack: [
     "React.js",

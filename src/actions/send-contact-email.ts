@@ -1,5 +1,6 @@
 "use server";
 
+import { randomUUID } from "crypto";
 import { render } from "@react-email/render";
 
 import { ContactConfirmationEmail } from "@/emails/contact-confirmation";
@@ -10,6 +11,7 @@ import { contactSchema } from "@/validation/contact";
 export type ContactFormState = {
   success: boolean;
   message: string;
+
   fieldErrors?: {
     name?: string;
     email?: string;
@@ -29,17 +31,38 @@ function getStringField(formData: FormData, key: string) {
   return String(formData.get(key) ?? "").trim();
 }
 
+function getSubmissionId(formData: FormData) {
+  const existingId = getStringField(formData, "submissionId");
+
+  /**
+   * Prefer the client-generated submission ID.
+   *
+   * If it doesn't exist, generate one server-side.
+   */
+  return existingId || randomUUID();
+}
+
 export async function sendContactEmail(
   _prevState: ContactFormState,
   formData: FormData,
 ): Promise<ContactFormState> {
   try {
+    /* =====================================================
+       1. Read FormData
+    ===================================================== */
+
     const rawData = {
       name: getStringField(formData, "name"),
       email: getStringField(formData, "email"),
       subject: getStringField(formData, "subject"),
       message: getStringField(formData, "message"),
     };
+
+    const submissionId = getSubmissionId(formData);
+
+    /* =====================================================
+       2. Validate
+    ===================================================== */
 
     const parsed = contactSchema.safeParse(rawData);
 
@@ -49,6 +72,7 @@ export async function sendContactEmail(
       return {
         success: false,
         message: "Please fix the highlighted fields.",
+
         fieldErrors: {
           name: errors.name?.[0],
           email: errors.email?.[0],
@@ -65,12 +89,25 @@ export async function sendContactEmail(
       message,
     } = parsed.data;
 
+    /* =====================================================
+       3. Owner email
+    ===================================================== */
+
     const ownerEmail = process.env.CONTACT_EMAIL;
 
     if (!ownerEmail) {
-      console.error("[contact] CONTACT_EMAIL is missing.");
-      throw new Error("CONTACT_EMAIL is missing.");
+      console.error(
+        "[contact] CONTACT_EMAIL is missing.",
+      );
+
+      throw new Error(
+        "CONTACT_EMAIL is missing.",
+      );
     }
+
+    /* =====================================================
+       4. Render emails
+    ===================================================== */
 
     const ownerHtml = await render(
       ContactOwnerEmail({
@@ -88,61 +125,128 @@ export async function sendContactEmail(
       }),
     );
 
-    const [
-      ownerResult,
-      confirmationResult,
-    ] = await Promise.allSettled([
-      sendMail({
-        to: ownerEmail,
-        replyTo: email,
-        subject: `New Portfolio Inquiry • ${subject}`,
-        html: ownerHtml,
-      }),
+    /* =====================================================
+       5. Send owner notification
+    ===================================================== */
 
-      sendMail({
-        to: email,
-        replyTo: ownerEmail,
-        subject: "We've received your message",
-        html: confirmationHtml,
-      }),
-    ]);
+    const ownerIdempotencyKey =
+      `contact-owner/${submissionId}`;
 
-    // Owner notification is critical.
-    if (ownerResult.status === "rejected") {
-      console.error(
-        "[contact] Owner notification failed:",
-        ownerResult.reason,
+    const confirmationIdempotencyKey =
+      `contact-confirmation/${submissionId}`;
+
+    console.info("[contact] Sending owner notification:", {
+      submissionId,
+      idempotencyKey: ownerIdempotencyKey,
+    });
+
+    const ownerResult = await sendMail({
+      to: ownerEmail,
+
+      replyTo: email,
+
+      subject:
+        `New Portfolio Inquiry • ${subject}`,
+
+      html: ownerHtml,
+
+      idempotencyKey:
+        ownerIdempotencyKey,
+    });
+
+    console.info(
+      "[contact] Owner notification sent:",
+      {
+        provider: ownerResult.provider,
+        messageId: ownerResult.messageId,
+        submissionId,
+      },
+    );
+
+    /* =====================================================
+       6. Send confirmation
+    ===================================================== */
+
+    try {
+      console.info(
+        "[contact] Sending visitor confirmation:",
+        {
+          submissionId,
+          idempotencyKey:
+            confirmationIdempotencyKey,
+        },
       );
 
-      return {
-        success: false,
-        message:
-          "We couldn't deliver your inquiry right now. Please try again later.",
-        fieldErrors: emptyFieldErrors,
-      };
-    }
+      const confirmationResult =
+        await sendMail({
+          to: email,
 
-    // Confirmation is secondary.
-    if (confirmationResult.status === "rejected") {
+          replyTo: ownerEmail,
+
+          subject:
+            "We've received your message",
+
+          html: confirmationHtml,
+
+          idempotencyKey:
+            confirmationIdempotencyKey,
+        });
+
+      console.info(
+        "[contact] Confirmation sent:",
+        {
+          provider:
+            confirmationResult.provider,
+
+          messageId:
+            confirmationResult.messageId,
+
+          submissionId,
+        },
+      );
+    } catch (confirmationError) {
+      /**
+       * Confirmation is secondary.
+       *
+       * The owner already received the inquiry,
+       * therefore we still return success.
+       */
       console.warn(
         "[contact] Confirmation email failed:",
-        confirmationResult.reason,
+        {
+          submissionId,
+          error: confirmationError,
+        },
       );
     }
+
+    /* =====================================================
+       7. Success
+    ===================================================== */
 
     return {
       success: true,
-      message: "Message sent successfully.",
-      fieldErrors: emptyFieldErrors,
+
+      message:
+        "Message sent successfully.",
+
+      fieldErrors:
+        emptyFieldErrors,
     };
   } catch (error) {
-    console.error("[contact] sendContactEmail error:", error);
+    console.error(
+      "[contact] sendContactEmail error:",
+      error,
+    );
 
     return {
       success: false,
+
       message:
         "Unable to send your message right now. Please try again.",
-      fieldErrors: emptyFieldErrors,
+
+      fieldErrors:
+        emptyFieldErrors,
     };
   }
 }

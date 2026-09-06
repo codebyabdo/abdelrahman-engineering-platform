@@ -1,14 +1,23 @@
-import { SITE_NAME, SITE_URL, type Locale } from "./metadata";
+import {
+  SITE_NAME,
+  SITE_URL,
+  type Locale,
+} from "./metadata";
 
 interface PersonSchemaOptions {
   locale: Locale;
+}
+
+function getPersonDescription(locale: Locale): string {
+  return locale === "ar"
+    ? "مهندس واجهات أمامية متخصص في React وNext.js وTypeScript وهندسة الواجهات الأمامية وبناء تطبيقات SaaS القابلة للتوسع."
+    : "Frontend Engineer specializing in React, Next.js, TypeScript, frontend architecture, scalable SaaS applications, and web performance.";
 }
 
 export function createPersonSchema({
   locale,
 }: PersonSchemaOptions) {
   return {
-    "@context": "https://schema.org",
     "@type": "Person",
 
     "@id": `${SITE_URL}/#person`,
@@ -22,16 +31,12 @@ export function createPersonSchema({
         ? "مهندس واجهات أمامية"
         : "Frontend Engineer",
 
-    description:
-      locale === "ar"
-        ? "مهندس واجهات أمامية متخصص في React وNext.js وTypeScript وهندسة الواجهات الأمامية وبناء تطبيقات SaaS القابلة للتوسع."
-        : "Frontend Engineer specializing in React, Next.js, TypeScript, frontend architecture, scalable SaaS applications, and web performance.",
+    description: getPersonDescription(locale),
 
     image: `${SITE_URL}/og-image.png`,
 
     sameAs: [
       "https://github.com/codebyabdo",
-      "https://codebyabdo.vercel.app",
     ],
 
     knowsAbout: [
@@ -48,11 +53,6 @@ export function createPersonSchema({
       "Responsive Web Design",
       "Software Engineering",
     ],
-
-    worksFor: {
-      "@type": "Organization",
-      name: "Independent / Freelance",
-    },
   };
 }
 
@@ -64,12 +64,11 @@ export function createWebsiteSchema({
   locale,
 }: WebsiteSchemaOptions) {
   return {
-    "@context": "https://schema.org",
     "@type": "WebSite",
 
     "@id": `${SITE_URL}/#website`,
 
-    url: `${SITE_URL}/${locale}`,
+    url: SITE_URL,
 
     name: SITE_NAME,
 
@@ -81,11 +80,6 @@ export function createWebsiteSchema({
     publisher: {
       "@id": `${SITE_URL}/#person`,
     },
-
-    inLanguage:
-      locale === "ar"
-        ? "ar-EG"
-        : "en-US",
   };
 }
 
@@ -93,19 +87,25 @@ interface WebPageSchemaOptions {
   locale: Locale;
   title: string;
   description: string;
-  path: string;
+  path?: string;
 }
 
 export function createWebPageSchema({
   locale,
   title,
   description,
-  path,
+  path = "",
 }: WebPageSchemaOptions) {
-  const url = `${SITE_URL}/${locale}${path}`;
+  const normalizedPath =
+    !path || path === "/"
+      ? ""
+      : path.startsWith("/")
+        ? path
+        : `/${path}`;
+
+  const url = `${SITE_URL}/${locale}${normalizedPath}`;
 
   return {
-    "@context": "https://schema.org",
     "@type": "WebPage",
 
     "@id": `${url}#webpage`,
@@ -140,7 +140,6 @@ export function createBreadcrumbSchema(
   items: BreadcrumbItem[],
 ) {
   return {
-    "@context": "https://schema.org",
     "@type": "BreadcrumbList",
 
     itemListElement: items.map((item, index) => ({
@@ -152,6 +151,53 @@ export function createBreadcrumbSchema(
 
       item: item.url,
     })),
+  };
+}
+
+interface CreateSiteGraphOptions {
+  locale: Locale;
+  title: string;
+  description: string;
+  path?: string;
+  includeBreadcrumbs?: BreadcrumbItem[];
+}
+
+export function createSiteGraph({
+  locale,
+  title,
+  description,
+  path = "",
+  includeBreadcrumbs,
+}: CreateSiteGraphOptions) {
+  const graph: Record<string, unknown>[] = [
+    createPersonSchema({
+      locale,
+    }),
+
+    createWebsiteSchema({
+      locale,
+    }),
+
+    createWebPageSchema({
+      locale,
+      title,
+      description,
+      path,
+    }),
+  ];
+
+  if (
+    includeBreadcrumbs &&
+    includeBreadcrumbs.length > 0
+  ) {
+    graph.push(
+      createBreadcrumbSchema(includeBreadcrumbs),
+    );
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": graph,
   };
 }
 

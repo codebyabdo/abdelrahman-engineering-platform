@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://codebyabdo.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://codebyabdo.me";
 
 export const SITE_NAME = "Abd El-Rahman Adel Portfolio";
+
+export const SITE_AUTHOR = "Abd El-Rahman Adel";
 
 export const DEFAULT_OG_IMAGE = "/og-image.png";
 
@@ -20,13 +22,33 @@ interface CreateMetadataOptions {
   noIndex?: boolean;
 }
 
+function normalizePath(path: string = ""): string {
+  if (!path || path === "/") {
+    return "";
+  }
+
+  return path.startsWith("/") ? path : `/${path}`;
+}
+
 export function getLocalizedUrl(
   locale: Locale,
   path: string = "",
 ): string {
-  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  const normalizedPath = normalizePath(path);
 
-  return `${SITE_URL}/${locale}${normalizedPath === "/" ? "" : normalizedPath}`;
+  return `${SITE_URL}/${locale}${normalizedPath}`;
+}
+
+function resolveImageUrl(image: string): string {
+  if (/^https?:\/\//i.test(image)) {
+    return image;
+  }
+
+  const normalizedImage = image.startsWith("/")
+    ? image
+    : `/${image}`;
+
+  return `${SITE_URL}${normalizedImage}`;
 }
 
 export function createMetadata({
@@ -44,12 +66,27 @@ export function createMetadata({
   const englishUrl = getLocalizedUrl("en", path);
   const arabicUrl = getLocalizedUrl("ar", path);
 
-  const resolvedImage = image.startsWith("http")
-    ? image
-    : `${SITE_URL}${image.startsWith("/") ? image : `/${image}`}`;
+  const resolvedImage = resolveImageUrl(image);
 
   const resolvedImageAlt =
-    imageAlt ?? `${title} — Abd El-Rahman Adel`;
+    imageAlt ?? `${title} — ${SITE_AUTHOR}`;
+
+  const robots = noIndex
+    ? {
+        index: false,
+        follow: false,
+      }
+    : {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          "max-image-preview": "large" as const,
+          "max-snippet": -1,
+          "max-video-preview": -1,
+        },
+      };
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -60,14 +97,14 @@ export function createMetadata({
 
     authors: [
       {
-        name: "Abd El-Rahman Adel",
+        name: SITE_AUTHOR,
         url: SITE_URL,
       },
     ],
 
-    creator: "Abd El-Rahman Adel",
+    creator: SITE_AUTHOR,
 
-    publisher: "Abd El-Rahman Adel",
+    publisher: SITE_AUTHOR,
 
     alternates: {
       canonical,
@@ -79,27 +116,12 @@ export function createMetadata({
       },
     },
 
-    robots: noIndex
-      ? {
-          index: false,
-          follow: false,
-        }
-      : {
-          index: true,
-          follow: true,
-
-          googleBot: {
-            index: true,
-            follow: true,
-            "max-image-preview": "large",
-            "max-snippet": -1,
-            "max-video-preview": -1,
-          },
-        },
+    robots,
 
     openGraph: {
       type,
       url: canonical,
+
       siteName: SITE_NAME,
 
       title,
@@ -143,16 +165,20 @@ export function createMetadata({
           type: "image/svg+xml",
         },
         {
-          url: "/icon-light-32x32.png",
-          media: "(prefers-color-scheme: light)",
-        },
-        {
-          url: "/icon-dark-32x32.png",
-          media: "(prefers-color-scheme: dark)",
+          url: "/favicon.ico",
+          sizes: "any",
         },
       ],
 
-      apple: "/apple-icon.png",
+      apple: [
+        {
+          url: "/apple-icon.png",
+          sizes: "180x180",
+          type: "image/png",
+        },
+      ],
     },
+
+    manifest: "/manifest.webmanifest",
   };
 }
