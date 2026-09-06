@@ -234,8 +234,17 @@ export function PageTransition({
   );
 }
 
+export const MotionButton = (
+  props: HTMLMotionProps<"button">,
+) => {
+  return (
+    <motion.button {...props} />
+  );
+};
+
 /* =========================================================
    Motion Export
 ========================================================= */
 
 export { motion };
+

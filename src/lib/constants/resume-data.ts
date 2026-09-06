@@ -37,7 +37,7 @@ export const RESUME = {
     email: "abdelrahman.adel.js@gmail.com",
     phone: "+20 115 341 4179",
 
-    portfolio: "https://codebyabdo.vercel.app",
+    portfolio: "https://codebyabdo.me",
     github: "https://github.com/codebyabdo",
     linkedin: "https://linkedin.com/in/codebyabdo",
 

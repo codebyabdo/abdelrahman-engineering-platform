@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
 
-import { PROJECTS } from "@/lib/constants/featured-projects-data";
 import { SITE_URL } from "@/lib/seo/metadata";
 
 const LOCALES = ["en", "ar"] as const;
@@ -15,7 +14,7 @@ const STATIC_ROUTES = [
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPages: MetadataRoute.Sitemap = LOCALES.flatMap((locale) =>
+  return LOCALES.flatMap((locale) =>
     STATIC_ROUTES.map((path) => {
       const url =
         path === ""
@@ -24,11 +23,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
       return {
         url,
-        lastModified: new Date(),
+
         changeFrequency:
-          path === "/blog" || path === "/projects"
+          path === "/blog" ||
+          path === "/projects"
             ? "weekly"
             : "monthly",
+
         priority:
           path === ""
             ? 1
@@ -40,15 +41,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
       };
     }),
   );
-
-  const projectPages: MetadataRoute.Sitemap = LOCALES.flatMap((locale) =>
-    PROJECTS.map((project) => ({
-      url: `${SITE_URL}/${locale}/projects/${project.id}`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: project.featured ? 0.8 : 0.6,
-    })),
-  );
-
-  return [...staticPages, ...projectPages];
 }
